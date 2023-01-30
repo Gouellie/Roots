@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Node2D",
+"class": "ResourceNode",
+"language": "GDScript",
+"path": "res://src/scripts/resource_node.gd"
+} ]
+_global_script_class_icons={
+"ResourceNode": ""
+}
+
 [application]
 
 config/name="Roots"
@@ -25,11 +35,16 @@ gdscript/warnings/treat_warnings_as_errors=true
 gdscript/warnings/unused_variable=false
 gdscript/warnings/unused_argument=false
 gdscript/warnings/return_value_discarded=false
+gdscript/warnings/unused_variable=false
 
 [display]
 
 window/size/width=1280
 window/size/height=720
+
+[global]
+
+singleton=false
 
 [gui]
 
@@ -42,6 +57,10 @@ camera_pan={
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":3,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
+
+[mono]
+
+project/assembly_name="Roots"
 
 [physics]
 
