@@ -31,14 +31,11 @@ Events="*res://src/autoload/events.gd"
 
 [debug]
 
-<<<<<<< Updated upstream
 gdscript/warnings/treat_warnings_as_errors=true
 gdscript/warnings/unused_variable=false
 gdscript/warnings/unused_argument=false
 gdscript/warnings/return_value_discarded=false
-=======
 gdscript/warnings/unused_variable=false
->>>>>>> Stashed changes
 
 [display]
 
