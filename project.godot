@@ -17,10 +17,14 @@ config/icon="res://roots.png"
 [autoload]
 
 Log="*res://src/autoload/log.gd"
+Events="*res://src/autoload/events.gd"
 
 [debug]
 
 gdscript/warnings/treat_warnings_as_errors=true
+gdscript/warnings/unused_variable=false
+gdscript/warnings/unused_argument=false
+gdscript/warnings/return_value_discarded=false
 
 [display]
 
