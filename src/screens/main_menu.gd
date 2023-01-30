@@ -1,4 +1,4 @@
-extends Control
+extends CanvasLayer
 
 onready var button_quit : Button = $HBoxContainer/Button_Quit
 
