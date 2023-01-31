@@ -20,11 +20,6 @@ _global_script_class_icons={
 "language": "GDScript",
 "path": "res://src/scenes/librairies/managers/entity_manager.gd"
 }, {
-"base": "Node2D",
-"class": "MyNode",
-"language": "GDScript",
-"path": "res://src/scenes/Node2D.gd"
-}, {
 "base": "ColorRect",
 "class": "TilePanel",
 "language": "GDScript",
@@ -32,7 +27,6 @@ _global_script_class_icons={
 } ]
 _global_script_class_icons={
 "EntityManager": "",
-"MyNode": "",
 "TilePanel": ""
 }
 
