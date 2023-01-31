@@ -2,7 +2,6 @@ extends Node2D
 
 var progress : float = 0 
 
-
 func _ready() -> void:
 	Events.connect("tick", self, "on_tick")
 

@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/GUI/progressbar_radial_bg.png" type="Texture" id=2]
+[ext_resource path="res://assets/GUI/progressbar_radial_fill.png" type="Texture" id=3]
+[ext_resource path="res://src/ui/scripts/resource_gauge.gd" type="Script" id=4]
+
+[node name="ResourceGauge" type="Control"]
+anchor_right = 0.077
+anchor_bottom = 0.027
+margin_right = 31.44
+margin_bottom = 134.56
+rect_min_size = Vector2( 130, 130 )
+rect_scale = Vector2( 0.5, 0.5 )
+script = ExtResource( 4 )
+identifier = "water"
+
+[node name="Margin" type="MarginContainer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Margin"]
+margin_right = 130.0
+margin_bottom = 148.0
+
+[node name="CenterContainer" type="CenterContainer" parent="Margin/VBoxContainer"]
+margin_right = 130.0
+margin_bottom = 130.0
+
+[node name="Gauge" type="TextureProgress" parent="Margin/VBoxContainer/CenterContainer"]
+margin_right = 130.0
+margin_bottom = 130.0
+value = 50.0
+texture_under = ExtResource( 2 )
+texture_progress = ExtResource( 3 )
+fill_mode = 4
+tint_under = Color( 0.541176, 0.658824, 0.552941, 1 )
+tint_progress = Color( 0, 0, 0, 1 )
+
+[node name="TextureRect" type="TextureRect" parent="Margin/VBoxContainer/CenterContainer"]
+margin_left = 65.0
+margin_top = 65.0
+margin_right = 65.0
+margin_bottom = 65.0
+
+[node name="Amount" type="Label" parent="Margin/VBoxContainer"]
+margin_top = 134.0
+margin_right = 130.0
+margin_bottom = 148.0
+text = "NAN"
+align = 1
