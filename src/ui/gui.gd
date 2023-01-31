@@ -22,5 +22,5 @@ func _on_Button_Retry_pressed() -> void:
 	get_tree().reload_current_scene()
 
 
-func _on_Button_ToggleTick_toggled(button_pressed: bool) -> void:
-	Events.emit_signal("is_ticking_toggled", button_pressed)
+func _on_Button_Tick_pressed() -> void:
+	Events.emit_signal("tick")

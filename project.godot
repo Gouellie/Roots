@@ -16,6 +16,25 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "ResourceNode": ""
+=======
+"class": "EntityManager",
+"language": "GDScript",
+"path": "res://src/scenes/librairies/managers/entity_manager.gd"
+}, {
+"base": "Node2D",
+"class": "MyNode",
+"language": "GDScript",
+"path": "res://src/scenes/Node2D.gd"
+}, {
+"base": "ColorRect",
+"class": "TilePanel",
+"language": "GDScript",
+"path": "res://src/ui/tilepanel.gd"
+} ]
+_global_script_class_icons={
+"EntityManager": "",
+"MyNode": "",
+"TilePanel": ""
 }
 
 [application]
@@ -28,6 +47,7 @@ config/icon="res://roots.png"
 
 Log="*res://src/autoload/log.gd"
 Events="*res://src/autoload/events.gd"
+Globals="*res://src/autoload/globals.gd"
 
 [debug]
 

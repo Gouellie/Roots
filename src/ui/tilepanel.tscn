@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/ui/tilepanel.gd" type="Script" id=1]
+
+[node name="TilePanel" type="ColorRect"]
+margin_right = 64.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+script = ExtResource( 1 )
+
+[connection signal="gui_input" from="." to="." method="_on_TilePanel_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_TilePanel_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_TilePanel_mouse_exited"]
