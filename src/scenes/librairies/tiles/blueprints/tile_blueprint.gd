@@ -1,0 +1,2 @@
+extends TileBlueprintBase
+class_name TileBlueprint

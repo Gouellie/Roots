@@ -9,14 +9,15 @@ const selected_color := Color.green
 var is_selected : bool = false setget set_is_selected
 
 onready var default := color
+onready var tile_blueprint : TileBlueprintBase
 
 
 func _ready() -> void:
 	if tile_scene:
-		var tile = tile_scene.instance() as TileBase
-		tile.scale = Vector2(0.7, 0.7)
-		tile.position = $TileCenterPos.rect_position
-		add_child(tile)
+		tile_blueprint = tile_scene.instance() as TileBlueprintBase
+		tile_blueprint.scale = Vector2(0.7, 0.7)
+		tile_blueprint.position = $TileCenterPos.rect_position
+		add_child(tile_blueprint)
 
 
 func _on_TilePanel_mouse_entered() -> void:
@@ -31,12 +32,12 @@ func _on_TilePanel_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.pressed :
 			set_is_selected(!is_selected)
+			Events.emit_signal("tilepanel_selected", self, tile_blueprint if is_selected else null)
 
 
 func set_is_selected(value : bool) -> void:
 	is_selected = value
-	if is_selected:
+	if is_selected and tile_blueprint:
 		color = selected_color
-		Events.emit_signal("tile_selected", self)
 	else:
 		color = default

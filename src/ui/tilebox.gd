@@ -10,14 +10,11 @@ onready var tile_container := $CenterContainer/TileContainer
 
 
 func _ready() -> void:
-	Events.connect("tile_selected", self, "on_selected_tile_changed")
+	Events.connect("tilepanel_selected", self, "on_selected_tile_changed")
+	Events.connect("tile_placed", self, "on_tile_placed")
 
 
-func on_tile_drawn(new_tile) -> void:
-	pass
-
-
-func on_selected_tile_changed(new_selection : TilePanel) -> void:
+func on_selected_tile_changed(new_selection : TilePanel, tile : TileBlueprint) -> void:
 	if selection == new_selection:
 		return
 	if selection :
@@ -30,3 +27,14 @@ func _on_Button_DrawTile_pressed() -> void:
 		return
 	var new_tile = tile_panel_scene.instance()
 	tile_container.add_child(new_tile)
+
+
+func on_tile_placed(tile) -> void:
+	if is_instance_valid(selection):
+		selection.queue_free()
+		selection = null
+
+
+func _on_Button_Erase_pressed() -> void:
+	on_selected_tile_changed(null, null)
+	Events.emit_signal("eraser_mode_toggled")
