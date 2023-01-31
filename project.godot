@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "ResourceNode",
 "language": "GDScript",
-"path": "res://src/scripts/resource_node.gd"
+"path": "res://src/scripts/resources/resource_node.gd"
 }, {
 "base": "ColorRect",
 "class": "TilePanel",
