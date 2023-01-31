@@ -1,6 +1,7 @@
 extends ColorRect
 class_name TilePanel
 
+export (PackedScene) var tile_scene
 
 const mouse_over := Color.yellow
 const selected_color := Color.green
