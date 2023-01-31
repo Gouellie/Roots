@@ -16,7 +16,6 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "ResourceNode": ""
-=======
 "class": "EntityManager",
 "language": "GDScript",
 "path": "res://src/scenes/librairies/managers/entity_manager.gd"
