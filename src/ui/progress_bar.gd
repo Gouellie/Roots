@@ -2,6 +2,7 @@ extends ProgressBar
 
 
 func _ready() -> void:
+	max_value = Globals.CYCLE_LENGTH
 	Events.connect("progress_updated", self, "on_progress_update")
 
 
