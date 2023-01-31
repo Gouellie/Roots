@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/ui/tilepanel.gd" type="Script" id=1]
+[ext_resource path="res://src/scenes/librairies/tiles/tile_fourway.tscn" type="PackedScene" id=2]
 
 [node name="TilePanel" type="ColorRect"]
 margin_right = 64.0
@@ -8,6 +9,7 @@ margin_bottom = 64.0
 rect_min_size = Vector2( 64, 64 )
 color = Color( 0.439216, 0.419608, 0.419608, 1 )
 script = ExtResource( 1 )
+tile_scene = ExtResource( 2 )
 
 [node name="TileCenterPos" type="Control" parent="."]
 margin_left = 32.0

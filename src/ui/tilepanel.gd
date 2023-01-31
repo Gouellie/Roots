@@ -12,7 +12,11 @@ onready var default := color
 
 
 func _ready() -> void:
-	pass # Replace with function body.
+	if tile_scene:
+		var tile = tile_scene.instance() as TileBase
+		tile.scale = Vector2(0.7, 0.7)
+		tile.position = $TileCenterPos.rect_position
+		add_child(tile)
 
 
 func _on_TilePanel_mouse_entered() -> void:

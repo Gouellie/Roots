@@ -1,6 +1,5 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://src/ui/tilepanel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/ui/tilebox.gd" type="Script" id=2]
 
 [node name="TileBox" type="Panel"]
@@ -31,9 +30,5 @@ custom_constants/separation = 13
 margin_right = 52.0
 margin_bottom = 64.0
 text = "DRAW"
-
-[node name="TilePanel" parent="CenterContainer/TileContainer" instance=ExtResource( 1 )]
-margin_left = 65.0
-margin_right = 129.0
 
 [connection signal="pressed" from="CenterContainer/TileContainer/Button_DrawTile" to="." method="_on_Button_DrawTile_pressed"]
