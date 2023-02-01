@@ -7,6 +7,7 @@ onready var resource_manager : ResourceManager = $ResourceManager
 
 var can_rotate : bool = true
 var real_rotation : float = 0.0
+var valid : bool setget set_is_valid,get_is_valid
 
 func _ready() -> void:
 	tile_scene = Resources.Tiles[tile_index]
@@ -51,3 +52,12 @@ func rotate_blueprint(cw : bool) -> void:
 	# will eventually do a sprite change to simulate rotation instead of actually rotating node
 	# this is the value that must be referenced, the rotation_degrees will not change
 	real_rotation = rotation_degrees
+
+
+func set_is_valid(value : bool) -> void:
+	valid = value
+	$Sprite_Invalid.visible = not valid
+
+
+func get_is_valid() -> bool:
+	return valid

@@ -36,6 +36,7 @@ func _move_blueprint(mouse_position: Vector2) -> void:
 		_eraser.position = snap_position
 	elif _blueprint:
 		_blueprint.position = snap_position
+		_blueprint.valid = _can_place_tile(cellv)
 
 
 func on_tile_selected(sender : TilePanel, new_selected_blueprint : TileBlueprintBase)-> void:
@@ -43,6 +44,7 @@ func on_tile_selected(sender : TilePanel, new_selected_blueprint : TileBlueprint
 	if new_selected_blueprint:
 		_set_eraser_mode(false)
 		var new_blueprint = new_selected_blueprint.duplicate() as TileBlueprintBase
+		new_blueprint.scale = Vector2(1.0,1.0)
 		add_child(new_blueprint)
 		_placeable_blueprint = true
 		_blueprint = new_blueprint
@@ -63,6 +65,8 @@ func _set_eraser_mode(value : bool) -> void:
 		if is_instance_valid(_eraser):
 			_eraser.queue_free()
 			_eraser = null
+	if is_instance_valid(_blueprint):
+		_clear_blueprint()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -80,15 +84,23 @@ func _unhandled_input(event: InputEvent) -> void:
 		elif _eraser_mode:
 			_remove_tile()
 	if event.is_action_pressed("ui_cancel"):
-		pass #todo
-		
+		_set_eraser_mode(false)
+
+
+func _can_place_tile(cellv : Vector2) -> bool:
+	if is_cell_occupied(cellv):
+		return false
+	if _terrain.get_cellv(cellv) == TileMap.INVALID_CELL:
+		return false
+	return true
+
 
 func _place_tile() -> void:
 	if not _blueprint is TileBlueprint:
 		return
-	var cellv = _terrain.world_to_map(_blueprint.position)
-	if is_cell_occupied(cellv):
+	if not _blueprint.valid:
 		return
+	var cellv = _terrain.world_to_map(_blueprint.position)
 	var new_tile = _blueprint.tile_scene.instance() as TileBase
 	new_tile.position = _blueprint.position
 	new_tile.rotation_degrees = _blueprint.real_rotation
