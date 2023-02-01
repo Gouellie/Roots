@@ -1,17 +1,18 @@
 extends Node2D
 class_name ResourceManager
 
-export var resource_types : Dictionary = {}
+# warning-ignore:unused_signal
+signal new_resource_added(resource_node)
 
 onready var resource_container  : ResourceContainer = $ResourceContainer
+
+export var resource_types : Dictionary = {}
 
 func _ready():
 	for _rt in resource_types:
 		var _value = resource_types[_rt]
-		var _instance = resource_container.add_new_resource(_rt, _value)
-			
-	pass
-
+		var _instance = add_new_resource(_rt, _value)
+		
 func can_consume_all(_target_to_consume : ResourceManager) -> bool:
 	for _identifier in _target_to_consume.get_all_resources():
 		var _value = _target_to_consume.get_all_resources()[_identifier]
@@ -49,3 +50,55 @@ func try_consume(_identifier : String, _amount : int) -> bool:
 	var _resource_node : ResourceNode = resource_container.get_all_resources()[_identifier]
 	_resource_node.deduct_resource(_amount)
 	return true
+
+
+func get_all_resources() -> Dictionary:
+	var _d = {}
+	for _r in  resource_container.resources:
+		var _rsc : ResourceNode = _r as ResourceNode
+		if is_instance_valid(_rsc):
+			_d.append({"Item": _rsc.identifier, "Stack":_rsc.value})
+		
+	return _d
+
+func get_resource(identifier:String) -> ResourceNode:
+	for r in resource_container.resources:
+		if r.identifier == identifier:
+			return r
+	
+	return null
+
+func add_new_resource(_identifier:String, _defaultAmount:int) -> ResourceNode:
+	for _r in resource_container.resources:
+		var _rsc : ResourceNode = _r as ResourceNode
+		if is_instance_valid(_rsc) && _rsc.identifier == _identifier:
+			return _rsc
+
+	var _instance : ResourceNode = ResourceNode.new()
+	resource_container.resources.append(_instance)
+	resource_container.add_child(_instance)
+	_instance.name = "ResourceNode_" + _identifier
+	_instance.identifier = _identifier
+	_instance.value = _defaultAmount
+	self.emit_signal("new_resource_added", _instance)
+	return _instance
+
+func add_to_resource(_identifier:String, _amount:int) -> void:
+	var rsc = get_resource(_identifier)
+	if is_instance_valid(rsc) == false:
+		return
+	
+	rsc.add_resource(_amount)
+
+func deduct_from_resource(_identifier:String, _amount:int) -> void:
+	var rsc = get_resource(_identifier)
+	if is_instance_valid(rsc) == false:
+		return
+	
+	rsc.decuct_resource(_amount)
+
+func initialize_gui():
+	for _c in resource_container.get_children():
+		var rsc : ResourceNode = _c as ResourceNode
+		if is_instance_valid(rsc):
+			rsc.initialize()

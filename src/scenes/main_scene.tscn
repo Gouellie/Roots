@@ -21,10 +21,10 @@ script = ExtResource( 2 )
 script = ExtResource( 5 )
 terrain_node_path = NodePath("../Terrain")
 
+[node name="ResourceManager" parent="." instance=ExtResource( 6 )]
+
 [node name="UserInterface" type="CanvasLayer" parent="."]
 pause_mode = 2
 physics_interpolation_mode = 1
 
 [node name="Gui" parent="UserInterface" instance=ExtResource( 1 )]
-
-[node name="ResourceManager" parent="." instance=ExtResource( 6 )]

@@ -31,7 +31,7 @@ const Tiles_resource_cost = {
 	},
 	TILES.FOURWAY : {
 		"water": 2,
-		"soil": 2,
+		"sunlight": 2,
 	},
 }
 

@@ -23,12 +23,15 @@ func _ready() -> void:
 		Resources.TILES.FOURWAY:
 			$Sprite_FourWay.visible = true
 			can_rotate = false
-		
+	
+	load_resource_cost()
+
+func load_resource_cost():
 	var _resource_cost = Resources.Tiles_resource_cost[tile_index]
 	if resource_manager:
 		for _rc in _resource_cost:
 			var _cost = _resource_cost[_rc]
-			resource_manager.resource_container.add_new_resource(_rc, _cost)
+			resource_manager.add_new_resource(_rc, _cost)
 
 func can_afford(_consumer : ResourceManager) -> bool:
 	return _consumer.can_consume_all(resource_manager)

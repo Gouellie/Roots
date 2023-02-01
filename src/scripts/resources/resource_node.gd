@@ -2,7 +2,7 @@ extends Node2D
 class_name ResourceNode
 
 # warning-ignore:unused_signal
-signal node_update(node)
+signal node_update()
 
 export (String)var identifier : String = "default"
 export (int)var min_value : int = 0
@@ -17,15 +17,15 @@ func _ready():
 func add_resource(amount:int) -> void:
 	value = int(clamp(value + amount, min_value, max_value))
 	is_depleted = _is_depleted()
-	emit_signal("node_update", self)
+	emit_signal("node_update")
 
 func deduct_resource(amount:int) -> void:
 	value = int(clamp(value - amount, min_value, max_value))
 	is_depleted = _is_depleted()
-	emit_signal("node_update", self)
+	emit_signal("node_update")
 
 func _is_depleted() -> bool:
 	return value <= 0
 
 func initialize() -> void:
-	emit_signal("node_update", self)
+	emit_signal("node_update")
