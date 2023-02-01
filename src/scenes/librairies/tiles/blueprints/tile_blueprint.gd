@@ -61,3 +61,7 @@ func set_is_valid(value : bool) -> void:
 
 func get_is_valid() -> bool:
 	return valid
+	
+
+func is_connected_to_network() -> bool:
+	return true

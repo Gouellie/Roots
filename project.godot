@@ -168,6 +168,11 @@ camera_control={
  ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="RootConnection"
+2d_physics/layer_2="PlantConnection"
+
 [physics]
 
 common/enable_pause_aware_picking=true

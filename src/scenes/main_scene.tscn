@@ -18,9 +18,6 @@ offset = Vector2( 640, 360 )
 current = true
 script = ExtResource( 2 )
 
-[node name="Plant" parent="." instance=ExtResource( 9 )]
-position = Vector2( 608, 352 )
-
 [node name="Terrain" parent="." instance=ExtResource( 3 )]
 
 [node name="Ingredients" type="TileMap" parent="."]
@@ -31,6 +28,11 @@ script = ExtResource( 8 )
 
 [node name="EntityManager" type="Node2D" parent="."]
 script = ExtResource( 5 )
+terrain_node_path = NodePath("../Terrain")
+plant_master_node_path = NodePath("../Plant_Master")
+
+[node name="Plant_Master" parent="." instance=ExtResource( 9 )]
+position = Vector2( 608, 352 )
 terrain_node_path = NodePath("../Terrain")
 
 [node name="ResourceManager" parent="." instance=ExtResource( 6 )]

@@ -2,6 +2,7 @@ extends Node2D
 class_name EntityManager
 
 export (NodePath) var terrain_node_path
+export (NodePath) var plant_master_node_path
 
 const _eraser_scene := preload("res://src/scenes/librairies/tiles/blueprints/tile_eraser.tscn")
 
@@ -13,12 +14,13 @@ var _eraser : TileBlueprintEraser
 var _placeable_blueprint : bool
 var _eraser_mode : bool
 
-
+onready var _plant_master : Plant
 onready var _terrain : TileMap
 onready var tile_offset : Vector2
 
 
 func _ready() -> void:
+	_plant_master = get_node(plant_master_node_path) as Plant
 	_terrain = get_node(terrain_node_path) as TileMap
 	tile_offset = _terrain.cell_size / 2
 	Events.connect("tilepanel_selected", self, "on_tile_selected")
@@ -48,7 +50,7 @@ func on_tile_selected(sender : TilePanel, new_selected_blueprint : TileBlueprint
 		add_child(new_blueprint)
 		_placeable_blueprint = true
 		_blueprint = new_blueprint
-	
+
 
 func on_eraser_mode_toggled()-> void:
 	_set_eraser_mode(not _eraser_mode)
@@ -92,7 +94,7 @@ func _can_place_tile(cellv : Vector2) -> bool:
 		return false
 	if _terrain.get_cellv(cellv) == TileMap.INVALID_CELL:
 		return false
-	return true
+	return _blueprint.is_connected_to_network()
 
 
 func _place_tile() -> void:
@@ -103,7 +105,8 @@ func _place_tile() -> void:
 	var cellv = _terrain.world_to_map(_blueprint.position)
 	var new_tile = _blueprint.tile_scene.instance() as Tile
 	new_tile.position = _blueprint.position
-	new_tile.rotation_degrees = _blueprint.real_rotation
+	new_tile.real_rotation = _blueprint.real_rotation
+	new_tile.cellv = cellv
 	add_child(new_tile)
 	tiles[cellv] = new_tile
 	Events.emit_signal("tile_placed", new_tile)
@@ -113,7 +116,8 @@ func _place_tile() -> void:
 func _remove_tile() -> void:
 	var cellv = _terrain.world_to_map(_eraser.position)
 	if is_cell_occupied(cellv):
-		remove_tile_at_position(cellv)
+		if remove_tile_at_position(cellv):
+			_update_network_connection()
 
 
 func _clear_blueprint() -> void:
@@ -132,5 +136,37 @@ func remove_tile_at_position(cellv: Vector2) -> bool:
 	return false
 
 
+func get_tile_at_position(cellv: Vector2) -> Tile:
+	if tiles.has(cellv):
+		return tiles[cellv] as Tile
+	return null
+
+
 func is_cell_occupied(cellv: Vector2) -> bool:
 	return tiles.has(cellv)
+
+
+func _update_network_connection() -> void:
+	# assuming all tiles are disconnected
+	for tile in tiles.values():
+		if tile is Tile:
+			tile.connected = false
+	var head = _plant_master._get_network_head()
+	# no head connected to flower means no good
+	if not is_instance_valid(head):
+		return
+	if head.is_queued_for_deletion():
+		return
+	head.connected = true
+	_parse_network(head)
+
+
+func _parse_network(current : Tile) -> void:
+	for tile in current.get_connections():
+		if not tile is Tile:
+			continue 
+		if tile.connected:
+			continue
+		tile.connected = true
+		_parse_network(tile)
+
