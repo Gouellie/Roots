@@ -56,8 +56,9 @@ func get_all_resources() -> Dictionary:
 	var _d = {}
 	for _r in  resource_container.resources:
 		var _rsc : ResourceNode = _r as ResourceNode
+		print(_r)
 		if is_instance_valid(_rsc):
-			_d.append({"Item": _rsc.identifier, "Stack":_rsc.value})
+			_d[_rsc.identifier] = _rsc
 		
 	return _d
 
@@ -73,7 +74,7 @@ func add_new_resource(_identifier:String, _defaultAmount:int) -> ResourceNode:
 		var _rsc : ResourceNode = _r as ResourceNode
 		if is_instance_valid(_rsc) && _rsc.identifier == _identifier:
 			return _rsc
-
+	
 	var _instance : ResourceNode = ResourceNode.new()
 	resource_container.resources.append(_instance)
 	resource_container.add_child(_instance)
