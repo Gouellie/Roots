@@ -101,7 +101,7 @@ func _place_tile() -> void:
 	if not _blueprint.valid:
 		return
 	var cellv = _terrain.world_to_map(_blueprint.position)
-	var new_tile = _blueprint.tile_scene.instance() as TileBase
+	var new_tile = _blueprint.tile_scene.instance() as Tile
 	new_tile.position = _blueprint.position
 	new_tile.rotation_degrees = _blueprint.real_rotation
 	add_child(new_tile)
