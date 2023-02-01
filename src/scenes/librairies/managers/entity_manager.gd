@@ -66,6 +66,12 @@ func _set_eraser_mode(value : bool) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if _blueprint:
+		if event.is_action_pressed("rotate_cw"):
+			_blueprint.rotate_blueprint(true)
+		if event.is_action_pressed("rotate_ccw"):
+			_blueprint.rotate_blueprint(false)
+	
 	if not event is InputEventMouseButton: 
 		return
 	if event.is_action_pressed("ui_select"):
@@ -74,7 +80,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		elif _eraser_mode:
 			_remove_tile()
 	if event.is_action_pressed("ui_cancel"):
-		pass # todo !
+		pass #todo
 		
 
 func _place_tile() -> void:
@@ -82,6 +88,7 @@ func _place_tile() -> void:
 		return
 	var new_tile = _blueprint.tile_scene.instance() as TileBase
 	new_tile.position = _blueprint.position
+	new_tile.rotation_degrees = _blueprint.real_rotation
 	var cellv = _terrain.world_to_map(new_tile.position)
 	add_child(new_tile)
 	tiles[cellv] = new_tile
