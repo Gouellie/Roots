@@ -22,7 +22,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "ResourceManager",
 "language": "GDScript",
-"path": "res://src/scenes/librairies/managers/resource_manager.gd"
+"path": "res://src/scripts/resources/resource_manager.gd"
 }, {
 "base": "Node2D",
 "class": "ResourceNode",

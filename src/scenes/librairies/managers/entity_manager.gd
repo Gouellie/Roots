@@ -86,6 +86,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _place_tile() -> void:
 	if not _blueprint is TileBlueprint:
 		return
+		
 	var new_tile = _blueprint.tile_scene.instance() as TileBase
 	new_tile.position = _blueprint.position
 	new_tile.rotation_degrees = _blueprint.real_rotation

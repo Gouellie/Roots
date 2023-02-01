@@ -1,31 +1,31 @@
 tool
 extends Control
 
-export var identifier : String
-export var icon : Texture
-export var color_progress : Color
+var resource_node : ResourceNode = null setget set_resource_node 
 
 onready var texture_rect : TextureRect = $Margin/VBoxContainer/CenterContainer/TextureRect
 onready var texture_progress : TextureProgress = $Margin/VBoxContainer/CenterContainer/Gauge
 onready var amount_label : Label = $Margin/VBoxContainer/Amount
 
-func _ready():
+func set_resource_node(_resource_node:ResourceNode):
+	resource_node = _resource_node
+	resource_node.connect("value_updated", self, "on_value_updated")
+	resource_node.initialize()
+
+	# assign icon & color accent based on the identifier
 	if texture_rect:
-		texture_rect.texture = icon
+		var _icon = Resources.icons[resource_node.identifier] as Texture
+		if _icon:
+			texture_rect.texture = _icon
 
 	if texture_progress:
-		texture_progress.tint_progress = color_progress
+		var _color = Resources.resource_color[resource_node.identifier] as Color
+		if _color:
+			texture_progress.tint_progress = _color
 
-	Events.connect("resource_node_updated", self, "on_resource_node_updated")
-
-func on_resource_node_updated(_identifier, _node) -> void:
-	if is_instance_valid(amount_label) == false || identifier != _identifier:
-		return
-		
-	var _rsc = _node as ResourceNode
-	if _rsc:
-		amount_label.text = String(_rsc.value)
-		texture_progress.min_value = _rsc.min_value
-		texture_progress.max_value = _rsc.max_value
-		texture_progress.value = _rsc.value
-
+func on_node_updated():
+	if resource_node:
+		amount_label.text = String(resource_node.value)
+		texture_progress.min_value = resource_node.min_value
+		texture_progress.max_value = resource_node.max_value
+		texture_progress.value = resource_node.value

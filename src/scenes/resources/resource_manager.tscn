@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/scripts/resources/resource_manager.gd" type="Script" id=1]
+[ext_resource path="res://src/scripts/resources/resource_container.gd" type="Script" id=3]
+
+[node name="ResourceManager" type="Node2D"]
+script = ExtResource( 1 )
+resource_types = {
+"soil": 10,
+"sunlight": 10,
+"water": 10
+}
+
+[node name="ResourceContainer" type="Node2D" parent="."]
+script = ExtResource( 3 )

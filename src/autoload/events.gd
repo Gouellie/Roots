@@ -20,6 +20,3 @@ signal tile_placed(new_tile)
 
 # warning-ignore:unused_signal
 signal game_over
-
-# warning-ignore:unused_signal
-signal resource_node_updated(identifier, node)
