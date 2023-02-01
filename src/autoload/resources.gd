@@ -5,7 +5,8 @@ enum TILES {
 	STRAIGHT = 1, 
 	ELBOW = 2, 
 	THREEWAY = 3, 
-	FOURWAY = 4}
+	FOURWAY = 4
+}
 
 
 const Tiles := {
@@ -13,6 +14,25 @@ const Tiles := {
 	TILES.ELBOW : preload("res://src/scenes/librairies/tiles/types/tile_elbow.tscn"),
 	TILES.THREEWAY : preload("res://src/scenes/librairies/tiles/types/tile_threeway.tscn"),
 	TILES.FOURWAY : preload("res://src/scenes/librairies/tiles/types/tile_fourway.tscn"),
+}
+
+const Tiles_resource_cost = {
+	TILES.STRAIGHT : {
+		"water": 1,
+		"soil": 1,
+	},
+	TILES.ELBOW : {
+		"water": 1,
+		"soil": 1,
+	},
+	TILES.THREEWAY : {
+		"water": 2,
+		"soil": 1,
+	},
+	TILES.FOURWAY : {
+		"water": 2,
+		"soil": 2,
+	},
 }
 
 const icons = {
