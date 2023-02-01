@@ -86,11 +86,12 @@ func _unhandled_input(event: InputEvent) -> void:
 func _place_tile() -> void:
 	if not _blueprint is TileBlueprint:
 		return
-		
+	var cellv = _terrain.world_to_map(_blueprint.position)
+	if is_cell_occupied(cellv):
+		return
 	var new_tile = _blueprint.tile_scene.instance() as TileBase
 	new_tile.position = _blueprint.position
 	new_tile.rotation_degrees = _blueprint.real_rotation
-	var cellv = _terrain.world_to_map(new_tile.position)
 	add_child(new_tile)
 	tiles[cellv] = new_tile
 	Events.emit_signal("tile_placed", new_tile)
