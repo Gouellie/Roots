@@ -12,16 +12,16 @@ func _ready() -> void:
 	tile_scene = Resources.Tiles[tile_index]
 	match tile_index:
 		Resources.TILES.STRAIGHT:
-			$Skin_Straight.visible = true
+			$Sprite_Straight.visible = true
 
 		Resources.TILES.ELBOW:
-			$Skin_Elbow.visible = true
+			$Sprite_Elbow.visible = true
 
 		Resources.TILES.THREEWAY:
-			$Skin_ThreeWay.visible = true
+			$Sprite_ThreeWay.visible = true
 
 		Resources.TILES.FOURWAY:
-			$Skin_FourWay.visible = true
+			$Sprite_FourWay.visible = true
 			can_rotate = false
 		
 	var _resource_cost = Resources.Tiles_resource_cost[tile_index]
