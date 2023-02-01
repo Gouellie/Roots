@@ -1,11 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://src/scenes/librairies/tiles/blueprints/tile_blueprint_fourway.gd" type="Script" id=1]
-[ext_resource path="res://src/scenes/librairies/tiles/tile_fourway.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/scenes/librairies/tiles/tile_fourway.gd" type="Script" id=1]
 
-[node name="TileBluePrint_FourWay" type="Node2D"]
+[node name="Tile_Elbow" type="Node2D"]
 script = ExtResource( 1 )
-tile_scene = ExtResource( 2 )
 
 [node name="ColorRect_TempVisual" type="ColorRect" parent="."]
 margin_left = -32.0
@@ -19,15 +17,15 @@ color = Color( 0.376471, 0.654902, 0.419608, 1 )
 margin_top = 29.0
 margin_right = 40.0
 margin_bottom = 69.0
-rect_scale = Vector2( 1.6, 0.12 )
+rect_scale = Vector2( 0.839999, 0.12 )
 mouse_filter = 2
 color = Color( 0, 0, 0, 1 )
 
 [node name="ColorRect2" type="ColorRect" parent="ColorRect_TempVisual"]
-margin_left = 35.0
-margin_right = 75.0
+margin_left = 34.0
+margin_right = 74.0
 margin_bottom = 40.0
 rect_rotation = 89.9999
-rect_scale = Vector2( 1.6, 0.12 )
+rect_scale = Vector2( 0.84, 0.12 )
 mouse_filter = 2
 color = Color( 0, 0, 0, 1 )

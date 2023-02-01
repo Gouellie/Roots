@@ -9,15 +9,15 @@ const selected_color := Color.green
 var is_selected : bool = false setget set_is_selected
 
 onready var default := color
-onready var tile_blueprint : TileBlueprintBase
+onready var tile_blueprint : TileBlueprint
 
 
 func _ready() -> void:
-	if tile_scene:
-		tile_blueprint = tile_scene.instance() as TileBlueprintBase
-		tile_blueprint.scale = Vector2(0.7, 0.7)
-		tile_blueprint.position = $TileCenterPos.rect_position
-		add_child(tile_blueprint)
+	tile_blueprint = tile_scene.instance() as TileBlueprint
+	tile_blueprint.tile_index = randi()%4+1
+	tile_blueprint.scale = Vector2(0.7, 0.7)
+	tile_blueprint.position = $TileCenterPos.rect_position
+	add_child(tile_blueprint)
 
 
 func _on_TilePanel_mouse_entered() -> void:
