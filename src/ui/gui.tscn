@@ -28,6 +28,7 @@ margin_left = 10.0
 margin_top = 10.0
 margin_right = 1270.0
 margin_bottom = 710.0
+mouse_filter = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Margin/ResourceGauges"]
 anchor_left = 0.5
@@ -37,6 +38,7 @@ margin_top = 56.0
 margin_right = -165.0
 margin_bottom = 186.0
 rect_scale = Vector2( 0.5, 0.5 )
+mouse_filter = 2
 
 [node name="ResourceGauge_Soil" parent="Margin/ResourceGauges/HBoxContainer" instance=ExtResource( 4 )]
 anchor_right = 0.0
@@ -127,6 +129,7 @@ margin_left = 10.0
 margin_top = 10.0
 margin_right = 1270.0
 margin_bottom = 710.0
+mouse_filter = 2
 
 [node name="Control_GameOver" type="ColorRect" parent="."]
 visible = false
