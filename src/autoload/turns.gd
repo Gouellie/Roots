@@ -1,5 +1,7 @@
 extends Node
 
+const time_per_turn : float = 45.0
+
 # warning-ignore:unused_signal
 signal turn_manager_initialized(turn_manager)
 

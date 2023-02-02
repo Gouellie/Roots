@@ -10,15 +10,12 @@ func _ready() -> void:
 func on_game_over() -> void:
 	control_game_over.visible = true
 
-
 func _on_Button_Quit_pressed() -> void:
 	var res = get_tree().change_scene("res://src/screens/main_menu.tscn")
 	Log.log_error(res, "gui.gd")
 
-
 func _on_Button_Retry_pressed() -> void:
 	get_tree().reload_current_scene()
-
 
 func _on_Button_Tick_pressed() -> void:
 	Events.emit_signal("tick")
