@@ -55,8 +55,9 @@ valign = 1
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = 324.0
-margin_right = 370.0
-margin_bottom = 28.0
-text = "Next Step"
+margin_top = 2.0
+margin_right = 419.0
+margin_bottom = 38.0
+text = "End Turn"
 
 [connection signal="pressed" from="EndTurn_Button" to="." method="_on_EndTurn_Button_pressed"]
