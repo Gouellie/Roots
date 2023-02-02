@@ -10,6 +10,7 @@ var is_leaf_node : bool
 onready var rig := $Rig
 onready var _leaf := $Leaf
 onready var _connections :Area2D= $Rig/Connections
+onready var _ingredient_detector :Area2D= $IngredientDetector
 
 
 func _ready() -> void:
@@ -34,6 +35,13 @@ func get_connections() -> Directory:
 	is_leaf_node = connections.size() < 2
 	_leaf.visible = is_leaf_node
 	return connections
+
+
+func get_overlapping_ingredient() -> Ingredient:
+	for area in _ingredient_detector.get_overlapping_areas():
+		if area.owner is Ingredient:
+			return area.owner
+	return null
 
 
 func set_distance(value : int) -> void:

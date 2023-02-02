@@ -1,10 +1,13 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/scenes/librairies/tiles/tile.gd" type="Script" id=1]
 [ext_resource path="res://assets/tiles/roots_tile_sheet_export_no_gap.png" type="Texture" id=2]
 [ext_resource path="res://assets/icons/invalid.png" type="Texture" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 16.0
 
 [node name="Tile_Straight" type="Node2D"]
 script = ExtResource( 1 )
@@ -43,3 +46,10 @@ margin_left = -24.0
 margin_top = -24.0
 margin_right = 16.0
 margin_bottom = -10.0
+
+[node name="IngredientDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="IngredientDetector"]
+shape = SubResource( 2 )
