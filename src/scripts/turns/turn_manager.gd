@@ -31,6 +31,7 @@ func _ready():
 	Turns.emit_signal("turn_manager_initialized", self)
 	Turns.connect("request_turn_end", self, "on_turn_end_requested")
 	Turns.connect("request_resolve", self, "on_request_resolve")
+	start_turn()
 
 func _start_end_turn_sequence():
 	end_turn()
@@ -84,7 +85,9 @@ func next_step():
 func start_turn():
 	time_remaining = Turns.time_per_turn
 	step = 0
-	next_step()
+	
+	while step != 2:
+		next_step()
 	
 func end_turn():
 	turn += 1

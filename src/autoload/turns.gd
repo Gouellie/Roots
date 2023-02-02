@@ -1,5 +1,7 @@
 extends Node
 
+var resolve_behaviors : Array = []
+
 const time_per_turn : float = 45.0
 
 # warning-ignore:unused_signal
@@ -39,8 +41,8 @@ signal step_condition_win()
 signal step_condition_lose()
 
 const step_order = {
-	1: "step_placing",
-	2: "step_resource_receive",
+	1: "step_resource_receive",
+	2: "step_placing",
 	3: "step_resource_consume",
 	4: "step_roots_sever",
 	5: "step_roots_destroy",
@@ -49,9 +51,9 @@ const step_order = {
 }
 
 const step_names = {
-	1: "building",
-	2: "income",
-	3: "tax",
+	1: "producing",
+	2: "building",
+	3: "consuming",
 	4: "severing",
 	5: "destroying",
 	6: "win?",
