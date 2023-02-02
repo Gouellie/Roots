@@ -1,5 +1,7 @@
 extends Camera2D
 
+export (NodePath) var zoom_entity
+
 const default_zoom := Vector2(1.0,1.0)
 
 # how far in you can zoom
@@ -21,9 +23,16 @@ var lock_y : bool = false
 
 var camera_control_type :int=0
 
+onready var camera_center : Vector2
+onready var camera_offset : Vector2
+
 
 func _ready() -> void:
-	pass
+	camera_offset = OS.window_size * 0.5
+	var node = get_node(zoom_entity)
+	if node:
+		camera_center = node.position
+		center_on_position(camera_center)
 
 
 func _process(_delta: float) -> void:
@@ -33,7 +42,7 @@ func _process(_delta: float) -> void:
 func _reset_camera() -> void:
 	zoom = default_zoom
 	desired_zoom = default_zoom
-	position = Vector2.ZERO
+	center_on_position(camera_center)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -59,9 +68,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event is InputEventMouseMotion and dragging:
 		position = zoom * (mouse_start_pos - event.position) + screen_start_position
 		if lock_x:
-			position.x = 0.0
+			position.x = camera_center.x - camera_offset.x
 		if lock_y:
-			position.y = 0.0
+			position.y = camera_center.y - camera_offset.y
 
 
 func _change_camera_control_type() -> void:
@@ -84,3 +93,7 @@ func _change_camera_control_type() -> void:
 			lock_x = true
 			lock_y = true
 			print("camera control type : no pan")
+
+
+func center_on_position(pos : Vector2) -> void:
+	position = pos - camera_offset

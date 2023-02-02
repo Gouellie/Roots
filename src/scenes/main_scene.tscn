@@ -2,7 +2,6 @@
 
 [ext_resource path="res://src/ui/gui.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/scenes/camera_controller.gd" type="Script" id=2]
-[ext_resource path="res://src/scenes/terrain.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/scenes/game.gd" type="Script" id=4]
 [ext_resource path="res://src/scenes/librairies/managers/entity_manager.gd" type="Script" id=5]
 [ext_resource path="res://src/scenes/resources/player_resource_manager.tscn" type="PackedScene" id=6]
@@ -10,6 +9,7 @@
 [ext_resource path="res://src/scenes/librairies/managers/ingredients_manager.gd" type="Script" id=8]
 [ext_resource path="res://src/scenes/librairies/plants/plant.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/scripts/turns/turn_manager.gd" type="Script" id=10]
+[ext_resource path="res://src/scenes/terrain_moderate_2.tscn" type="PackedScene" id=11]
 
 [node name="MainScene" type="Node2D"]
 script = ExtResource( 4 )
@@ -21,13 +21,14 @@ script = ExtResource( 10 )
 offset = Vector2( 640, 360 )
 current = true
 script = ExtResource( 2 )
+zoom_entity = NodePath("../Plant_Master")
 
-[node name="Terrain" parent="." instance=ExtResource( 3 )]
+[node name="Terrain" parent="." instance=ExtResource( 11 )]
 
 [node name="Ingredients" type="TileMap" parent="."]
 tile_set = ExtResource( 7 )
 format = 1
-tile_data = PoolIntArray( 458767, 1, 0, 524302, 1, 0, 524303, 1, 0, 524306, 2, 0, 524307, 2, 0, 524308, 2, 0, 589842, 2, 0, 589843, 2, 0, 589844, 2, 0, 786434, 0, 0, 786435, 0, 0, 786439, 1, 0, 786440, 1, 0, 786446, 1, 0, 786447, 1, 0, 851969, 0, 0, 851970, 0, 0, 851971, 0, 0, 851976, 1, 0, 851982, 1, 0, 851983, 1, 0, 917505, 0, 0, 917506, 0, 0, 917507, 0, 0, 917519, 2, 0, 917520, 2, 0, 983055, 2, 0, 983056, 2, 0 )
+tile_data = PoolIntArray( 327687, 0, 0, 327688, 0, 0, 327694, 0, 0, 393223, 0, 0, 393226, 0, 0, 393234, 0, 0, 458762, 0, 0, 458763, 0, 0, 458767, 1, 0, 524302, 1, 0, 524303, 1, 0, 524306, 2, 0, 524307, 2, 0, 524308, 2, 0, 589842, 2, 0, 589843, 2, 0, 589844, 2, 0, 786434, 0, 0, 786435, 0, 0, 786439, 1, 0, 786440, 1, 0, 786446, 1, 0, 786447, 1, 0, 851969, 0, 0, 851970, 0, 0, 851971, 0, 0, 851976, 1, 0, 851982, 1, 0, 851983, 1, 0, 917505, 0, 0, 917506, 0, 0, 917507, 0, 0, 917519, 2, 0, 917520, 2, 0, 983055, 2, 0, 983056, 2, 0 )
 script = ExtResource( 8 )
 
 [node name="EntityManager" type="Node2D" parent="."]
@@ -36,7 +37,7 @@ terrain_node_path = NodePath("../Terrain")
 plant_master_node_path = NodePath("../Plant_Master")
 
 [node name="Plant_Master" parent="." instance=ExtResource( 9 )]
-position = Vector2( 608, 352 )
+position = Vector2( 928, 224 )
 terrain_node_path = NodePath("../Terrain")
 
 [node name="PlayerResourceManager" parent="." instance=ExtResource( 6 )]
