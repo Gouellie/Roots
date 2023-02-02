@@ -5,11 +5,14 @@ const TILE_HEALTH : int = 3
 var player_resource_manager : PlayerResourceManager
 var entity_manager : EntityManager
 var turn_manager : TurnManager
+var ingredient_manager : IngredientManager
 
 func _init():
 	Events.connect("init_player_resource_manager", self, "on_player_resource_manager_init")
 	Events.connect("init_entity_manager", self, "on_entity_manager_init")
 	Events.connect("init_turn_manager", self, "on_turn_manager_init")
+	Events.connect("init_ingredient_manager", self, "on_ingredient_manager_init")
+		
 	
 func on_player_resource_manager_init(_player_resource_manager):
 	player_resource_manager = _player_resource_manager as PlayerResourceManager
@@ -19,4 +22,7 @@ func on_entity_manager_init(_entity_manager):
 	
 func on_turn_manager_init(_turn_manager):
 	turn_manager = _turn_manager as TurnManager
+	
+func on_ingredient_manager_init(_ingredient_manager):
+	ingredient_manager = _ingredient_manager as IngredientManager	
 

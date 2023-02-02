@@ -8,9 +8,7 @@ func is_harvesting() -> bool:
 		var _tile = _t as Tile
 		if _tile == null:
 			continue
-
 		var _i = _tile.get_overlapping_ingredient()
-		if _tile.get_overlapping_ingredient() == self:
+		if _i == self:
 			return true
-#
 	return false

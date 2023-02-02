@@ -4,6 +4,8 @@ class_name EntityManager
 export (NodePath) var terrain_node_path
 export (NodePath) var plant_master_node_path
 
+const plant_scene := preload("res://src/scenes/librairies/plants/plant.tscn")
+
 const _eraser_scene := preload("res://src/scenes/librairies/tiles/blueprints/tile_eraser.tscn")
 
 var tiles := {}
@@ -13,6 +15,8 @@ var _blueprint : TileBlueprint
 var _eraser : TileBlueprintEraser
 var _placeable_blueprint : bool
 var _eraser_mode : bool
+var _plants := []
+
 
 onready var _plant_master : Plant
 onready var _terrain : TileMap
@@ -25,9 +29,9 @@ func _ready() -> void:
 	tile_offset = _terrain.cell_size / 2
 	Events.connect("tilepanel_selected", self, "on_tile_selected")
 	Events.connect("eraser_mode_toggled", self, "on_eraser_mode_toggled")
-		# warning-ignore:unused_signal
-	Events.emit_signal("game_over", self)
+	Events.connect("spawn_plant", self, "on_spawn_plant")
 	Events.emit_signal("init_entity_manager", self)
+		
 
 func _process(_delta: float) -> void:
 	_move_blueprint(get_global_mouse_position())
@@ -160,7 +164,7 @@ func _update_network_connection() -> void:
 		if tile is Tile:
 			tile.connected = false
 			tile.distance = 999
-	var head = _plant_master._get_network_head()
+	var head = get_network_head(_plant_master)
 	# no head connected to flower means no good
 	if not is_instance_valid(head):
 		return
@@ -168,6 +172,26 @@ func _update_network_connection() -> void:
 		return
 	head.connected = true
 	head.distance = 0
+	_parse_network(head, 1)
+	_update_plants()
+	
+
+func _update_plants() -> void:
+	for _p in _plants:
+		_update_plant(_p)
+
+
+func _update_plant(_plant : Plant) -> void:
+	var head = get_network_head(_plant)
+	# no head connected to flower means no good
+	if not is_instance_valid(head):
+		return
+	if head.is_queued_for_deletion():
+		return
+	if not head.connected:
+#		_plant.connected = false
+		return
+	head.distance = 0		
 	_parse_network(head, 1)
 
 
@@ -192,3 +216,18 @@ func get_connected_root_tiles() -> Array:
 			connected_tiles.append(tile)
 			
 	return connected_tiles
+
+
+func on_spawn_plant(pos : Vector2) -> void:
+	var new_plant = plant_scene.instance() as Plant
+	new_plant.position = pos
+	new_plant.cellv = _terrain.world_to_map(pos)
+	new_plant.head_tile_cellv = new_plant.cellv
+	new_plant.head_tile_cellv.y += 1
+	_plants.append(new_plant)
+	add_child(new_plant)
+	_update_plant(new_plant)
+
+
+func get_network_head(_p : Plant) -> Tile:
+	return get_tile_at_position(_p.head_tile_cellv)	

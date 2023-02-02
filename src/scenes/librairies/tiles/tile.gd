@@ -55,10 +55,7 @@ func get_connections() -> Directory:
 	return connections
 
 func get_overlapping_ingredient() -> Ingredient:
-	for area in _ingredient_detector.get_overlapping_areas():
-		if area.owner is Ingredient:
-			return area.owner
-	return null
+	return Globals.ingredient_manager.get_ingredient_at(cellv)
 
 func set_distance(value : int) -> void:
 	distance = value

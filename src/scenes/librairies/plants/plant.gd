@@ -3,7 +3,8 @@ class_name Plant
 
 export (NodePath) var terrain_node_path
 
-onready var head_tile_cellv
+var head_tile_cellv : Vector2
+
 
 func _ready() -> void:
 	if terrain_node_path:
@@ -12,11 +13,6 @@ func _ready() -> void:
 		head_tile_cellv = cellv
 		head_tile_cellv.y += 1
 
-func _get_network_head() -> Entity:
-	for area in $Area2D.get_overlapping_areas():
-		if area.owner is Entity:
-			return area.owner
-	return null
 
 func _on_step_resolved(_step):
 	# setup resolve steps no the Plant.scene, handle logic here
