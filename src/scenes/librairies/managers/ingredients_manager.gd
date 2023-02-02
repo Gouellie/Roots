@@ -20,6 +20,7 @@ func _ready() -> void:
 		var ingredient = _scene.instance() as Entity
 		ingredient.position = real_pos + tile_offset
 		add_child(ingredient)
+	clear()
 
 
 func _get_scene(cellv : int) -> PackedScene:
