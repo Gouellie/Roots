@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/scenes/librairies/tiles/tile.gd" type="Script" id=1]
 [ext_resource path="res://assets/tiles/roots_tile_sheet_export_no_gap.png" type="Texture" id=2]
 [ext_resource path="res://assets/icons/invalid.png" type="Texture" id=3]
+[ext_resource path="res://src/ui/turns/resolve_behaviors/resolve_behavior_consume_resource.gd" type="Script" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -57,3 +58,6 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="IngredientDetector"]
 shape = SubResource( 2 )
+
+[node name="ConsumerResolveBehavior" type="Node2D" parent="."]
+script = ExtResource( 4 )
