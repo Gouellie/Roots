@@ -6,6 +6,8 @@
 [ext_resource path="res://src/ui/turns/resolve_behaviors/resolve_behavior_consume_resource.gd" type="Script" id=4]
 [ext_resource path="res://src/ui/turns/resolve_behaviors/resolve_behavior_damage_noresources.gd" type="Script" id=5]
 [ext_resource path="res://assets/theme/main_theme.tres" type="Theme" id=6]
+[ext_resource path="res://assets/shaders/outline_disconnected_shadder.tres" type="Material" id=7]
+[ext_resource path="res://assets/shaders/outline_parched_shadder.tres" type="Material" id=8]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -18,6 +20,20 @@ script = ExtResource( 1 )
 [node name="Rig" type="Node2D" parent="."]
 
 [node name="Sprite" type="Sprite" parent="Rig"]
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 128, 64, 64 )
+
+[node name="Parched" type="Sprite" parent="Rig"]
+visible = false
+material = ExtResource( 6 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 128, 64, 64 )
+
+[node name="Disconnected" type="Sprite" parent="Rig"]
+visible = false
+material = ExtResource( 5 )
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 128, 128, 64, 64 )

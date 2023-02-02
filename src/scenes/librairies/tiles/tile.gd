@@ -34,13 +34,16 @@ func on_health_changed():
 	# do something to update visual here later
 	$Health.text = String(health_node.value)
 	pass
+	$Rig/Parched.visible = true
+	
 
 func apply_damage(_damage : int):
 	resource_manager.deduct_from_resource(Resources.HEALTH, _damage)
 
+
 func set_is_connected(value : bool) -> void:
 	connected = value
-	$Disconnected.visible = not connected
+	$Rig/Disconnected.visible = not connected
 	$Distance.visible = connected
 
 func get_is_connected() -> bool:
