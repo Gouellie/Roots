@@ -178,3 +178,10 @@ func _parse_network(current : Tile, distance : int) -> void:
 		tile.connected = true
 		_parse_network(tile, distance + 1)
 
+
+func get_connected_root_tiles() -> Array:
+	var connected_tiles = []
+	for tile in tiles:
+		if tile.connected:
+			connected_tiles.append(tile)
+	return connected_tiles
