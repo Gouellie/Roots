@@ -22,7 +22,7 @@ func get_time_remaining() -> float:
 	return time_remaining
 
 func _process(delta):
-	if step != 1:
+	if step != Turns.STEP_ORDER.placing:
 		return
 	
 	set_time_remaining(time_remaining - delta)
