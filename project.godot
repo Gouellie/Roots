@@ -59,7 +59,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/ui/turns/turn_step_resolver.gd"
 }, {
-"base": "Entity",
+"base": "TileBase",
 "class": "Tile",
 "language": "GDScript",
 "path": "res://src/scenes/librairies/tiles/tile.gd"
