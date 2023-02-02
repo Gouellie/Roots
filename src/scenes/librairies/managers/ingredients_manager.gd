@@ -4,10 +4,9 @@ const WATER_TILE_INDEX :int= 0
 const NUTRIENT_TILE_INDEX :int= 1
 const ROCK_TILE_INDEX :int= 2
 
-const WATER_SCENE :PackedScene= preload("res://src/scenes/librairies/ingredients/water.tscn")
-const NUT_SCENE :PackedScene= preload("res://src/scenes/librairies/ingredients/nutrient.tscn")
-const ROCKWATER_SCENE :PackedScene= preload("res://src/scenes/librairies/ingredients/rock.tscn")
-
+const WATER_SCENE : PackedScene= preload("res://src/scenes/librairies/ingredients/water.tscn")
+const NUT_SCENE : PackedScene= preload("res://src/scenes/librairies/ingredients/soil.tscn")
+const ROCKWATER_SCENE : PackedScene= preload("res://src/scenes/librairies/ingredients/rock.tscn")
 
 func _ready() -> void:
 	var tile_offset = cell_size / 2
