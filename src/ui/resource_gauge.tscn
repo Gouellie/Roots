@@ -43,8 +43,7 @@ margin_bottom = 65.0
 
 [node name="Amount" type="Label" parent="Margin/VBoxContainer"]
 margin_top = 134.0
-margin_right = 65.0
+margin_right = 130.0
 margin_bottom = 148.0
-rect_scale = Vector2( 2, 2 )
 text = "NAN"
 align = 1
