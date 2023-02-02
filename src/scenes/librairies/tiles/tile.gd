@@ -24,6 +24,7 @@ func _ready() -> void:
 		health_node = resource_manager.add_new_resource(Resources.HEALTH, Globals.TILE_HEALTH)
 		health_node.connect("node_depleted", self, "on_health_depleted")
 		health_node.connect("node_update", self, "on_health_changed")
+		$Health.text = String(health_node.value)
 
 func on_health_depleted():
 	self.queue_free()
@@ -31,6 +32,7 @@ func on_health_depleted():
 
 func on_health_changed():
 	# do something to update visual here later
+	$Health.text = String(health_node.value)
 	pass
 
 func apply_damage(_damage : int):

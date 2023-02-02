@@ -29,13 +29,13 @@ signal step_resource_produce()
 signal step_resource_consume()
 
 # warning-ignore:unused_signal
-signal step_roots_sever()
+signal step_roots_damage_severed()
 
 # warning-ignore:unused_signal
 signal step_roots_destroy()
 
 # warning-ignore:unused_signal
-signal step_condition_win()
+signal step_roots_damage_connected()
 
 # warning-ignore:unused_signal
 signal step_condition_lose()
@@ -44,8 +44,8 @@ enum STEP_ORDER {
 	resources_produce = 1,
 	placing = 2,
 	resources_consume = 3,
-	roots_sever = 4,
-	roots_destroy = 5,
+	roots_damage_severed = 4,
+	roots_damage_connected = 5,
 	condition_win = 6,
 	condition_lose = 7,
 }
@@ -55,8 +55,8 @@ const step_order = {
 	1: "step_resource_produce",
 	2: "step_placing",
 	3: "step_resource_consume",
-	4: "step_roots_sever",
-	5: "step_roots_destroy",
+	4: "step_roots_damage_severed",
+	5: "step_roots_damage_connected",
 	6: "step_condition_win",
 	7: "step_condition_lose",
 }

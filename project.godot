@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/ui/turns/resolve_behaviors/resolve_behavior_consume_resource.gd"
 }, {
+"base": "ResolveBehavior",
+"class": "DamageResolveBehavior",
+"language": "GDScript",
+"path": "res://src/ui/turns/resolve_behaviors/resolve_behavior_damage.gd"
+}, {
 "base": "Node2D",
 "class": "Entity",
 "language": "GDScript",
@@ -53,6 +58,11 @@ _global_script_classes=[ {
 "class": "IngredientManager",
 "language": "GDScript",
 "path": "res://src/scenes/librairies/managers/ingredients_manager.gd"
+}, {
+"base": "ResolveBehavior",
+"class": "NoResourcesDamageResolveBehavior",
+"language": "GDScript",
+"path": "res://src/ui/turns/resolve_behaviors/resolve_behavior_damage_noresources.gd"
 }, {
 "base": "Entity",
 "class": "Plant",
@@ -141,6 +151,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "ConsumerResolveBehavior": "",
+"DamageResolveBehavior": "",
 "Entity": "",
 "EntityManager": "",
 "Harvestable": "",
@@ -149,6 +160,7 @@ _global_script_class_icons={
 "HarvestableWater": "",
 "Ingredient": "",
 "IngredientManager": "",
+"NoResourcesDamageResolveBehavior": "",
 "Plant": "",
 "PlayerResourceManager": "",
 "ProducerResolveBehavior": "",

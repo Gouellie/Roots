@@ -22,7 +22,6 @@ onready var _plant_master : Plant
 onready var _terrain : TileMap
 onready var tile_offset : Vector2
 
-
 func _ready() -> void:
 	_plant_master = get_node(plant_master_node_path) as Plant
 	_terrain = get_node(terrain_node_path) as TileMap
@@ -232,3 +231,29 @@ func on_spawn_plant(pos : Vector2) -> void:
 
 func get_network_head(_p : Plant) -> Tile:
 	return get_tile_at_position(_p.head_tile_cellv)	
+
+func get_connected_root_tiles_by_distance(_distance : int) -> Array:
+	var _tiles : Array = []
+	for _t in get_connected_root_tiles():
+		if _t is Tile:
+			var _tile : Tile = _t as Tile
+			if _tile.distance == _distance:
+				_tiles.append(_tile)
+			
+	return _tiles
+	
+func get_longest_distance() -> int:
+	var _longest_distance = 0
+	for _t in get_connected_root_tiles():
+		if _t is Tile:
+			var _tile : Tile = _t as Tile
+			_longest_distance = max(_longest_distance, _tile.distance)
+			
+	return _longest_distance
+	
+func should_receive_damage(_tile : Tile) -> bool:
+	if _tile.distance == get_longest_distance():
+		return true
+		
+	return false
+			
