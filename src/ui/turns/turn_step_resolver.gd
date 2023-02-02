@@ -2,7 +2,19 @@ extends Node
 class_name StepResolver
 
 var owner_node2d : Node2D
-var resolve_behavior : Array = []
+var resolve_behavior : Array = [] setget set_resolve_behavior, get_resolve_behavior
+
+func set_resolve_behavior(var _value : Array):
+	resolve_behavior = _value
+
+func get_resolve_behavior() -> Array:
+	var _result : Array = []
+	for _rb in resolve_behavior:
+		if is_instance_valid(_rb):
+			_result.append(_rb)
+	
+	resolve_behavior = _result
+	return _result
 
 func ready(_node : Node2D):
 	owner_node2d = _node
@@ -27,3 +39,4 @@ func execute_resolve(_step):
 			continue
 		if _rb.resolve_step == _step:
 			_rb._execute_resolve_behavior()
+			

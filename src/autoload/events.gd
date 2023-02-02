@@ -26,3 +26,6 @@ signal init_player_resource_manager(_resource_manager)
 
 # warning-ignore:unused_signal
 signal init_entity_manager(_entity_manager)
+
+# warning-ignore:unused_signal
+signal init_turn_manager(_turn_manager)

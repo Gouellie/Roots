@@ -26,7 +26,7 @@ func _ready():
 	time_remaining_bar.min_value = 0
 	time_remaining_bar.max_value = Turns.time_per_turn
 	
-	step_label.text = String(Turns.step_names[turn_manager.step])
+	step_label.text = String(Turns.step_order[turn_manager.step])
 	turn_label.text = String(turn_manager.turn)
 	
 func on_turn_manager_initialized(_turn_manager):
@@ -34,7 +34,7 @@ func on_turn_manager_initialized(_turn_manager):
 	turn_manager.connect("time_remaining_changed", self, "on_time_remaining_changed")
 	
 func on_step_next(_step):
-	step_label.text = String(Turns.step_names[_step])
+	step_label.text = String(Turns.step_order[_step])
 	
 func on_turn_next(_turn):
 	turn_label.text = String(_turn)

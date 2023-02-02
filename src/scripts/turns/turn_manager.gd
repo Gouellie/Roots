@@ -11,6 +11,9 @@ var step : int = 1
 var step_resolvers = {}
 var time_remaining : float = Turns.time_per_turn setget set_time_remaining, get_time_remaining
 
+func _init():
+	Events.emit_signal("init_turn_manager", self)
+
 func set_time_remaining(_value : float):
 	time_remaining = _value
 	emit_signal("time_remaining_changed", _value)

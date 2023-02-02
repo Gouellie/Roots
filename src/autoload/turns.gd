@@ -23,7 +23,7 @@ signal request_resolve(sender, step)
 signal step_placing()
 
 # warning-ignore:unused_signal
-signal step_resource_receive()
+signal step_resource_produce()
 
 # warning-ignore:unused_signal
 signal step_resource_consume()
@@ -40,22 +40,23 @@ signal step_condition_win()
 # warning-ignore:unused_signal
 signal step_condition_lose()
 
+enum STEP_ORDER {
+	resources_produce = 1,
+	placing = 2,
+	resources_consume = 3,
+	roots_sever = 4,
+	roots_destroy = 5,
+	condition_win = 6,
+	condition_lose = 7,
+}
+
+# careful when renaming, it's using the "VALUE" to find the corresponding signal
 const step_order = {
-	1: "step_resource_receive",
+	1: "step_resource_produce",
 	2: "step_placing",
 	3: "step_resource_consume",
 	4: "step_roots_sever",
 	5: "step_roots_destroy",
 	6: "step_condition_win",
 	7: "step_condition_lose",
-}
-
-const step_names = {
-	1: "producing",
-	2: "building",
-	3: "consuming",
-	4: "severing",
-	5: "destroying",
-	6: "win?",
-	7: "lose?",
 }

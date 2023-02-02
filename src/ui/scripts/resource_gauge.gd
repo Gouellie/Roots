@@ -1,11 +1,16 @@
 tool
 extends Control
 
-var resource_node : ResourceNode = null setget set_resource_node 
-
 onready var texture_rect : TextureRect = $Margin/VBoxContainer/CenterContainer/TextureRect
-onready var texture_progress : TextureProgress = $Margin/VBoxContainer/CenterContainer/Gauge
-onready var amount_label : Label = $Margin/VBoxContainer/Amount
+onready var amount_label : Label = $Amount
+
+var resource_node : ResourceNode = null setget set_resource_node 
+var update_frequency : float = 1.0
+var update_timer : float = 0.0
+var display_string : String = "%s+%s/-%s"
+
+func _ready():
+	Events.connect("tile_placed", self, "on_tile_placed")
 
 func set_resource_node(_resource_node:ResourceNode):
 	resource_node = _resource_node
@@ -18,14 +23,23 @@ func set_resource_node(_resource_node:ResourceNode):
 		if _icon:
 			texture_rect.texture = _icon
 
-	if texture_progress:
-		var _color = Resources.resource_color[resource_node.identifier] as Color
-		if _color:
-			texture_progress.tint_progress = _color
-
+func on_tile_placed(_tile):
+	_update_values()
+	
 func on_node_updated():
+	_update_values()
+
+func _process(_delta):
+	update_timer += _delta
+	if update_timer >= update_frequency:
+		update_timer = 0
+		_update_values()
+
+#var display_string : String = "{current}/+{increase}/-{decrease}"
+func _update_values():
+	update_timer = 0
 	if resource_node:
-		amount_label.text = String(resource_node.value)
-		texture_progress.min_value = resource_node.min_value
-		texture_progress.max_value = resource_node.max_value
-		texture_progress.value = resource_node.value
+		var _current_value = String(resource_node.value)
+		var _prod_amount = String(Globals.player_resource_manager.get_production_amount_by_resource(resource_node.identifier))
+		var _cons_amount = String(Globals.player_resource_manager.get_consumption_amount_by_resource(resource_node.identifier))
+		amount_label.text = display_string % [_current_value, _prod_amount, _cons_amount]
