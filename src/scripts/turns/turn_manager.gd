@@ -1,21 +1,42 @@
 extends Node2D
 class_name TurnManager
 
-var turn : int = 1
-var step : int = 1
+# warning-ignore:unused_signal
+signal time_remaining_changed(_time_remaining)
 
 export (int)var max_turns : int = 30
 
+var turn : int = 1
+var step : int = 1
 var step_resolvers = {}
+var time_remaining : float = Turns.time_per_turn setget set_time_remaining, get_time_remaining
+
+func set_time_remaining(_value : float):
+	time_remaining = _value
+	emit_signal("time_remaining_changed", _value)
+	
+func get_time_remaining() -> float:
+	return time_remaining
+
+func _process(delta):
+	if step != 1:
+		return
+	
+	set_time_remaining(time_remaining - delta)
+	
+	if time_remaining <= 0:
+		_start_end_turn_sequence()
 
 func _ready():
 	Turns.emit_signal("turn_manager_initialized", self)
 	Turns.connect("request_turn_end", self, "on_turn_end_requested")
 	Turns.connect("request_resolve", self, "on_request_resolve")
 
+func _start_end_turn_sequence():
+	end_turn()
+
 func on_turn_end_requested(_sender):
-	next_step()
-#	end_turn()
+	_start_end_turn_sequence()
 
 func on_request_resolve(_sender, _step):
 	var _resolver : StepResolver = _sender as StepResolver
@@ -59,6 +80,11 @@ func next_step():
 	Turns.emit_signal("step_next", step)
 	Turns.emit_signal(_signal)
 
+func start_turn():
+	time_remaining = Turns.time_per_turn
+	step = 0
+	next_step()
+	
 func end_turn():
 	turn += 1
 	if turn > max_turns:
@@ -66,8 +92,7 @@ func end_turn():
 		return
 	
 	Turns.emit_signal("turn_next", turn)
-	step = 0
-	next_step()
+	start_turn()
 
 func end_session():
 	pass
