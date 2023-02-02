@@ -77,7 +77,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			_blueprint.rotate_blueprint(true)
 		if event.is_action_pressed("rotate_ccw"):
 			_blueprint.rotate_blueprint(false)
-	
+		
 	if not event is InputEventMouseButton: 
 		return
 	if event.is_action_pressed("ui_select"):
@@ -111,6 +111,9 @@ func _place_tile() -> void:
 	tiles[cellv] = new_tile
 	Events.emit_signal("tile_placed", new_tile)
 	_clear_blueprint()
+	# physics takes a few frame before it registers overlapping areas... 
+	yield(get_tree().create_timer(0.1), "timeout")
+	_update_network_connection()
 
 
 func _remove_tile() -> void:
