@@ -19,9 +19,11 @@ func file_resolve_request(_step:int):
 	
 func execute_resolve(_step):
 	for _b in resolve_behavior:
+		if is_instance_valid(_b) == false || _b.is_queued_for_deletion():
+			continue
+			
 		var _rb = _b as ResolveBehavior
 		if _rb == null:
 			continue
-			
 		if _rb.resolve_step == _step:
 			_rb._execute_resolve_behavior()
