@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/scenes/librairies/tiles/tile.gd" type="Script" id=1]
 [ext_resource path="res://assets/tiles/roots_tile_sheet_export_no_gap.png" type="Texture" id=2]
@@ -26,14 +26,14 @@ region_rect = Rect2( 320, 128, 64, 64 )
 
 [node name="Parched" type="Sprite" parent="Rig"]
 visible = false
-material = ExtResource( 6 )
+material = ExtResource( 8 )
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 320, 128, 64, 64 )
 
 [node name="Disconnected" type="Sprite" parent="Rig"]
 visible = false
-material = ExtResource( 5 )
+material = ExtResource( 7 )
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 320, 128, 64, 64 )
