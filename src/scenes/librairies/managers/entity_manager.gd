@@ -85,7 +85,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			_place_tile()
 		elif _eraser_mode:
 			_remove_tile()
-	if event.is_action_pressed("ui_cancel"):
+		
+	if _eraser_mode and event.is_action_pressed("ui_cancel"):
 		_set_eraser_mode(false)
 
 
