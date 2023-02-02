@@ -25,7 +25,9 @@ func _ready() -> void:
 	tile_offset = _terrain.cell_size / 2
 	Events.connect("tilepanel_selected", self, "on_tile_selected")
 	Events.connect("eraser_mode_toggled", self, "on_eraser_mode_toggled")
-
+		# warning-ignore:unused_signal
+	Events.emit_signal("game_over", self)
+	Events.emit_signal("init_entity_manager", self)
 
 func _process(_delta: float) -> void:
 	_move_blueprint(get_global_mouse_position())
