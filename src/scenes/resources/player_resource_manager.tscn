@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/scenes/resources/resource_manager.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/scenes/resources/player_resource_manager.gd" type="Script" id=2]
+
+[node name="PlayerResourceManager" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="ResourceManager" parent="." instance=ExtResource( 1 )]
+resource_types = {
+"soil": 30,
+"sunlight": 2,
+"water": 20
+}

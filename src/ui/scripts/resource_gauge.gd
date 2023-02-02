@@ -9,7 +9,7 @@ onready var amount_label : Label = $Margin/VBoxContainer/Amount
 
 func set_resource_node(_resource_node:ResourceNode):
 	resource_node = _resource_node
-	resource_node.connect("value_updated", self, "on_value_updated")
+	resource_node.connect("node_update", self, "on_node_updated")
 	resource_node.initialize()
 
 	# assign icon & color accent based on the identifier

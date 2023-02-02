@@ -5,7 +5,7 @@
 [ext_resource path="res://src/scenes/terrain.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/scenes/game.gd" type="Script" id=4]
 [ext_resource path="res://src/scenes/librairies/managers/entity_manager.gd" type="Script" id=5]
-[ext_resource path="res://src/scenes/resources/resource_manager.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/scenes/resources/player_resource_manager.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/tiles/ingredients_tiles_tileset.tres" type="TileSet" id=7]
 [ext_resource path="res://src/scenes/librairies/managers/ingredients_manager.gd" type="Script" id=8]
 [ext_resource path="res://src/scenes/librairies/plants/plant.tscn" type="PackedScene" id=9]
@@ -39,7 +39,7 @@ plant_master_node_path = NodePath("../Plant_Master")
 position = Vector2( 608, 352 )
 terrain_node_path = NodePath("../Terrain")
 
-[node name="ResourceManager" parent="." instance=ExtResource( 6 )]
+[node name="PlayerResourceManager" parent="." instance=ExtResource( 6 )]
 
 [node name="UserInterface" type="CanvasLayer" parent="."]
 pause_mode = 2

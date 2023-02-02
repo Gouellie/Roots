@@ -51,12 +51,10 @@ func try_consume(_identifier : String, _amount : int) -> bool:
 	_resource_node.deduct_resource(_amount)
 	return true
 
-
 func get_all_resources() -> Dictionary:
 	var _d = {}
 	for _r in  resource_container.resources:
 		var _rsc : ResourceNode = _r as ResourceNode
-		print(_r)
 		if is_instance_valid(_rsc):
 			_d[_rsc.identifier] = _rsc
 		

@@ -20,3 +20,6 @@ signal tile_placed(new_tile)
 
 # warning-ignore:unused_signal
 signal game_over
+
+# warning-ignore:unused_signal
+signal init_player_resource_manager(_resource_manager)
