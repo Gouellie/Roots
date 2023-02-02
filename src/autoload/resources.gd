@@ -1,5 +1,9 @@
 extends Node
 
+const WATER : String = "water"
+const SUNLIGHT : String = "sunlight"
+const SOIL : String = "soil"
+const HEALTH : String = "health"
 
 enum TILES {
 	STRAIGHT = 1, 
@@ -7,7 +11,6 @@ enum TILES {
 	THREEWAY = 3, 
 	FOURWAY = 4
 }
-
 
 const Tiles := {
 	TILES.STRAIGHT : preload("res://src/scenes/librairies/tiles/types/tile_straight.tscn"),
@@ -18,20 +21,16 @@ const Tiles := {
 
 const Tiles_resource_cost = {
 	TILES.STRAIGHT : {
-		"water": 1,
-		"soil": 1,
+		"sunlight": 1,
 	},
 	TILES.ELBOW : {
-		"water": 1,
-		"soil": 1,
+		"sunlight": 1,
 	},
 	TILES.THREEWAY : {
-		"water": 2,
-		"soil": 1,
+		"sunlight": 1,
 	},
 	TILES.FOURWAY : {
-		"water": 2,
-		"sunlight": 2,
+		"sunlight": 1,
 	},
 }
 

@@ -1,5 +1,7 @@
 extends Node
 
+const TILE_HEALTH : int = 3
+
 var player_resource_manager : PlayerResourceManager
 var entity_manager : EntityManager
 var turn_manager : TurnManager
@@ -18,4 +20,3 @@ func on_entity_manager_init(_entity_manager):
 func on_turn_manager_init(_turn_manager):
 	turn_manager = _turn_manager as TurnManager
 
-const CYCLE_LENGTH :int= 12

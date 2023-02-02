@@ -4,11 +4,24 @@ class_name ResourceManager
 # warning-ignore:unused_signal
 signal new_resource_added(resource_node)
 
-onready var resource_container  : ResourceContainer = $ResourceContainer
+var resource_container : ResourceContainer
 
 export var resource_types : Dictionary = {}
 
+func _init():
+	# load constructed ResourceContainer, if it's present
+	for _c in get_children():
+		if _c is ResourceContainer:
+			resource_container = _c as ResourceContainer
+			return
+
 func _ready():
+	# construct ResourceContainer if none was found
+	if resource_container == null:
+		resource_container = ResourceContainer.new()
+		resource_container.name = "ResourceContainer_Instance"
+		add_child(resource_container)
+		
 	for _rt in resource_types:
 		var _value = resource_types[_rt]
 		var _instance = add_new_resource(_rt, _value)
