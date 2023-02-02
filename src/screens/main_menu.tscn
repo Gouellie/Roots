@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/plants/plant.png" type="Texture" id=1]
 [ext_resource path="res://src/screens/main_menu.gd" type="Script" id=2]
 [ext_resource path="res://assets/theme/main_theme.tres" type="Theme" id=3]
 [ext_resource path="res://assets/theme/fonts/RubikDirt-Regular.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://src/scenes/terrain_moderate_2.tscn" type="PackedScene" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 31
@@ -15,6 +16,10 @@ font_data = ExtResource( 4 )
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource( 2 )
+
+[node name="Terrain" parent="." instance=ExtResource( 5 )]
+modulate = Color( 0.286275, 0.207843, 0.207843, 1 )
+position = Vector2( -317, 139 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchor_left = 0.5
