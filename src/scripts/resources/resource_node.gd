@@ -19,7 +19,7 @@ func add_resource(amount:int) -> void:
 	is_depleted = _is_depleted()
 	emit_signal("node_update")
 
-func deduct_resource(amount:int) -> void:
+func decuct_resource(amount:int) -> void:
 	value = int(clamp(value - amount, min_value, max_value))
 	is_depleted = _is_depleted()
 	emit_signal("node_update")

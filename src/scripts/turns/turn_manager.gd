@@ -36,7 +36,8 @@ func _start_end_turn_sequence():
 	end_turn()
 
 func on_turn_end_requested(_sender):
-	_start_end_turn_sequence()
+	next_step()
+#	_start_end_turn_sequence()
 
 func on_request_resolve(_sender, _step):
 	var _resolver : StepResolver = _sender as StepResolver

@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "ResourceResolveBehavior",
+"class": "ConsumerResolveBehavior",
+"language": "GDScript",
+"path": "res://src/ui/turns/resolve_behaviors/resolve_behavior_consume_resource.gd"
+}, {
 "base": "Node2D",
 "class": "Entity",
 "language": "GDScript",
@@ -28,6 +33,16 @@ _global_script_classes=[ {
 "class": "Plant",
 "language": "GDScript",
 "path": "res://src/scenes/librairies/plants/plant.gd"
+}, {
+"base": "ResourceResolveBehavior",
+"class": "ProducerResolveBehavior",
+"language": "GDScript",
+"path": "res://src/ui/turns/resolve_behaviors/resolve_behavior_produce_resource.gd"
+}, {
+"base": "Node2D",
+"class": "ResolveBehavior",
+"language": "GDScript",
+"path": "res://src/ui/turns/resolve_behavior_base.gd"
 }, {
 "base": "Node2D",
 "class": "ResourceContainer",
@@ -53,6 +68,11 @@ _global_script_classes=[ {
 "class": "ResourceNode",
 "language": "GDScript",
 "path": "res://src/scripts/resources/resource_node.gd"
+}, {
+"base": "ResolveBehavior",
+"class": "ResourceResolveBehavior",
+"language": "GDScript",
+"path": "res://src/ui/turns/resolve_behavior_resources.gd"
 }, {
 "base": "Node",
 "class": "StepResolver",
@@ -90,15 +110,19 @@ _global_script_classes=[ {
 "path": "res://src/scripts/turns/turn_manager.gd"
 } ]
 _global_script_class_icons={
+"ConsumerResolveBehavior": "",
 "Entity": "",
 "EntityManager": "",
 "Ingredient": "",
 "Plant": "",
+"ProducerResolveBehavior": "",
+"ResolveBehavior": "",
 "ResourceContainer": "",
 "ResourceControl": "",
 "ResourceCostStackPanel": "",
 "ResourceManager": "",
 "ResourceNode": "",
+"ResourceResolveBehavior": "",
 "StepResolver": "",
 "Tile": "",
 "TileBlueprint": "",

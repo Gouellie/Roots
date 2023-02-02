@@ -1,15 +1,27 @@
 extends Node
 class_name StepResolver
 
-signal resolved(step)
-export (Array, int) var resolve_steps = []
+var owner_node2d : Node2D
+var resolve_behavior : Array = []
 
-func _ready():
-	for _step in resolve_steps:
-		file_resolve_request(_step)
-
+func ready(_node : Node2D):
+	owner_node2d = _node
+	for _c in owner_node2d.get_children():
+		var _behavior : ResolveBehavior =_c as ResolveBehavior
+		if _behavior == null:
+			continue
+		
+		resolve_behavior.append(_behavior)
+		file_resolve_request(_behavior.resolve_step)
+	
 func file_resolve_request(_step:int):
 	Turns.emit_signal("request_resolve", self, _step)
 	
 func execute_resolve(_step):
-	emit_signal("resolved", _step)
+	for _b in resolve_behavior:
+		var _rb = _b as ResolveBehavior
+		if _rb == null:
+			continue
+			
+		if _rb.resolve_step == _step:
+			_rb._execute_resolve_behavior()

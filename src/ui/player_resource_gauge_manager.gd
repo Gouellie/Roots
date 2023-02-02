@@ -18,7 +18,6 @@ func _ready():
 		
 		var _instance = resource_gauge.instance()
 		add_child(_instance)
-		print(_node)
 		_instance.resource_node = _node
 	
 func on_resource_manager_init(_resource_manager):
