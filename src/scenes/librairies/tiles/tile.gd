@@ -17,7 +17,6 @@ func _init():
 	resource_manager = ResourceManager.new()
 	resource_manager.name = "Health_ResourceManager"
 	add_child(resource_manager)
-	print(resource_manager)
 
 func _ready() -> void:
 	rig.rotation_degrees = real_rotation
