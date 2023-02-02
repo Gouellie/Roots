@@ -57,8 +57,6 @@ func rotate_blueprint(cw : bool) -> void:
 		return
 	var rot = 90.0 if cw else -90.0
 	real_rotation = wrapf(real_rotation + rot, 0.0, 360.0) 
-	# will eventually do a sprite change to simulate rotation instead of actually rotating node
-	# this is the value that must be referenced, the rotation_degrees will not change
 	$skin.rotation_degrees = real_rotation
 
 
@@ -71,9 +69,11 @@ func get_is_valid() -> bool:
 	return valid
 	
 
-func is_connected_to_network() -> bool:
+func is_connected_to_network(except: Tile) -> bool:
 	for area in _connections.get_overlapping_areas():
 		var a_owner = area.owner
+		if a_owner == except:
+			continue
 		if a_owner is Plant:
 			return true
 		if a_owner is Tile and a_owner.connected:
