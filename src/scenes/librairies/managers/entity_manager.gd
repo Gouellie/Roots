@@ -90,11 +90,11 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _can_place_tile(cellv : Vector2) -> bool:
-	if is_cell_occupied(cellv):
-		return false
+#	if is_cell_occupied(cellv):
+#		return false
 	if _terrain.get_cellv(cellv) == TileMap.INVALID_CELL:
 		return false
-	return _blueprint.is_connected_to_network()
+	return _blueprint.is_connected_to_network(get_tile_at_position(cellv))
 
 
 func _place_tile() -> void:
@@ -103,6 +103,8 @@ func _place_tile() -> void:
 	if not _blueprint.valid:
 		return
 	var cellv = _terrain.world_to_map(_blueprint.position)
+	remove_tile_at_position(cellv)
+
 	var new_tile = _blueprint.tile_scene.instance() as Tile
 	new_tile.position = _blueprint.position
 	new_tile.real_rotation = _blueprint.real_rotation
@@ -154,6 +156,7 @@ func _update_network_connection() -> void:
 	for tile in tiles.values():
 		if tile is Tile:
 			tile.connected = false
+			tile.distance = 999
 	var head = _plant_master._get_network_head()
 	# no head connected to flower means no good
 	if not is_instance_valid(head):
@@ -161,15 +164,17 @@ func _update_network_connection() -> void:
 	if head.is_queued_for_deletion():
 		return
 	head.connected = true
-	_parse_network(head)
+	head.distance = 0
+	_parse_network(head, 1)
 
 
-func _parse_network(current : Tile) -> void:
+func _parse_network(current : Tile, distance : int) -> void:
 	for tile in current.get_connections():
 		if not tile is Tile:
-			continue 
-		if tile.connected:
 			continue
+		if tile.distance <= distance:
+			continue
+		tile.distance = min(tile.distance, distance)
 		tile.connected = true
-		_parse_network(tile)
+		_parse_network(tile, distance + 1)
 
