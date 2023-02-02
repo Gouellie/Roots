@@ -189,8 +189,9 @@ func _update_plant(_plant : Plant) -> void:
 	if head.is_queued_for_deletion():
 		return
 	if not head.connected:
-#		_plant.connected = false
+		_plant.connected = false
 		return
+	_plant.connected = true
 	head.distance = 0		
 	_parse_network(head, 1)
 
