@@ -197,7 +197,6 @@ func _update_network_connection() -> void:
 	_parse_network(head, 1)
 	_update_plants()
 	_update_parche_preview()
-	Events.emit_signal("tile_network_updated")
 	
 func _update_plants() -> void:
 	for _p in _plants.values():

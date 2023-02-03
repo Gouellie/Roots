@@ -1,20 +1,10 @@
 extends Node2D
 class_name PlayerResourceManager
 
-
 onready var resource_manager = $ResourceManager setget , get_resource_manager
-
-var consumption_amount : Dictionary = {} setget ,get_consumption_amount
-var production_amount : Dictionary = {} setget ,get_production_amount
-
 
 func get_resource_manager() -> ResourceManager:
 	return resource_manager as ResourceManager
-
-
-func _init():
-	Events.connect("tile_network_updated", self, "on_tile_network_updated")
-
 
 func _ready():
 	for _rsc in get_resource_manager().get_all_resources():
@@ -29,28 +19,13 @@ func _ready():
 	
 	Events.emit_signal("init_player_resource_manager", self)
 
-
-func get_consumption_amount() -> Dictionary:
-	return consumption_amount
-	
 func get_consumption_amount_by_resource(identifier : String) -> int:
 	var _d : Dictionary = get_consumption_amount()
 	if _d.has(identifier):
 		return _d[identifier]
 	return 0
 	
-
-func get_production_amount() -> Dictionary:
-	return production_amount
-	
-func get_production_amount_by_resource(identifier : String) -> int:
-	var _d : Dictionary = get_production_amount()
-	if _d.has(identifier):
-		return _d[identifier]
-	return 0
-
-
-func _update_consumption_amount():
+func get_consumption_amount() -> Dictionary:
 	var _d : Dictionary = {}
 	var _resolvers = Globals.turn_manager.step_resolvers as Dictionary
 	if _resolvers == null:
@@ -77,9 +52,15 @@ func _update_consumption_amount():
 					else:
 						_d[_c_behav.identifier] = _c_behav.amount
 		
-	consumption_amount =_d
-	
-func _update_production_amount():
+	return _d
+
+func get_production_amount_by_resource(identifier : String) -> int:
+	var _d : Dictionary = get_production_amount()
+	if _d.has(identifier):
+		return _d[identifier]
+	return 0
+		
+func get_production_amount() -> Dictionary:
 	var _d : Dictionary = {}
 	var _resolvers = Globals.turn_manager.step_resolvers as Dictionary
 	if _resolvers == null:
@@ -106,8 +87,4 @@ func _update_production_amount():
 					else:
 						_d[_c_behav.identifier] = _c_behav.get_amount()
 			
-	production_amount = _d
-
-func on_tile_network_updated():
-	_update_production_amount()
-	_update_consumption_amount()
+	return _d

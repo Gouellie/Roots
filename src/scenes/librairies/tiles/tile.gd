@@ -13,8 +13,6 @@ var is_leaf_node : bool
 
 var building_mode_active : bool = false
 
-var overlapping_ingredient : Ingredient setget set_overlapping_ingredient, get_overlapping_ingredient
-
 onready var rig := $Rig
 onready var _leaf := $Leaf
 onready var _connections :Area2D= $Rig/Connections
@@ -124,15 +122,8 @@ func get_connections() -> Directory:
 #	_leaf.visible = is_leaf_node
 	return connections
 
-func set_overlapping_ingredient(_ingredient : Ingredient):
-	overlapping_ingredient = _ingredient
-
 func get_overlapping_ingredient() -> Ingredient:
-	if overlapping_ingredient:
-		return overlapping_ingredient
-	
-	set_overlapping_ingredient(Globals.ingredient_manager.get_ingredient_at(cellv))
-	return overlapping_ingredient
+	return Globals.ingredient_manager.get_ingredient_at(cellv)
 
 func set_distance(value : int) -> void:
 	distance = value
