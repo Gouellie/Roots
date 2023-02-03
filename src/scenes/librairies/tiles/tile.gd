@@ -27,13 +27,10 @@ func _ready() -> void:
 		$Health.text = String(health_node.value)
 
 func on_health_depleted():
-	self.queue_free()
-	pass
+	Globals.entity_manager.deplete_tile(self)
 
 func on_health_changed():
-	# do something to update visual here later
 	$Health.text = String(health_node.value)
-	pass
 	$Rig/Parched.visible = true
 	
 

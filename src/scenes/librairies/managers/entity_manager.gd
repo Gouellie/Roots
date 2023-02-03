@@ -122,6 +122,9 @@ func _place_tile() -> void:
 	yield(get_tree().create_timer(0.1), "timeout")
 	_update_network_connection()
 
+func deplete_tile(_tile : Tile):
+	remove_tile_at_position(_tile.cellv)
+	_update_network_connection()
 
 func _remove_tile() -> void:
 	var cellv = _terrain.world_to_map(_eraser.position)
