@@ -129,7 +129,9 @@ func _place_tile() -> void:
 	if _blueprint.try_consume() == false:
 		return
 	
-	Events.emit_signal("building_mode_toggle", false)		
+	Events.emit_signal("building_mode_toggle", false)
+	builder_mode = false
+	
 	var cellv = _terrain.world_to_map(_blueprint.position)
 	remove_tile_at_position(cellv)
 
