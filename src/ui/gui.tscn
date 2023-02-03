@@ -56,22 +56,12 @@ margin_right = 1270.0
 margin_bottom = 710.0
 mouse_filter = 2
 
-[node name="VBoxContainer" type="HBoxContainer" parent="Margin/Control"]
+[node name="Button_GiveUp" type="Button" parent="Margin/Control"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -206.0
+margin_left = -129.0
 margin_bottom = 40.0
-
-[node name="Button_Retry" type="Button" parent="Margin/Control/VBoxContainer"]
-margin_right = 129.0
-margin_bottom = 40.0
-text = "RESTART"
-
-[node name="Button_Quit" type="Button" parent="Margin/Control/VBoxContainer"]
-margin_left = 133.0
-margin_right = 206.0
-margin_bottom = 40.0
-text = "QUIT"
+text = "GIVE UP"
 
 [node name="Control_Tilebox" type="Control" parent="Margin"]
 margin_left = 10.0
@@ -161,7 +151,6 @@ margin_top = -224.0
 margin_right = 192.0
 margin_bottom = 224.0
 
-[connection signal="pressed" from="Margin/Control/VBoxContainer/Button_Retry" to="." method="_on_Button_Retry_pressed"]
-[connection signal="pressed" from="Margin/Control/VBoxContainer/Button_Quit" to="." method="_on_Button_Quit_pressed"]
+[connection signal="pressed" from="Margin/Control/Button_GiveUp" to="." method="_on_Button_GiveUp_pressed"]
 [connection signal="pressed" from="Control_GameOver/Panel/CenterContainer/VBoxContainer/Button_Retry" to="." method="_on_Button_Retry_pressed"]
 [connection signal="pressed" from="Control_GameOver/Panel/CenterContainer/VBoxContainer/Button_Quit" to="." method="_on_Button_Quit_pressed"]
