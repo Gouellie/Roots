@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/ui/turns/turn_panel.gd" type="Script" id=1]
+[ext_resource path="res://assets/theme/main_theme.tres" type="Theme" id=2]
 
 [node name="TurnPanel" type="Control"]
 anchor_right = 1.0
@@ -9,22 +10,23 @@ mouse_filter = 2
 script = ExtResource( 1 )
 
 [node name="EndTurn_Button" type="Button" parent="."]
-margin_left = 832.0
-margin_right = 899.0
-margin_bottom = 44.0
-text = "End Turn"
+margin_left = 840.0
+margin_right = 997.0
+margin_bottom = 40.0
+theme = ExtResource( 2 )
+text = "END TURN"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -200.0
 margin_right = 200.0
-margin_bottom = 44.0
+margin_bottom = 40.0
 custom_constants/separation = 0
 
 [node name="CurrentTurnBar" type="ProgressBar" parent="VBoxContainer"]
 margin_right = 400.0
-margin_bottom = 32.0
+margin_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_min_size = Vector2( 0, 32 )
@@ -34,6 +36,7 @@ value = 5.0
 percent_visible = false
 
 [node name="TimeRemainingBar" type="ProgressBar" parent="VBoxContainer"]
+visible = false
 margin_top = 32.0
 margin_right = 400.0
 margin_bottom = 44.0
@@ -49,7 +52,8 @@ anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -20.0
 margin_right = 20.0
-margin_bottom = 27.0
+margin_bottom = 32.0
+theme = ExtResource( 2 )
 text = "0"
 align = 1
 valign = 1

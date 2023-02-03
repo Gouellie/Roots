@@ -22,13 +22,14 @@ func get_time_remaining() -> float:
 	return time_remaining
 
 func _process(delta):
-	if step != Turns.STEP_ORDER.placing:
-		return
-	
-	set_time_remaining(time_remaining - delta)
-	
-	if time_remaining <= 0:
-		_start_end_turn_sequence()
+	pass
+#	if step != Turns.STEP_ORDER.placing:
+#		return
+#
+#	set_time_remaining(time_remaining - delta)
+#
+#	if time_remaining <= 0:
+#		_start_end_turn_sequence()
 
 func _ready():
 	Turns.emit_signal("turn_manager_initialized", self)
