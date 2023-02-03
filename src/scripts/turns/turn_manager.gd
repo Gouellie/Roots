@@ -89,7 +89,7 @@ func start_turn():
 	time_remaining = Turns.time_per_turn
 	step = 0
 	
-	while step != 2:
+	while step != Turns.STEP_ORDER.placing:
 		next_step()
 	
 func end_turn():

@@ -41,8 +41,8 @@ signal step_condition_win()
 signal step_condition_lose()
 
 enum STEP_ORDER {
-	resources_produce = 1,
-	placing = 2,
+	placing = 1,
+	resources_produce = 2,
 	resources_consume = 3,
 	roots_damage_severed = 4,
 	roots_damage_connected = 5,
@@ -52,11 +52,11 @@ enum STEP_ORDER {
 
 # careful when renaming, it's using the "VALUE" to find the corresponding signal
 const step_order = {
-	1: "step_resource_produce",
-	2: "step_placing",
-	3: "step_resource_consume",
-	4: "step_roots_damage_severed",
-	5: "step_roots_damage_connected",
-	6: "step_condition_win",
-	7: "step_condition_lose",
+	STEP_ORDER.placing: "step_placing",
+	STEP_ORDER.resources_produce: "step_resource_produce",
+	STEP_ORDER.resources_consume: "step_resource_consume",
+	STEP_ORDER.roots_damage_severed: "step_roots_damage_severed",
+	STEP_ORDER.roots_damage_connected: "step_roots_damage_connected",
+	STEP_ORDER.condition_win: "step_condition_win",
+	STEP_ORDER.condition_lose: "step_condition_lose",
 }
