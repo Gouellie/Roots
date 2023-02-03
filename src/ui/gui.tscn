@@ -1,15 +1,18 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/ui/gui.gd" type="Script" id=1]
 [ext_resource path="res://src/ui/info_panel.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/ui/tilebox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/ui/turns/turn_panel.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/ui/player_resource_gauge_manager.gd" type="Script" id=5]
+[ext_resource path="res://assets/theme/main_theme.tres" type="Theme" id=6]
+[ext_resource path="res://src/ui/upgrades_shop.tscn" type="PackedScene" id=7]
 
 [node name="Gui" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
+theme = ExtResource( 6 )
 script = ExtResource( 1 )
 
 [node name="Margin" type="MarginContainer" parent="."]
@@ -52,12 +55,22 @@ margin_right = 1270.0
 margin_bottom = 710.0
 mouse_filter = 2
 
-[node name="Button_Quit" type="Button" parent="Margin/Control"]
+[node name="VBoxContainer" type="HBoxContainer" parent="Margin/Control"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -107.0
-margin_bottom = 20.0
-text = "QUIT TO MAIN"
+margin_left = -206.0
+margin_bottom = 40.0
+
+[node name="Button_Retry" type="Button" parent="Margin/Control/VBoxContainer"]
+margin_right = 129.0
+margin_bottom = 40.0
+text = "RESTART"
+
+[node name="Button_Quit" type="Button" parent="Margin/Control/VBoxContainer"]
+margin_left = 133.0
+margin_right = 206.0
+margin_bottom = 40.0
+text = "QUIT"
 
 [node name="Control_Tilebox" type="Control" parent="Margin"]
 margin_left = 10.0
@@ -107,35 +120,46 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control_GameOver/Panel/CenterContainer"]
-margin_left = 46.0
-margin_top = 20.0
-margin_right = 153.0
-margin_bottom = 100.0
+margin_left = 9.0
+margin_right = 190.0
+margin_bottom = 140.0
 
 [node name="Label" type="Label" parent="Control_GameOver/Panel/CenterContainer/VBoxContainer"]
-margin_right = 107.0
-margin_bottom = 14.0
+margin_right = 181.0
+margin_bottom = 29.0
 text = "GAME OVER"
 align = 1
 
 [node name="Label_Space" type="Label" parent="Control_GameOver/Panel/CenterContainer/VBoxContainer"]
-margin_top = 18.0
-margin_right = 107.0
-margin_bottom = 32.0
+margin_top = 33.0
+margin_right = 181.0
+margin_bottom = 62.0
 align = 1
 
 [node name="Button_Retry" type="Button" parent="Control_GameOver/Panel/CenterContainer/VBoxContainer"]
-margin_top = 36.0
-margin_right = 107.0
-margin_bottom = 56.0
+margin_top = 66.0
+margin_right = 181.0
+margin_bottom = 101.0
 text = "RETRY"
 
 [node name="Button_Quit" type="Button" parent="Control_GameOver/Panel/CenterContainer/VBoxContainer"]
-margin_top = 60.0
-margin_right = 107.0
-margin_bottom = 80.0
+margin_top = 105.0
+margin_right = 181.0
+margin_bottom = 140.0
 text = "QUIT TO MAIN"
 
-[connection signal="pressed" from="Margin/Control/Button_Quit" to="." method="_on_Button_Quit_pressed"]
+[node name="UpgradesShop" parent="." instance=ExtResource( 7 )]
+pause_mode = 2
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -192.0
+margin_top = -224.0
+margin_right = 192.0
+margin_bottom = 224.0
+
+[connection signal="pressed" from="Margin/Control/VBoxContainer/Button_Retry" to="." method="_on_Button_Retry_pressed"]
+[connection signal="pressed" from="Margin/Control/VBoxContainer/Button_Quit" to="." method="_on_Button_Quit_pressed"]
 [connection signal="pressed" from="Control_GameOver/Panel/CenterContainer/VBoxContainer/Button_Retry" to="." method="_on_Button_Retry_pressed"]
 [connection signal="pressed" from="Control_GameOver/Panel/CenterContainer/VBoxContainer/Button_Quit" to="." method="_on_Button_Quit_pressed"]

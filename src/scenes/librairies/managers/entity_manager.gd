@@ -13,10 +13,11 @@ var tiles := {}
 var _blueprint : TileBlueprint
 var _eraser : TileBlueprintEraser
 var _placeable_blueprint : bool
-var _eraser_mode : bool
 var _plants := []
 var step_resolver : StepResolver = StepResolver.new()
 
+var builder_mode : bool = false
+var eraser_mode : bool = false
 
 onready var _plant_master : Plant
 onready var _terrain : TileMap
@@ -28,7 +29,7 @@ func _ready() -> void:
 	tile_offset = _terrain.cell_size / 2
 	_register_ready_roots()
 	Events.connect("tilepanel_selected", self, "on_tile_selected")
-	Events.connect("eraser_mode_toggled", self, "on_eraser_mode_toggled")
+	Events.connect("eraser_mode_toggled", self, "oneraser_mode_toggled")
 	Events.connect("spawn_plant", self, "on_spawn_plant")
 	Events.emit_signal("init_entity_manager", self)
 	step_resolver.ready(self)
@@ -48,7 +49,7 @@ func _register_ready_roots() -> void:
 func _move_blueprint(mouse_position: Vector2) -> void:
 	var cellv = _terrain.world_to_map(mouse_position)
 	var snap_position = _terrain.map_to_world(cellv) + tile_offset
-	if _eraser_mode and _eraser:
+	if eraser_mode and _eraser:
 		_eraser.position = snap_position
 	elif _blueprint:
 		_blueprint.position = snap_position
@@ -58,24 +59,25 @@ func _move_blueprint(mouse_position: Vector2) -> void:
 func on_tile_selected(sender : TilePanel, new_selected_blueprint : TileBlueprintBase)-> void:
 	_clear_blueprint()
 	if new_selected_blueprint:
-		_set_eraser_mode(false)
+		_seteraser_mode(false)
 		var new_blueprint = new_selected_blueprint.duplicate() as TileBlueprintBase
 		new_blueprint.scale = Vector2(1.0,1.0)
 		add_child(new_blueprint)
 		_placeable_blueprint = true
 		_blueprint = new_blueprint
-	Events.emit_signal("building_mode_toggle", new_selected_blueprint != null)
+	builder_mode = new_selected_blueprint != null
+	Events.emit_signal("building_mode_toggle", builder_mode)
 
 
-func on_eraser_mode_toggled()-> void:
-	_set_eraser_mode(not _eraser_mode)
+func oneraser_mode_toggled()-> void:
+	_seteraser_mode(not eraser_mode)
 
 
-func _set_eraser_mode(value : bool) -> void:
-	if _eraser_mode == value:
+func _seteraser_mode(value : bool) -> void:
+	if eraser_mode == value:
 		return
-	_eraser_mode = value
-	if _eraser_mode:
+	eraser_mode = value
+	if eraser_mode:
 		_eraser = _eraser_scene.instance() as TileBlueprintBase
 		add_child(_eraser)
 		Events.emit_signal("building_mode_toggle", false)
@@ -100,11 +102,11 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_select"):
 		if _placeable_blueprint:
 			_place_tile()
-		elif _eraser_mode:
+		elif eraser_mode:
 			_remove_tile()
 		
-	if _eraser_mode and event.is_action_pressed("ui_cancel"):
-		_set_eraser_mode(false)
+	if eraser_mode and event.is_action_pressed("ui_cancel"):
+		_seteraser_mode(false)
 
 
 func _emit_tile_info() -> void:

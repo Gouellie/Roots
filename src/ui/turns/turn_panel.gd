@@ -2,8 +2,8 @@ extends Control
 
 var _max_turns : int = 0
 
-onready var progress_bar : ProgressBar = $HBoxContainer/VBoxContainer/CurrentTurnBar
-onready var time_remaining_bar : ProgressBar = $HBoxContainer/VBoxContainer/TimeRemainingBar
+onready var progress_bar : ProgressBar = $VBoxContainer/CurrentTurnBar
+onready var time_remaining_bar : ProgressBar = $VBoxContainer/TimeRemainingBar
 onready var turn_label : Label = $Turn
 onready var step_label : Label = $Step
 
