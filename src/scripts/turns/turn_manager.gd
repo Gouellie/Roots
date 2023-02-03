@@ -38,14 +38,15 @@ func _ready():
 	start_turn()
 
 func _start_end_turn_sequence():
-#	while step != Turns.STEP_ORDER.placing:
-#		next_step()
-	end_turn()
-
+	if step != Turns.STEP_ORDER.placing:
+		return
+	
+	next_step()
+	while step != Turns.STEP_ORDER.placing:
+		next_step()
 
 func on_turn_end_requested(_sender):
-	next_step()
-#	_start_end_turn_sequence()
+	_start_end_turn_sequence()
 
 func on_request_resolve(_sender, _step):
 	var _resolver : StepResolver = _sender as StepResolver
