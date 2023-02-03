@@ -5,10 +5,12 @@ onready var texture_rect : TextureRect = $Margin/VBoxContainer/CenterContainer/T
 onready var amount_label : Label = $Amount
 
 var resource_node : ResourceNode = null setget set_resource_node 
-var update_frequency : float = 1.0
-var update_timer : float = 0.0
+#var update_frequency : float = 1.0
+#var update_timer : float = 0.0
 var display_string : String = "%s/%s"
 
+func _init():
+	Events.connect("consumption_amount_changed", self, "on_consumption_amount_changed")
 func _ready():
 	Events.connect("tile_placed", self, "on_tile_placed")
 
@@ -29,14 +31,14 @@ func on_tile_placed(_tile):
 func on_node_updated():
 	_update_values()
 
-func _process(_delta):
-	update_timer += _delta
-	if update_timer >= update_frequency:
-		update_timer = 0
-		_update_values()
+#func _process(_delta):
+#	update_timer += _delta
+#	if update_timer >= update_frequency:
+#		update_timer = 0
+#		_update_values()
 
 func _update_values():
-	update_timer = 0
+#	update_timer = 0
 	if resource_node:
 		if resource_node.identifier == Resources.SUNLIGHT:
 			amount_label.text = String(resource_node.value)
@@ -50,3 +52,7 @@ func _on_TextureRect_mouse_entered() -> void:
 	var info = Info.new(resource_node.identifier)
 	info.add_info("Enter information")
 	Events.emit_signal("info_request", info)
+
+
+func on_consumption_amount_changed(_dictionary : Dictionary):
+	_update_values()
