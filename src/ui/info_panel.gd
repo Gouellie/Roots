@@ -32,4 +32,5 @@ func _add_message(msg : String) -> void:
 func _add_separator() -> void:
 	var sep = ColorRect.new()
 	sep.rect_min_size = Vector2(0.0, 2.0)
+	sep.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	messages.add_child(sep)
