@@ -12,6 +12,7 @@ onready var tile_container := $MarginContainer/TileContainer
 
 func _ready() -> void:
 	Events.connect("tilepanel_selected", self, "on_selected_tile_changed")
+	Events.connect("shop_draw_tiles", self, "on_draw_tiles")
 	Turns.connect("turn_next", self, "on_next_turn")
 	if use_random:
 		_draw_tiles()
@@ -64,6 +65,10 @@ func _on_Button_Erase_pressed() -> void:
 
 
 func on_next_turn(turn) -> void:
+	_draw_tiles()
+	
+	
+func on_draw_tiles() -> void:
 	_draw_tiles()
 
 

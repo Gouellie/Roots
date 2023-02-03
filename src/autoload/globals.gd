@@ -7,6 +7,10 @@ var player_resource_manager : PlayerResourceManager
 var entity_manager : EntityManager
 var turn_manager : TurnManager
 var ingredient_manager : IngredientManager
+var upgrades_manager : UpgradesManager
+
+var is_upgrade_menu_opened : bool = false
+
 
 func _init():
 	Events.connect("init_player_resource_manager", self, "on_player_resource_manager_init")

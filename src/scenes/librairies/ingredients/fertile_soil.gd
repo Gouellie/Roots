@@ -14,6 +14,13 @@ func _init():
 func _ready() -> void:
 	button.visible = false
 	sprite_attention.visible = true
+	_delay_animation()
+
+
+func _delay_animation() -> void:
+	yield(get_tree().create_timer(rand_range(0.1, 0.3)), "timeout")
+	$AnimationPlayer.play("Idle")
+
 
 func _process(delta: float) -> void:
 	if ferlitized:

@@ -13,16 +13,28 @@ resource_name = "Idle"
 length = 1.5
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite_Attention:position")
+tracks/0/path = NodePath("Sprite_Attention:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.6, 1.5 ),
-"transitions": PoolRealArray( 0.554784, 1.8025, 0.233258 ),
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 32 ), Vector2( 0, 28 ), Vector2( 0, 32 ) ]
+"values": [ Vector2( 1, 1 ), Vector2( 1.2, 1.2 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite_Attention:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 74.6, 0.0 ]
 }
 
 [node name="FertileSoil" type="Node2D"]
@@ -35,6 +47,8 @@ region_rect = Rect2( 0, 384, 192, 64 )
 
 [node name="Sprite_Attention" type="Sprite" parent="."]
 position = Vector2( 0, 32 )
+rotation = 1.26241
+scale = Vector2( 1.19392, 1.19392 )
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 64, 256, 64, 64 )
@@ -64,7 +78,6 @@ margin_bottom = -40.0
 rect_scale = Vector2( 0.3, 0.3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "Idle"
 anims/Idle = SubResource( 2 )
 
 [node name="ResourceManager" type="Node2D" parent="."]
