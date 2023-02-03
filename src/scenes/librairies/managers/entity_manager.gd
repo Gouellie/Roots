@@ -131,6 +131,14 @@ func _place_tile() -> void:
 		return
 	if not _blueprint.valid:
 		return
+
+	var _player_resources : Dictionary = Globals.player_resource_manager.get_resource_manager().get_all_resources()
+	var _did_consume = Globals.player_resource_manager.get_resource_manager().try_consume_all(_blueprint.resource_manager)
+	
+	if _did_consume == false:
+		print("Insufficient resources")
+		return
+	
 	Events.emit_signal("building_mode_toggle", false)		
 	var cellv = _terrain.world_to_map(_blueprint.position)
 	remove_tile_at_position(cellv)

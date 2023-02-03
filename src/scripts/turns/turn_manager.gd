@@ -7,7 +7,7 @@ signal time_remaining_changed(_time_remaining)
 export (int)var max_turns : int = 30
 
 var turn : int = 1
-var step : int = 1
+var step : int = Turns.STEP_ORDER.placing
 var step_resolvers = {}
 var time_remaining : float = Turns.time_per_turn setget set_time_remaining, get_time_remaining
 
@@ -34,6 +34,7 @@ func _ready():
 	Turns.emit_signal("turn_manager_initialized", self)
 	Turns.connect("request_turn_end", self, "on_turn_end_requested")
 	Turns.connect("request_resolve", self, "on_request_resolve")
+	
 	start_turn()
 
 func _start_end_turn_sequence():

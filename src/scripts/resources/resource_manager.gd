@@ -29,13 +29,13 @@ func _ready():
 func can_consume_all(_target_to_consume : ResourceManager) -> bool:
 	for _identifier in _target_to_consume.get_all_resources():
 		var _value = _target_to_consume.get_all_resources()[_identifier]
-		if self.can_consume(_identifier, _value) == false:
+		if self.can_consume(_identifier, _value.value) == false:
 			return false
 
 	return true
 
 func can_consume(identifier:String, amount:int) -> bool:
-	var _resource_node : ResourceNode = resource_container.get_all_resources()[identifier]
+	var _resource_node : ResourceNode = get_resource(identifier)
 	if is_instance_valid(_resource_node) == false:
 		return false
 	
@@ -47,7 +47,7 @@ func try_consume_all(_target_to_consume : ResourceManager) -> bool:
 	
 	for _identifier in _target_to_consume.get_all_resources():
 		var _value = _target_to_consume.get_all_resources()[_identifier]
-		var result : bool = self.try_consume(_identifier, _value)
+		var result : bool = self.try_consume(_identifier, _value.value)
 		if result == false:
 			# This should never trigger
 			Log.log_error(0, "Failed to consume " + _identifier + " on a ResourceManager. Exiting.")
@@ -60,7 +60,7 @@ func try_consume(_identifier : String, _amount : int) -> bool:
 	if _consumable == false:
 		return false
 	
-	var _resource_node : ResourceNode = resource_container.get_all_resources()[_identifier]
+	var _resource_node : ResourceNode = get_resource(_identifier)
 	_resource_node.deduct_resource(_amount)
 	return true
 
@@ -107,7 +107,7 @@ func deduct_from_resource(_identifier:String, _amount:int) -> void:
 	if is_instance_valid(rsc) == false:
 		return
 	
-	rsc.decuct_resource(_amount)
+	rsc.deduct_resource(_amount)
 
 func initialize_gui():
 	for _c in resource_container.get_children():

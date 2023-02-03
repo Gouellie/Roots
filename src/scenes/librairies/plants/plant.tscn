@@ -39,7 +39,9 @@ shape = SubResource( 2 )
 [node name="ProducerResolveBehavior" type="Node2D" parent="."]
 script = ExtResource( 6 )
 identifier = "sunlight"
+amount = 3
 produce_when_harvesting = false
+trigger_on_game_start = true
 
 [node name="ConsumerResolveBehavior" type="Node2D" parent="."]
 script = ExtResource( 5 )
