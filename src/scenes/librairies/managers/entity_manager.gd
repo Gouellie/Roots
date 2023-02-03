@@ -54,6 +54,7 @@ func on_tile_selected(sender : TilePanel, new_selected_blueprint : TileBlueprint
 		add_child(new_blueprint)
 		_placeable_blueprint = true
 		_blueprint = new_blueprint
+	Events.emit_signal("building_mode_toggle", new_selected_blueprint != null)
 
 
 func on_eraser_mode_toggled()-> void:
@@ -67,6 +68,7 @@ func _set_eraser_mode(value : bool) -> void:
 	if _eraser_mode:
 		_eraser = _eraser_scene.instance() as TileBlueprintBase
 		add_child(_eraser)
+		Events.emit_signal("building_mode_toggle", false)
 	else:
 		if is_instance_valid(_eraser):
 			_eraser.queue_free()
@@ -107,6 +109,7 @@ func _place_tile() -> void:
 		return
 	if not _blueprint.valid:
 		return
+	Events.emit_signal("building_mode_toggle", false)		
 	var cellv = _terrain.world_to_map(_blueprint.position)
 	remove_tile_at_position(cellv)
 
@@ -275,3 +278,6 @@ func should_receive_damage(_tile : Tile) -> bool:
 		
 	return false
 	
+
+func get_plants_count() -> int:
+	return _plants.size()

@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/ui/gui.gd" type="Script" id=1]
+[ext_resource path="res://src/ui/info_panel.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/ui/tilebox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/ui/turns/turn_panel.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/ui/player_resource_gauge_manager.gd" type="Script" id=5]
@@ -11,17 +12,6 @@ anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource( 1 )
 
-[node name="ResourceGaugeContainer" type="HBoxContainer" parent="."]
-anchor_left = 0.254
-anchor_right = 0.254
-margin_left = -0.119995
-margin_top = 53.0
-margin_right = 1259.88
-margin_bottom = 183.0
-rect_scale = Vector2( 0.5, 0.5 )
-mouse_filter = 2
-script = ExtResource( 5 )
-
 [node name="Margin" type="MarginContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -30,6 +20,21 @@ custom_constants/margin_right = 10
 custom_constants/margin_top = 10
 custom_constants/margin_left = 10
 custom_constants/margin_bottom = 10
+
+[node name="Control_ResourceGauge" type="Control" parent="Margin"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 1270.0
+margin_bottom = 710.0
+mouse_filter = 2
+
+[node name="ResourceGaugeContainer" type="HBoxContainer" parent="Margin/Control_ResourceGauge"]
+margin_left = 54.0
+margin_right = 438.0
+margin_bottom = 130.0
+rect_scale = Vector2( 0.5, 0.5 )
+mouse_filter = 2
+script = ExtResource( 5 )
 
 [node name="TurnPanel" parent="Margin" instance=ExtResource( 4 )]
 anchor_right = 0.0
@@ -61,6 +66,7 @@ margin_bottom = 710.0
 mouse_filter = 2
 
 [node name="TileBox" parent="Margin/Control_Tilebox" instance=ExtResource( 3 )]
+mouse_filter = 2
 
 [node name="Resources" type="Control" parent="Margin"]
 margin_left = 10.0
@@ -68,6 +74,15 @@ margin_top = 10.0
 margin_right = 1270.0
 margin_bottom = 710.0
 mouse_filter = 2
+
+[node name="Control_InfoPanel" type="Control" parent="Margin"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 1270.0
+margin_bottom = 710.0
+mouse_filter = 2
+
+[node name="InfoPanel" parent="Margin/Control_InfoPanel" instance=ExtResource( 2 )]
 
 [node name="Control_GameOver" type="ColorRect" parent="."]
 visible = false

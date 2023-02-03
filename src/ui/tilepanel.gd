@@ -18,7 +18,7 @@ onready var tile_blueprint : TileBlueprint
 func _ready() -> void:
 	tile_blueprint = tile_scene.instance() as TileBlueprint
 	tile_blueprint.tile_index = randi()%4+1 if random_tile else tile_index
-	tile_blueprint.scale = Vector2(0.7, 0.7)
+	tile_blueprint.scale = Vector2(0.5, 0.5)
 	tile_blueprint.position = $TileCenterPos.rect_position
 	add_child(tile_blueprint)
 

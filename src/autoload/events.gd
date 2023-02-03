@@ -10,6 +10,9 @@ signal tilepanel_selected(sender, selected_blueprint)
 signal tile_selected(tile)
 
 # warning-ignore:unused_signal
+signal building_mode_toggle(is_active)
+
+# warning-ignore:unused_signal
 signal progress_updated(new_value)
 
 # warning-ignore:unused_signal

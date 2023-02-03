@@ -8,27 +8,45 @@ anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource( 1 )
 
-[node name="CurrentTurnBar" type="ProgressBar" parent="."]
-anchor_left = 0.25
-anchor_right = 0.75
-margin_bottom = 30.0
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -320.0
+margin_right = 320.0
+margin_bottom = 44.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+margin_right = 640.0
+margin_bottom = 44.0
+custom_constants/separation = 0
+
+[node name="CurrentTurnBar" type="ProgressBar" parent="HBoxContainer/VBoxContainer"]
+margin_right = 640.0
+margin_bottom = 32.0
 grow_horizontal = 2
 grow_vertical = 2
-rect_pivot_offset = Vector2( 200, 0 )
+rect_min_size = Vector2( 0, 32 )
+rect_pivot_offset = Vector2( 320, 0 )
 step = 1.0
 value = 5.0
 percent_visible = false
 
-[node name="TimeRemainingBar" type="ProgressBar" parent="."]
-anchor_left = 0.25
-anchor_right = 0.75
-margin_top = 30.0
-margin_bottom = 40.0
+[node name="TimeRemainingBar" type="ProgressBar" parent="HBoxContainer/VBoxContainer"]
+margin_top = 32.0
+margin_right = 640.0
+margin_bottom = 44.0
 grow_horizontal = 2
 grow_vertical = 2
-rect_pivot_offset = Vector2( 200, 0 )
+rect_min_size = Vector2( 640, 12 )
+rect_pivot_offset = Vector2( 320, 0 )
 value = 100.0
 percent_visible = false
+
+[node name="EndTurn_Button" type="Button" parent="HBoxContainer"]
+margin_left = 644.0
+margin_right = 711.0
+margin_bottom = 44.0
+text = "End Turn"
 
 [node name="Turn" type="Label" parent="."]
 anchor_left = 0.5
@@ -51,13 +69,4 @@ text = "Current Step"
 align = 1
 valign = 1
 
-[node name="EndTurn_Button" type="Button" parent="."]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = 324.0
-margin_top = 2.0
-margin_right = 419.0
-margin_bottom = 38.0
-text = "End Turn"
-
-[connection signal="pressed" from="EndTurn_Button" to="." method="_on_EndTurn_Button_pressed"]
+[connection signal="pressed" from="HBoxContainer/EndTurn_Button" to="." method="_on_EndTurn_Button_pressed"]

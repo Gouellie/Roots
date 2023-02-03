@@ -70,6 +70,7 @@ margin_bottom = 29.0
 color = Color( 0.219608, 1, 0, 1 )
 
 [node name="Distance" type="Label" parent="."]
+visible = false
 margin_left = -24.0
 margin_top = -24.0
 margin_right = 16.0
@@ -98,3 +99,5 @@ script = ExtResource( 5 )
 
 [node name="SeveredConnectionDamageResolveBehavior" type="Node2D" parent="."]
 script = ExtResource( 9 )
+[connection signal="area_shape_entered" from="Rig/Connections" to="." method="_on_Connections_area_shape_entered"]
+[connection signal="area_shape_exited" from="Rig/Connections" to="." method="_on_Connections_area_shape_exited"]
