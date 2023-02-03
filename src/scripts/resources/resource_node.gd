@@ -11,6 +11,9 @@ export (String)var identifier : String = "default"
 export (int)var min_value : int = 0
 export (int)var max_value : int = 1000000
 export (int)var value : int = 0
+export (bool)var reset_on_next_turn = false
+export (bool)var has_limits = true
+
 var delta : int = 0
 var start : int = 0
 
@@ -25,18 +28,27 @@ func _ready():
 	Turns.connect("turn_next", self, "on_next_turn")
 
 func on_next_turn(_turn):
+	if reset_on_next_turn:
+		value = min_value
+		
 	start = value
 	delta = 0
 	
 func add_resource(amount:int) -> void:
 	delta += amount
-	value = int(clamp(value + amount, min_value, max_value))
+	value += amount
+	if has_limits:
+		value = int(clamp(value, min_value, max_value))
+	
 	is_depleted = _is_depleted()
 	emit_signal("node_update")
 
 func decuct_resource(amount:int) -> void:
 	delta -= amount
-	value = int(clamp(value - amount, min_value, max_value))
+	value -= amount
+	if has_limits:
+		value = int(clamp(value, min_value, max_value))
+		
 	is_depleted = _is_depleted()
 	emit_signal("node_update")
 	if is_depleted:

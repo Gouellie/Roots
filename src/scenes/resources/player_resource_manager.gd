@@ -7,6 +7,13 @@ func get_resource_manager() -> ResourceManager:
 	return resource_manager as ResourceManager
 
 func _ready():
+	for _rsc in get_resource_manager().get_all_resources():
+		var _node = get_resource_manager().get_all_resources()[_rsc] as ResourceNode
+		if _node:
+			_node.reset_on_next_turn = true
+			_node.has_limits = false
+			_node.value = _node.min_value
+	
 	Events.emit_signal("init_player_resource_manager", self)
 
 func get_consumption_amount_by_resource(identifier : String) -> int:
@@ -33,7 +40,10 @@ func get_consumption_amount() -> Dictionary:
 			
 			for _rb in _c_resolver.resolve_behavior:
 				if _rb is ConsumerResolveBehavior:
-					var _c_behav = _rb as ConsumerResolveBehavior
+					var _c_behav : ConsumerResolveBehavior = _rb as ConsumerResolveBehavior
+					if _c_behav.get_is_enabled() == false:
+						continue
+						
 					if _d.has(_c_behav.identifier):
 						_d[_c_behav.identifier] += _c_behav.amount
 					else:
@@ -62,9 +72,13 @@ func get_production_amount() -> Dictionary:
 			var _c_resolver : StepResolver = _c as StepResolver
 			if _c_resolver == null:
 				continue
+				
 			for _rb in _c_resolver.resolve_behavior:
 				if _rb is ProducerResolveBehavior:
-					var _c_behav = _rb as ProducerResolveBehavior
+					var _c_behav : ProducerResolveBehavior = _rb as ProducerResolveBehavior
+					if _c_behav.get_is_enabled() == false:
+						continue
+						
 					if _d.has(_c_behav.identifier):
 						_d[_c_behav.identifier] += _c_behav.get_amount()
 					else:

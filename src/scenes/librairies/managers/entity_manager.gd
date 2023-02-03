@@ -11,11 +11,11 @@ const _eraser_scene := preload("res://src/scenes/librairies/tiles/blueprints/til
 var tiles := {}
 
 var _blueprint : TileBlueprint
-
 var _eraser : TileBlueprintEraser
 var _placeable_blueprint : bool
 var _eraser_mode : bool
 var _plants := []
+var step_resolver : StepResolver = StepResolver.new()
 
 
 onready var _plant_master : Plant
@@ -31,7 +31,7 @@ func _ready() -> void:
 	Events.connect("eraser_mode_toggled", self, "on_eraser_mode_toggled")
 	Events.connect("spawn_plant", self, "on_spawn_plant")
 	Events.emit_signal("init_entity_manager", self)
-
+	step_resolver.ready(self)
 
 func _process(_delta: float) -> void:
 	_move_blueprint(get_global_mouse_position())
@@ -279,17 +279,7 @@ func get_longest_distance() -> int:
 			_longest_distance = max(_longest_distance, _tile.distance)
 			
 	return _longest_distance
-	
-func should_receive_damage(_tile : Tile) -> bool:
-	var _sorted_tiles : Array = get_tiles_sorted_by_distance()
-	var _node : ResourceNode = Globals.player_resource_manager.get_resource_manager().get_resource("water")
 
-	var _offset : int = int(min(_node.start + _node.delta, _node.value))
-	if _offset < 0:
-		return _sorted_tiles.find(_tile) < abs(_offset)
-		
-	return false
-	
 
 func get_plants_count() -> int:
 	return _plants.size()

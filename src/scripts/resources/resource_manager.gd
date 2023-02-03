@@ -9,7 +9,7 @@ var resource_container : ResourceContainer
 export var resource_types : Dictionary = {}
 
 func _init():
-	# load constructed ResourceContainer, if it's present
+	# load pre-constructed ResourceContainer, if it's present
 	for _c in get_children():
 		if _c is ResourceContainer:
 			resource_container = _c as ResourceContainer

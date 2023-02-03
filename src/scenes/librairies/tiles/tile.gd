@@ -5,6 +5,7 @@ export var real_rotation : float = 0.0
 
 var resource_manager : ResourceManager
 var health_node : ResourceNode
+
 var connected : bool = true setget set_is_connected,get_is_connected
 var distance : int setget set_distance,get_distance
 var is_leaf_node : bool
@@ -21,7 +22,7 @@ onready var connected_pos : PoolIntArray = []
 
 func _init():
 	resource_manager = ResourceManager.new()
-	resource_manager.name = "Health_ResourceManager"
+	resource_manager.name = "ResourceManager"
 	add_child(resource_manager)
 	Events.connect("building_mode_toggle", self, "on_buidling_mode_toggle")
 
@@ -32,7 +33,9 @@ func _ready() -> void:
 		health_node = resource_manager.add_new_resource(Resources.HEALTH, Globals.TILE_HEALTH)
 		health_node.connect("node_depleted", self, "on_health_depleted")
 		health_node.connect("node_update", self, "on_health_changed")
-		$Health.text = String(health_node.value)
+		
+		$Health.text = String(health_node.value)			
+			
 	connections_pos = []
 	for shape in _connections.get_children():
 		if shape is CollisionShape2D:
@@ -71,6 +74,10 @@ func set_is_connected(value : bool) -> void:
 	connected = value
 	$Rig/Disconnected.visible = not connected
 #	$Distance.visible = connected
+	for _behavior in step_resolver.get_resolve_behavior():
+		if _behavior is ResolveBehavior:
+			var _b : ResolveBehavior = _behavior as ResolveBehavior
+			_b.set_is_enabled(value)
 
 func get_is_connected() -> bool:
 	return connected

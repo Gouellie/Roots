@@ -7,7 +7,7 @@ onready var amount_label : Label = $Amount
 var resource_node : ResourceNode = null setget set_resource_node 
 var update_frequency : float = 1.0
 var update_timer : float = 0.0
-var display_string : String = "%s+%s/-%s"
+var display_string : String = "%s/%s"
 
 func _ready():
 	Events.connect("tile_placed", self, "on_tile_placed")
@@ -39,7 +39,6 @@ func _process(_delta):
 func _update_values():
 	update_timer = 0
 	if resource_node:
-		var _current_value = String(resource_node.value)
 		var _prod_amount = String(Globals.player_resource_manager.get_production_amount_by_resource(resource_node.identifier))
 		var _cons_amount = String(Globals.player_resource_manager.get_consumption_amount_by_resource(resource_node.identifier))
-		amount_label.text = display_string % [_current_value, _prod_amount, _cons_amount]
+		amount_label.text = display_string % [_cons_amount, _prod_amount]
