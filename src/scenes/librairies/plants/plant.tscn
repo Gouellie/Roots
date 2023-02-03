@@ -23,3 +23,6 @@ shape = SubResource( 1 )
 [node name="Disconnected" type="Sprite" parent="."]
 visible = false
 texture = ExtResource( 3 )
+
+[connection signal="area_shape_entered" from="Area2D" to="." method="_on_Area2D_area_shape_entered"]
+[connection signal="area_shape_exited" from="Area2D" to="." method="_on_Area2D_area_shape_exited"]

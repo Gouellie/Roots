@@ -49,6 +49,7 @@ region_rect = Rect2( 256, 128, 64, 64 )
 [node name="Connections" type="Area2D" parent="skin"]
 collision_layer = 0
 collision_mask = 3
+monitorable = false
 
 [node name="CollisionShape2D_N" type="CollisionShape2D" parent="skin/Connections"]
 position = Vector2( 0, -32 )

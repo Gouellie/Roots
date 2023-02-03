@@ -48,6 +48,7 @@ plant_master_node_path = NodePath("../Plant_Master")
 [node name="Plant_Master" parent="." instance=ExtResource( 9 )]
 position = Vector2( 928, 224 )
 terrain_node_path = NodePath("../Terrain")
+is_master_plant = true
 
 [node name="PlayerResourceManager" parent="." instance=ExtResource( 6 )]
 
