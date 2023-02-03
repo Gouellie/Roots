@@ -19,12 +19,12 @@ func on_new_resource_added(_resource_node : ResourceNode):
 func set_resource_node(_resource_node : ResourceNode):
 	resource_node = _resource_node
 	resource_node.connect("node_update", self, "on_node_updated")
-	_update_from_node()
+	_execute_update()
 
 func get_resource_node() -> ResourceNode:
 	return resource_node
 
-func _update_from_node():
+func _execute_update():
 	if resource_node:
 		identifier = resource_node.identifier
 		name = "resource_cost_control_" + identifier
@@ -35,7 +35,7 @@ func _update_from_node():
 
 		var _label = get_node("Count")
 		if _label:
-			_label.text = "x" + String(resource_node.value)
+			_label.text = "x" + String(resource_node.get_value())
 
 func on_node_updated():
-	_update_from_node()
+	_execute_update()

@@ -16,13 +16,17 @@ enum RESET_BEHAVIOR {
 export (String)var identifier : String = "default"
 export (int)var min_value : int = 0
 export (int)var max_value : int = 1000000
-export (int)var value : int = 0
+export (int)var value : int = 0 setget set_value, get_value
 export (bool)var reset_on_next_turn : bool = false
 export (RESET_BEHAVIOR)var reset_behavior = RESET_BEHAVIOR.TO_ZERO
 export (bool)var has_limits = true
 
+func set_value(_amount : int):
+	value = _amount
+	emit_signal("node_update")
+	
 func get_value() -> int:
-	return int(clamp(value, min_value, max_value))
+	return value
 
 var is_depleted : bool = _is_depleted()
 

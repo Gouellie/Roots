@@ -5,6 +5,16 @@ const SUNLIGHT : String = "sunlight"
 const SOIL : String = "soil"
 const HEALTH : String = "health"
 
+var num_plants = 1
+
+func _init():
+	Events.connect("spawn_plant", self, "on_plant_spawned")
+
+# doesn't trigger for MainPlant
+func on_plant_spawned(_position):
+	num_plants += 1
+	Events.emit_signal("num_plants_changed", num_plants)
+	
 enum TILES {
 	STRAIGHT = 1, 
 	ELBOW = 2, 

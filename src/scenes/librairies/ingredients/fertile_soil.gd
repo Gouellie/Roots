@@ -8,6 +8,9 @@ onready var button := $Button
 onready var sprite_attention := $Sprite_Attention
 onready var resource_manager : ResourceManager = $ResourceManager
 
+func _init():
+	Events.connect("num_plants_changed", self, "on_num_plants_changed")
+
 func _ready() -> void:
 	button.visible = false
 	sprite_attention.visible = true
@@ -70,3 +73,9 @@ func _toggle_visibility(show_button, show_icon) -> void:
 	for _c in get_children():
 		if _c is ResourceControl:
 			_c.visible = show_button
+
+func on_num_plants_changed(_num_plants):
+	if resource_manager as ResourceManager:
+		var _rm : ResourceManager = resource_manager
+		for _identifier in _rm.get_all_resources():
+			_rm.get_resource(_identifier).set_value(_num_plants) 
