@@ -41,6 +41,11 @@ func _start_end_turn_sequence():
 	if step != Turns.STEP_ORDER.placing:
 		return
 	
+	if is_last_turn():
+		while step != Turns.STEP_ORDER.condition_lose:
+			next_step()
+		return
+	
 	next_step()
 	while step != Turns.STEP_ORDER.placing:
 		next_step()
@@ -91,6 +96,9 @@ func next_step():
 	Turns.emit_signal(_signal)
 
 func start_turn():
+	if turn > max_turns:
+		return
+		
 	time_remaining = Turns.time_per_turn
 	step = 0
 	
@@ -99,12 +107,8 @@ func start_turn():
 	
 func end_turn():
 	turn += 1
-	if turn > max_turns:
-		end_session()
-		return
-	
 	Turns.emit_signal("turn_next", turn)
 	start_turn()
 
-func end_session():
-	pass
+func is_last_turn() -> bool:
+	return turn >= max_turns
