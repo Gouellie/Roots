@@ -5,7 +5,7 @@ onready var control_game_over := $Control_GameOver
 
 
 func _ready() -> void:
-	control_game_over.visible = false
+#	control_game_over.visible = false
 	Events.connect("game_over", self, "on_game_over")
 
 

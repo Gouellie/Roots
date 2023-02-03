@@ -7,6 +7,7 @@ export (bool) var is_master_plant
 var head_tile_cellv : Vector2
 var connected : bool = true setget set_is_connected,get_is_connected
 var unrooted : bool = false
+var fertile_soil : Entity
 
 func _ready() -> void:
 	if terrain_node_path:
@@ -14,6 +15,15 @@ func _ready() -> void:
 		cellv = terrain.world_to_map(position)
 		head_tile_cellv = cellv
 		head_tile_cellv.y += 1
+
+
+func on_health_depleted():
+	if is_master_plant:
+		Events.emit_signal("game_over")
+		return
+	fertile_soil.plant_is_dead()
+	Globals.entity_manager.plant_dead(cellv)
+	self.queue_free()
 
 
 func _on_step_resolved(_step):

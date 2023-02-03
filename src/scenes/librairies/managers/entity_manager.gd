@@ -13,7 +13,7 @@ var tiles := {}
 var _blueprint : TileBlueprint
 var _eraser : TileBlueprintEraser
 var _placeable_blueprint : bool
-var _plants := []
+var _plants := {}
 var step_resolver : StepResolver = StepResolver.new()
 
 var builder_mode : bool = false
@@ -198,7 +198,7 @@ func _update_network_connection() -> void:
 	_update_plants()
 	
 func _update_plants() -> void:
-	for _p in _plants:
+	for _p in _plants.values():
 		_update_plant(_p)
 
 func _update_plant(_plant : Plant) -> void:
@@ -236,15 +236,22 @@ func get_connected_root_tiles() -> Array:
 			
 	return connected_tiles
 
-func on_spawn_plant(pos : Vector2) -> void:
+func on_spawn_plant(fertile_soil: Entity, pos : Vector2) -> void:
 	var new_plant = plant_scene.instance() as Plant
 	new_plant.position = pos
-	new_plant.cellv = _terrain.world_to_map(pos)
-	new_plant.head_tile_cellv = new_plant.cellv
+	var cellv = _terrain.world_to_map(pos)
+	new_plant.cellv = cellv
+	new_plant.head_tile_cellv = cellv
 	new_plant.head_tile_cellv.y += 1
-	_plants.append(new_plant)
+	new_plant.fertile_soil = fertile_soil
+	_plants[cellv] = new_plant
 	add_child(new_plant)
 	_update_plant(new_plant)
+
+# using cellv instead of 'Plant' to avoid dealing with invalid instances
+func plant_dead(cellv : Vector2) -> void:
+	if _plants.has(cellv):
+		_plants.erase(cellv)
 
 func get_network_head(_p : Plant) -> Tile:
 	return get_tile_at_position(_p.head_tile_cellv)	

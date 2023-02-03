@@ -14,7 +14,7 @@ func get_plant_cost() -> int:
 	return num_plants * num_plants + 1
 
 # doesn't trigger for MainPlant
-func on_plant_spawned(_position):
+func on_plant_spawned(_fertile_soil, _position):
 	num_plants += 1
 	Events.emit_signal("num_plants_changed", num_plants)
 	

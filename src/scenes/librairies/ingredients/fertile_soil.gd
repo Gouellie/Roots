@@ -61,7 +61,7 @@ func _on_Button_pressed() -> void:
 		# this should never trigger
 		return
 			
-	Events.emit_signal("spawn_plant", position)
+	Events.emit_signal("spawn_plant", self, position)
 	ferlitized = true
 	_toggle_visibility(false,false)
 
@@ -74,8 +74,14 @@ func _toggle_visibility(show_button, show_icon) -> void:
 		if _c is ResourceControl:
 			_c.visible = show_button
 
+
 func on_num_plants_changed(_num_plants):
 	if resource_manager as ResourceManager:
 		var _rm : ResourceManager = resource_manager
 		for _identifier in _rm.get_all_resources():
 			_rm.get_resource(_identifier).set_value(Resources.get_plant_cost()) 
+
+
+func plant_is_dead() -> void:
+	ferlitized = false
+	_toggle_visibility(false, true)

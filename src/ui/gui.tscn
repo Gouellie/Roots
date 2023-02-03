@@ -111,9 +111,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -100.0
-margin_top = -60.0
+margin_top = -106.0
 margin_right = 100.0
-margin_bottom = 60.0
+margin_bottom = 106.0
 rect_min_size = Vector2( 200, 120 )
 
 [node name="CenterContainer" type="CenterContainer" parent="Control_GameOver/Panel"]
@@ -122,8 +122,9 @@ anchor_bottom = 1.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control_GameOver/Panel/CenterContainer"]
 margin_left = 9.0
+margin_top = 36.0
 margin_right = 190.0
-margin_bottom = 140.0
+margin_bottom = 176.0
 
 [node name="Label" type="Label" parent="Control_GameOver/Panel/CenterContainer/VBoxContainer"]
 margin_right = 181.0
