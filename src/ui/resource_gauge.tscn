@@ -6,6 +6,7 @@
 [ext_resource path="res://src/ui/scripts/resource_gauge.gd" type="Script" id=4]
 
 [sub_resource type="DynamicFont" id=1]
+size = 20
 font_data = ExtResource( 2 )
 
 [node name="ResourceGauge" type="Control"]
