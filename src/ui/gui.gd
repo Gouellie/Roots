@@ -10,7 +10,6 @@ func _ready() -> void:
 	game_control.visible = false
 	Events.connect("game_over", self, "on_game_over")
 	Events.connect("victory", self, "on_game_victory")
-	print("victory?")
 
 
 func on_game_over(behavior) -> void:
