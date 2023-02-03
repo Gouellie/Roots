@@ -44,6 +44,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/scenes/librairies/ingredients/resources/harvestable_water.gd"
 }, {
+"base": "Reference",
+"class": "Info",
+"language": "GDScript",
+"path": "res://src/scripts/messages/info.gd"
+}, {
 "base": "Entity",
 "class": "Ingredient",
 "language": "GDScript",
@@ -157,6 +162,7 @@ _global_script_class_icons={
 "HarvestableSoil": "",
 "HarvestableSunlight": "",
 "HarvestableWater": "",
+"Info": "",
 "Ingredient": "",
 "IngredientManager": "",
 "NoResourcesDamageResolveBehavior": "",
