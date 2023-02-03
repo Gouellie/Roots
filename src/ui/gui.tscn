@@ -89,55 +89,63 @@ mouse_filter = 2
 
 [node name="InfoPanel" parent="Margin/Control_InfoPanel" instance=ExtResource( 2 )]
 
-[node name="Control_GameOver" type="ColorRect" parent="."]
-visible = false
+[node name="GameControlScreen" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.113725, 0.0941176, 0.0941176, 0.54902 )
 
-[node name="Panel" type="Panel" parent="Control_GameOver"]
+[node name="Panel" type="Panel" parent="GameControlScreen"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -100.0
-margin_top = -106.0
-margin_right = 100.0
-margin_bottom = 106.0
+margin_left = -138.0
+margin_top = -169.0
+margin_right = 138.0
+margin_bottom = 169.0
 rect_min_size = Vector2( 200, 120 )
 
-[node name="CenterContainer" type="CenterContainer" parent="Control_GameOver/Panel"]
+[node name="CenterContainer" type="CenterContainer" parent="GameControlScreen/Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control_GameOver/Panel/CenterContainer"]
-margin_left = 9.0
-margin_top = 36.0
-margin_right = 190.0
-margin_bottom = 176.0
+[node name="VBoxContainer" type="VBoxContainer" parent="GameControlScreen/Panel/CenterContainer"]
+margin_left = 47.0
+margin_top = 82.0
+margin_right = 228.0
+margin_bottom = 255.0
 
-[node name="Label" type="Label" parent="Control_GameOver/Panel/CenterContainer/VBoxContainer"]
+[node name="Header" type="Label" parent="GameControlScreen/Panel/CenterContainer/VBoxContainer"]
 margin_right = 181.0
 margin_bottom = 29.0
 text = "GAME OVER"
 align = 1
+uppercase = true
 
-[node name="Label_Space" type="Label" parent="Control_GameOver/Panel/CenterContainer/VBoxContainer"]
+[node name="Description" type="Label" parent="GameControlScreen/Panel/CenterContainer/VBoxContainer"]
 margin_top = 33.0
 margin_right = 181.0
 margin_bottom = 62.0
+text = "GAME OVER"
 align = 1
+autowrap = true
 
-[node name="Button_Retry" type="Button" parent="Control_GameOver/Panel/CenterContainer/VBoxContainer"]
+[node name="Label_Space" type="Label" parent="GameControlScreen/Panel/CenterContainer/VBoxContainer"]
 margin_top = 66.0
 margin_right = 181.0
-margin_bottom = 101.0
+margin_bottom = 95.0
+align = 1
+
+[node name="Button_Retry" type="Button" parent="GameControlScreen/Panel/CenterContainer/VBoxContainer"]
+margin_top = 99.0
+margin_right = 181.0
+margin_bottom = 134.0
 text = "RETRY"
 
-[node name="Button_Quit" type="Button" parent="Control_GameOver/Panel/CenterContainer/VBoxContainer"]
-margin_top = 105.0
+[node name="Button_Quit" type="Button" parent="GameControlScreen/Panel/CenterContainer/VBoxContainer"]
+margin_top = 138.0
 margin_right = 181.0
-margin_bottom = 140.0
+margin_bottom = 173.0
 text = "QUIT TO MAIN"
 
 [node name="UpgradesShop" parent="." instance=ExtResource( 7 )]
@@ -152,5 +160,5 @@ margin_right = 192.0
 margin_bottom = 224.0
 
 [connection signal="pressed" from="Margin/Control/Button_GiveUp" to="." method="_on_Button_GiveUp_pressed"]
-[connection signal="pressed" from="Control_GameOver/Panel/CenterContainer/VBoxContainer/Button_Retry" to="." method="_on_Button_Retry_pressed"]
-[connection signal="pressed" from="Control_GameOver/Panel/CenterContainer/VBoxContainer/Button_Quit" to="." method="_on_Button_Quit_pressed"]
+[connection signal="pressed" from="GameControlScreen/Panel/CenterContainer/VBoxContainer/Button_Retry" to="." method="_on_Button_Retry_pressed"]
+[connection signal="pressed" from="GameControlScreen/Panel/CenterContainer/VBoxContainer/Button_Quit" to="." method="_on_Button_Quit_pressed"]

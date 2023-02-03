@@ -26,7 +26,7 @@ custom_constants/separation = 0
 
 [node name="CurrentTurnBar" type="ProgressBar" parent="VBoxContainer"]
 margin_right = 400.0
-margin_bottom = 40.0
+margin_bottom = 32.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_min_size = Vector2( 0, 32 )

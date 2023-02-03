@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "ResourceResolveBehavior",
+"class": "ConditionLoseResolveBehavior",
+"language": "GDScript",
+"path": "res://src/ui/turns/resolve_behavior_condition_lose.gd"
+}, {
+"base": "ResourceResolveBehavior",
 "class": "ConditionWinResolveBehavior",
 "language": "GDScript",
 "path": "res://src/ui/turns/resolve_behavior_condition_win.gd"
@@ -165,6 +170,7 @@ _global_script_classes=[ {
 "path": "res://src/scripts/turns/turn_manager.gd"
 } ]
 _global_script_class_icons={
+"ConditionLoseResolveBehavior": "",
 "ConditionWinResolveBehavior": "",
 "ConditionWinResolveBehavior_MaxTurns": "",
 "ConsumerResolveBehavior": "",

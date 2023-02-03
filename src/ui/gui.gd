@@ -1,16 +1,32 @@
 extends Control
 
 
-onready var control_game_over := $Control_GameOver
+onready var game_control := $GameControlScreen
+onready var header = $GameControlScreen/Panel/CenterContainer/VBoxContainer/Header
+onready var description = $GameControlScreen/Panel/CenterContainer/VBoxContainer/Description
 
 
 func _ready() -> void:
-#	control_game_over.visible = false
+	game_control.visible = false
 	Events.connect("game_over", self, "on_game_over")
+	Events.connect("victory", self, "on_game_victory")
+	print("victory?")
 
 
-func on_game_over() -> void:
-	control_game_over.visible = true
+func on_game_over(behavior) -> void:
+	header.text = "GAME OVER"
+	game_control.visible = true
+	
+	if behavior is ConditionLoseResolveBehavior:
+		description.text = behavior.description
+
+
+func on_game_victory(behavior) -> void:
+	header.text = "VICTORY"
+	game_control.visible = true
+	
+	if behavior is ConditionWinResolveBehavior:
+		description.text = behavior.description
 
 
 func _on_Button_Quit_pressed() -> void:
@@ -23,4 +39,7 @@ func _on_Button_Retry_pressed() -> void:
 
 
 func _on_Button_GiveUp_pressed() -> void:
-	control_game_over.visible = true
+	game_control.visible = true
+	header.text = "GAME OVER"
+	description.text = "You gave up"
+	

@@ -22,10 +22,10 @@ signal eraser_mode_toggled
 signal tile_placed(new_tile)
 
 # warning-ignore:unused_signal
-signal game_over
+signal game_over(resolve_behavior)
 
 # warning-ignore:unused_signal
-signal victory
+signal victory(resolve_behavior)
 
 # warning-ignore:unused_signal
 signal open_plant_shop
