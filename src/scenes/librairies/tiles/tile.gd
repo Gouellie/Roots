@@ -7,6 +7,7 @@ var resource_manager : ResourceManager
 var health_node : ResourceNode
 
 var connected : bool = true setget set_is_connected,get_is_connected
+var queued_parche : bool = false setget set_queued_parche
 var distance : int setget set_distance,get_distance
 var is_leaf_node : bool
 
@@ -65,19 +66,34 @@ func update_sprite_region():
 	var _pos : Vector2 = start_rect.position as Vector2
 	var _size : Vector2 = start_rect.size as Vector2
 	var _height = _size.y
+	var _current_health = resource_manager.get_resource(Resources.HEALTH).value
+	var _max_health = Globals.TILE_HEALTH
+	var _percent : float =   float(_current_health) / float(_max_health)
 
-	var _base = 128
 	var _offset = 0
-	match resource_manager.get_resource(Resources.HEALTH).value:
-		1: _offset = _height * 2
-		2: _offset = _height * 1
+	if _percent <= .4:
+		$Rig/Parched.visible = false
+		$Rig/Disconnected.visible = queued_parche || not connected
+		_offset = _height * 2
+	elif _percent <= .7:
+		$Rig/Parched.visible = queued_parche || not connected
+		$Rig/Disconnected.visible = false
+		_offset = _height * 1
+	else:
+		$Rig/Parched.visible = queued_parche || not connected
+		$Rig/Disconnected.visible = false
+		_offset = 0
 	
 	_sprite.set_region_rect(Rect2(Vector2(_pos.x, _pos.y - _offset), _size))
 	$Rig/Parched.set_region_rect(Rect2(Vector2(_pos.x, _pos.y - _offset), _size))
 	$Rig/Disconnected.set_region_rect(Rect2(Vector2(_pos.x, _pos.y - _offset), _size))
 
+func set_queued_parche(_is_parched_preview : bool):
+	queued_parche = _is_parched_preview
+	update_sprite_region()
+	
+
 func on_health_changed():
-	$Rig/Parched.visible = true
 	update_sprite_region()
 	
 
@@ -87,7 +103,7 @@ func apply_damage(_damage : int):
 
 func set_is_connected(value : bool) -> void:
 	connected = value
-	$Rig/Disconnected.visible = not connected
+#	$Rig/Disconnected.visible = not connected
 #	$Distance.visible = connected
 	for _behavior in step_resolver.get_resolve_behavior():
 		if _behavior is ResolveBehavior:

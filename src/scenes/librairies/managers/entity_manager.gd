@@ -196,6 +196,7 @@ func _update_network_connection() -> void:
 	head.distance = 0
 	_parse_network(head, 1)
 	_update_plants()
+	_update_parche_preview()
 	
 func _update_plants() -> void:
 	for _p in _plants.values():
@@ -214,6 +215,52 @@ func _update_plant(_plant : Plant) -> void:
 	_plant.connected = true
 	head.distance = 0		
 	_parse_network(head, 1)
+
+func _update_parche_preview():
+	var _parche_tiles : Array = get_tiles_to_parche()
+	for _t in tiles.values():
+		if _t is Tile:
+			var _tile = _t as Tile
+			_tile.queued_parche = _parche_tiles.has(_tile) || _tile.connected == false
+	
+func get_tiles_to_parche() -> Array:
+	var _identifier = Resources.WATER
+	var rsc : ResourceNode = Globals.player_resource_manager.get_resource_manager().get_resource(_identifier) as ResourceNode
+	if rsc == null || rsc._is_depleted() == false:
+		return []
+
+	var _sorted_tiles : Array = get_tiles_sorted_by_distance()
+	
+	var _consumption = Globals.player_resource_manager.get_consumption_amount_by_resource(_identifier)
+	var _production = Globals.player_resource_manager.get_production_amount_by_resource(_identifier)
+	var _net_resources : int = _production - _consumption
+	
+	if _net_resources >= 0:
+		return []
+		
+	var _i = 0
+	var _parched_tiles = []
+	for _t in _sorted_tiles:
+		if _t is Tile:
+			var _tile : Tile = _t as Tile
+			
+			var _did_consume : bool = false
+			for _c in _tile.get_children():
+				if _c is ConsumerResolveBehavior:
+					var _consumer = _c as ConsumerResolveBehavior
+					if _consumer.identifier != _identifier:
+						continue
+					
+					_net_resources += _consumer.amount
+					_did_consume = true
+			
+			if _did_consume:
+				_parched_tiles.append(_tile)
+			
+			if _net_resources >= 0:
+				return _parched_tiles
+	
+	return _parched_tiles
 
 func _parse_network(current : Tile, distance : int) -> void:
 	for tile in current.get_connections():
