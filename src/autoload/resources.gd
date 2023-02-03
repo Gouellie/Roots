@@ -10,6 +10,9 @@ var num_plants = 1
 func _init():
 	Events.connect("spawn_plant", self, "on_plant_spawned")
 
+func get_plant_cost() -> int:
+	return num_plants * num_plants + 1
+
 # doesn't trigger for MainPlant
 func on_plant_spawned(_position):
 	num_plants += 1
