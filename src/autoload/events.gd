@@ -22,6 +22,9 @@ signal eraser_mode_toggled
 signal tile_placed(new_tile)
 
 # warning-ignore:unused_signal
+signal tile_network_updated
+
+# warning-ignore:unused_signal
 signal game_over(resolve_behavior)
 
 # warning-ignore:unused_signal
