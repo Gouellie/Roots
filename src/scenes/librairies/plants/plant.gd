@@ -41,3 +41,23 @@ func _on_Area2D_area_shape_exited(area_rid: RID, area: Area2D, area_shape_index:
 	if not is_master_plant:	
 		set_is_connected(false)
 		unrooted = true
+
+
+func _input(event: InputEvent) -> void:
+	if not has_mouse:
+		return
+	if not event is InputEventMouse:
+		return
+	var info = Info.new("Master Plant" if is_master_plant else "Plant")
+	info.add_info("Connect roots to your plant")
+	info.add_info("Each additional Plants generate Sun token")
+	info.add_info("Each additional Plants generate Sun token", 1)
+	Events.emit_signal("info_request", info)
+
+
+func _on_MouseDetector_mouse_entered() -> void:
+	has_mouse = true
+
+
+func _on_MouseDetector_mouse_exited() -> void:
+	has_mouse = false

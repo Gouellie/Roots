@@ -42,3 +42,9 @@ func _update_values():
 		var _prod_amount = String(Globals.player_resource_manager.get_production_amount_by_resource(resource_node.identifier))
 		var _cons_amount = String(Globals.player_resource_manager.get_consumption_amount_by_resource(resource_node.identifier))
 		amount_label.text = display_string % [_cons_amount, _prod_amount]
+
+
+func _on_TextureRect_mouse_entered() -> void:
+	var info = Info.new(resource_node.identifier)
+	info.add_info("Enter information")
+	Events.emit_signal("info_request", info)

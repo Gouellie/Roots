@@ -199,6 +199,7 @@ Events="*res://src/autoload/events.gd"
 Globals="*res://src/autoload/globals.gd"
 Resources="*res://src/autoload/resources.gd"
 Turns="*res://src/autoload/turns.gd"
+Utils="*res://src/autoload/utils.gd"
 
 [debug]
 

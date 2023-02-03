@@ -25,6 +25,9 @@ func _ready() -> void:
 
 func _on_TilePanel_mouse_entered() -> void:
 	color = mouse_over
+	var info = Info.new("Tile")
+	info.add_info("Connect the tile to your root network")
+	Events.emit_signal("info_request", info)
 
 
 func _on_TilePanel_mouse_exited() -> void:

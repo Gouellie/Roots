@@ -38,3 +38,6 @@ signal init_ingredient_manager(_ingredient_manager)
 
 # warning-ignore:unused_signal
 signal spawn_plant(position)
+
+# warning-ignore:unused_signal
+signal info_request(info)

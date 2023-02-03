@@ -88,6 +88,7 @@ func _set_eraser_mode(value : bool) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	_emit_tile_info()
 	if _blueprint:
 		if event.is_action_pressed("rotate_cw"):
 			_blueprint.rotate_blueprint(true)
@@ -106,9 +107,20 @@ func _unhandled_input(event: InputEvent) -> void:
 		_set_eraser_mode(false)
 
 
+func _emit_tile_info() -> void:
+	var cellv = _terrain.world_to_map(get_global_mouse_position())
+	if _plant_master.cellv == cellv:
+		return
+	if is_cell_occupied(cellv):
+		return
+	if Globals.ingredient_manager.is_cell_occupied(cellv):
+		return
+	var info = Info.new("Terrain Tiles")
+	info.add_info("Regular Terrain")
+	Events.emit_signal("info_request", info)
+
+
 func _can_place_tile(cellv : Vector2) -> bool:
-#	if is_cell_occupied(cellv):
-#		return false
 	if _terrain.get_cellv(cellv) == TileMap.INVALID_CELL:
 		return false
 	return _blueprint.is_connected_to_network(get_tile_at_position(cellv))

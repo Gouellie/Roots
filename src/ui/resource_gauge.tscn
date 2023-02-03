@@ -4,10 +4,8 @@
 [ext_resource path="res://src/ui/scripts/resource_gauge.gd" type="Script" id=4]
 
 [node name="ResourceGauge" type="Control"]
-anchor_right = 0.077
-anchor_bottom = 0.027
-margin_right = 31.44
-margin_bottom = 134.56
+margin_right = 130.0
+margin_bottom = 154.0
 rect_min_size = Vector2( 130, 130 )
 rect_scale = Vector2( 0.5, 0.5 )
 script = ExtResource( 4 )
@@ -37,3 +35,6 @@ margin_bottom = 124.0
 rect_scale = Vector2( 2, 2 )
 text = "NAN"
 align = 1
+
+[connection signal="mouse_entered" from="." to="." method="_on_ResourceGauge_mouse_entered"]
+[connection signal="mouse_entered" from="Margin/VBoxContainer/CenterContainer/TextureRect" to="." method="_on_TextureRect_mouse_entered"]

@@ -47,6 +47,10 @@ func _ready() -> void:
 	clear()
 
 
+func is_cell_occupied(cellv: Vector2) -> bool:
+	return ingredients.has(cellv)
+
+
 func get_ingredient_at(pos : Vector2) -> Ingredient:
 	if ingredients.has(pos):
 		return ingredients[pos]

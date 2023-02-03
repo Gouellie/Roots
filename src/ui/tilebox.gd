@@ -68,4 +68,6 @@ func on_next_turn(turn) -> void:
 
 
 func _on_Button_Erase_mouse_entered() -> void:
-	pass
+	var info = Info.new("Eraser Tool")
+	info.add_info("Use eraser tool to remove tiles")
+	Events.emit_signal("info_request",info)
