@@ -25,5 +25,4 @@ func on_new_resource_added(_resource_node : ResourceNode):
 		_instance.resource_node = _resource_node
 		resource_container.add_child(_instance)
 		containers.append(_instance)
-#
 		

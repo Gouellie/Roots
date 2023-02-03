@@ -1,10 +1,21 @@
 extends Control
 class_name ResourceControl
 
-var identifier : String
+export (String)var identifier : String = "sunlight"
 
 var resource_node : ResourceNode setget set_resource_node, get_resource_node
 
+func _ready():
+	for _sibling in get_parent().get_children():
+		var _rm : ResourceManager = _sibling as ResourceManager
+		if is_instance_valid(_rm):
+			_rm.connect("new_resource_added", self, "on_new_resource_added")
+			break
+	
+func on_new_resource_added(_resource_node : ResourceNode):
+	if _resource_node.identifier == identifier:
+		set_resource_node(_resource_node)
+	
 func set_resource_node(_resource_node : ResourceNode):
 	resource_node = _resource_node
 	resource_node.connect("node_update", self, "on_node_updated")
