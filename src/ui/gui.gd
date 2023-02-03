@@ -22,5 +22,5 @@ func _on_Button_Retry_pressed() -> void:
 	get_tree().reload_current_scene()
 
 
-func _on_Button_Tick_pressed() -> void:
-	Events.emit_signal("tick")
+func _on_Button_GiveUp_pressed() -> void:
+	control_game_over.visible = true
