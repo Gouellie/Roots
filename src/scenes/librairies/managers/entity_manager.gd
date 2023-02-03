@@ -124,7 +124,8 @@ func _place_tile() -> void:
 
 func deplete_tile(_tile : Tile):
 	remove_tile_at_position(_tile.cellv)
-	_update_network_connection()
+	if _tile.connected:
+		_update_network_connection()
 
 func _remove_tile() -> void:
 	var cellv = _terrain.world_to_map(_eraser.position)
