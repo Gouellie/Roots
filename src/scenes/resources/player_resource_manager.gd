@@ -3,6 +3,16 @@ class_name PlayerResourceManager
 
 onready var resource_manager = $ResourceManager setget , get_resource_manager
 
+var consumption_amount = {} setget set_consumption_amount, get_consumption_amount
+var production_amount = {} setget set_production_amount, get_production_amount
+
+func _init():
+	Events.connect("tile_network_updated", self, "on_tile_network_updated")
+
+func on_tile_network_updated():
+	_update_production_amount()
+	_update_consumption_amount()
+
 func get_resource_manager() -> ResourceManager:
 	return resource_manager as ResourceManager
 
@@ -19,13 +29,23 @@ func _ready():
 	
 	Events.emit_signal("init_player_resource_manager", self)
 
+func set_consumption_amount(_dictionary : Dictionary):
+	consumption_amount = _dictionary
+	Events.emit_signal("consumption_amount_changed", consumption_amount)
+
+
+func get_consumption_amount() -> Dictionary:
+	return consumption_amount
+
+
 func get_consumption_amount_by_resource(identifier : String) -> int:
 	var _d : Dictionary = get_consumption_amount()
 	if _d.has(identifier):
 		return _d[identifier]
 	return 0
-	
-func get_consumption_amount() -> Dictionary:
+
+
+func _update_consumption_amount():
 	var _d : Dictionary = {}
 	var _resolvers = Globals.turn_manager.step_resolvers as Dictionary
 	if _resolvers == null:
@@ -52,7 +72,16 @@ func get_consumption_amount() -> Dictionary:
 					else:
 						_d[_c_behav.identifier] = _c_behav.amount
 		
-	return _d
+	set_consumption_amount(_d)
+
+func set_production_amount(_dictionary : Dictionary):
+	production_amount = _dictionary
+	Events.emit_signal("production_amount_changed", production_amount)
+
+
+func get_production_amount() -> Dictionary:
+	return production_amount
+
 
 func get_production_amount_by_resource(identifier : String) -> int:
 	var _d : Dictionary = get_production_amount()
@@ -60,7 +89,8 @@ func get_production_amount_by_resource(identifier : String) -> int:
 		return _d[identifier]
 	return 0
 		
-func get_production_amount() -> Dictionary:
+		
+func _update_production_amount():	
 	var _d : Dictionary = {}
 	var _resolvers = Globals.turn_manager.step_resolvers as Dictionary
 	if _resolvers == null:
@@ -87,4 +117,4 @@ func get_production_amount() -> Dictionary:
 					else:
 						_d[_c_behav.identifier] = _c_behav.get_amount()
 			
-	return _d
+	production_amount =_d

@@ -32,6 +32,7 @@ func _ready() -> void:
 	Events.connect("eraser_mode_toggled", self, "oneraser_mode_toggled")
 	Events.connect("spawn_plant", self, "on_spawn_plant")
 	Events.emit_signal("init_entity_manager", self)
+	Events.connect("consumption_amount_changed", self, "on_resource_consumption_changed")
 	step_resolver.ready(self)
 
 func _process(_delta: float) -> void:
@@ -196,7 +197,6 @@ func _update_network_connection() -> void:
 	head.distance = 0
 	_parse_network(head, 1)
 	_update_plants()
-	_update_parche_preview()
 	Events.emit_signal("tile_network_updated")
 	
 func _update_plants() -> void:
@@ -336,3 +336,6 @@ func get_longest_distance() -> int:
 
 func get_plants_count() -> int:
 	return _plants.size()
+
+func on_resource_consumption_changed(_dictionary : Dictionary):
+	_update_parche_preview()

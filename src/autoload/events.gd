@@ -71,3 +71,9 @@ signal num_plants_changed(_num_plants)
 
 # warning-ignore:unused_signal
 signal info_request(info)
+
+# warning-ignore:unused_signal
+signal production_amount_changed(_dictionary)
+
+# warning-ignore:unused_signal
+signal consumption_amount_changed(_dictionary)
