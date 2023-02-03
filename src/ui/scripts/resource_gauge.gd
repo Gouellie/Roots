@@ -35,13 +35,15 @@ func _process(_delta):
 		update_timer = 0
 		_update_values()
 
-#var display_string : String = "{current}/+{increase}/-{decrease}"
 func _update_values():
 	update_timer = 0
 	if resource_node:
-		var _prod_amount = String(Globals.player_resource_manager.get_production_amount_by_resource(resource_node.identifier))
-		var _cons_amount = String(Globals.player_resource_manager.get_consumption_amount_by_resource(resource_node.identifier))
-		amount_label.text = display_string % [_cons_amount, _prod_amount]
+		if resource_node.identifier == Resources.SUNLIGHT:
+			amount_label.text = String(resource_node.value)
+		else:
+			var _prod_amount = String(Globals.player_resource_manager.get_production_amount_by_resource(resource_node.identifier))
+			var _cons_amount = String(Globals.player_resource_manager.get_consumption_amount_by_resource(resource_node.identifier))
+			amount_label.text = display_string % [_cons_amount, _prod_amount]
 
 
 func _on_TextureRect_mouse_entered() -> void:

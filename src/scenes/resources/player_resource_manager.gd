@@ -13,8 +13,12 @@ func _ready():
 			_node.reset_on_next_turn = true
 			_node.has_limits = false
 			_node.value = _node.min_value
+			
+			if _node.identifier == Resources.SUNLIGHT:
+				_node.reset_on_next_turn = false
 	
 	Events.emit_signal("init_player_resource_manager", self)
+	Events.connect("tile_placed", self, "on_tile_placed")
 
 func get_consumption_amount_by_resource(identifier : String) -> int:
 	var _d : Dictionary = get_consumption_amount()

@@ -8,7 +8,6 @@ var head_tile_cellv : Vector2
 var connected : bool = true setget set_is_connected,get_is_connected
 var unrooted : bool = false
 
-
 func _ready() -> void:
 	if terrain_node_path:
 		var terrain = get_node(terrain_node_path) as TileMap
