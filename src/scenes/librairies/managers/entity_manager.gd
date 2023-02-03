@@ -30,7 +30,6 @@ func _ready() -> void:
 	Events.connect("eraser_mode_toggled", self, "on_eraser_mode_toggled")
 	Events.connect("spawn_plant", self, "on_spawn_plant")
 	Events.emit_signal("init_entity_manager", self)
-		
 
 func _process(_delta: float) -> void:
 	_move_blueprint(get_global_mouse_position())
@@ -241,6 +240,17 @@ func get_connected_root_tiles_by_distance(_distance : int) -> Array:
 				_tiles.append(_tile)
 			
 	return _tiles
+
+func sort_distance_ascending(a : Tile, b : Tile) -> bool:
+	return a.distance < b.distance
+	
+func sort_distance_descending(a : Tile, b : Tile) -> bool:
+	return a.distance > b.distance
+
+func get_tiles_sorted_by_distance() -> Array:
+	var _tiles = get_connected_root_tiles()
+	_tiles.sort_custom(self, "sort_distance_descending")
+	return _tiles
 	
 func get_longest_distance() -> int:
 	var _longest_distance = 0
@@ -252,8 +262,12 @@ func get_longest_distance() -> int:
 	return _longest_distance
 	
 func should_receive_damage(_tile : Tile) -> bool:
-	if _tile.distance == get_longest_distance():
-		return true
+	var _sorted_tiles : Array = get_tiles_sorted_by_distance()
+	var _node : ResourceNode = Globals.player_resource_manager.get_resource_manager().get_resource("water")
+
+	var _offset : int = int(min(_node.start + _node.delta, _node.value))
+	if _offset < 0:
+		return _sorted_tiles.find(_tile) < abs(_offset)
 		
 	return false
-			
+	

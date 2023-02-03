@@ -32,10 +32,10 @@ signal step_resource_consume()
 signal step_roots_damage_severed()
 
 # warning-ignore:unused_signal
-signal step_roots_destroy()
+signal step_roots_damage_connected()
 
 # warning-ignore:unused_signal
-signal step_roots_damage_connected()
+signal step_condition_win()
 
 # warning-ignore:unused_signal
 signal step_condition_lose()

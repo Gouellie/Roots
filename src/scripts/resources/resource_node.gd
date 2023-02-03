@@ -9,20 +9,33 @@ signal node_depleted()
 
 export (String)var identifier : String = "default"
 export (int)var min_value : int = 0
-export (int)var max_value : int = 100
+export (int)var max_value : int = 1000000
 export (int)var value : int = 0
+var delta : int = 0
+var start : int = 0
+
+func get_value() -> int:
+	return int(clamp(value, min_value, max_value))
 
 var is_depleted : bool = _is_depleted()
 
 func _ready():
 	initialize()
+	start = value
+	Turns.connect("turn_next", self, "on_next_turn")
 
+func on_next_turn(_turn):
+	start = value
+	delta = 0
+	
 func add_resource(amount:int) -> void:
+	delta += amount
 	value = int(clamp(value + amount, min_value, max_value))
 	is_depleted = _is_depleted()
 	emit_signal("node_update")
 
 func decuct_resource(amount:int) -> void:
+	delta -= amount
 	value = int(clamp(value - amount, min_value, max_value))
 	is_depleted = _is_depleted()
 	emit_signal("node_update")

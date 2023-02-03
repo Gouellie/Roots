@@ -17,7 +17,7 @@ func _execute_resolve_behavior():
 	var rsc : ResourceNode = Globals.player_resource_manager.get_resource_manager().get_resource(identifier) as ResourceNode
 	if rsc == null || rsc._is_depleted() == false:
 		return
-		
+#
 	if Globals.entity_manager.should_receive_damage(tile) == false:
 		return
 	
