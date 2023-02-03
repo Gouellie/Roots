@@ -16,9 +16,12 @@ onready var rig := $Rig
 onready var _leaf := $Leaf
 onready var _connections :Area2D= $Rig/Connections
 onready var _ingredient_detector :Area2D= $IngredientDetector
+onready var _sprite : Sprite = $Rig/Sprite
 
 onready var connections_pos :PoolVector2Array = []
 onready var connected_pos : PoolIntArray = []
+
+var start_rect : Rect2
 
 func _init():
 	resource_manager = ResourceManager.new()
@@ -26,15 +29,13 @@ func _init():
 	add_child(resource_manager)
 	Events.connect("building_mode_toggle", self, "on_buidling_mode_toggle")
 
-
 func _ready() -> void:
+	start_rect = _sprite.region_rect
 	rig.rotation_degrees = real_rotation
 	if resource_manager:
 		health_node = resource_manager.add_new_resource(Resources.HEALTH, Globals.TILE_HEALTH)
 		health_node.connect("node_depleted", self, "on_health_depleted")
 		health_node.connect("node_update", self, "on_health_changed")
-		
-		$Health.text = String(health_node.value)			
 			
 	connections_pos = []
 	for shape in _connections.get_children():
@@ -60,10 +61,24 @@ func on_health_depleted():
 	Globals.entity_manager.deplete_tile(self)
 	self.queue_free()
 
+func update_sprite_region():
+	var _pos : Vector2 = start_rect.position as Vector2
+	var _size : Vector2 = start_rect.size as Vector2
+	var _height = _size.y
+
+	var _base = 128
+	var _offset = 0
+	match resource_manager.get_resource(Resources.HEALTH).value:
+		1: _offset = _height * 2
+		2: _offset = _height * 1
+	
+	_sprite.set_region_rect(Rect2(Vector2(_pos.x, _pos.y - _offset), _size))
+	$Rig/Parched.set_region_rect(Rect2(Vector2(_pos.x, _pos.y - _offset), _size))
+	$Rig/Disconnected.set_region_rect(Rect2(Vector2(_pos.x, _pos.y - _offset), _size))
 
 func on_health_changed():
-	$Health.text = String(health_node.value)
 	$Rig/Parched.visible = true
+	update_sprite_region()
 	
 
 func apply_damage(_damage : int):
