@@ -25,6 +25,9 @@ signal tile_placed(new_tile)
 signal game_over
 
 # warning-ignore:unused_signal
+signal open_plant_shop
+
+# warning-ignore:unused_signal
 signal init_player_resource_manager(_resource_manager)
 
 # warning-ignore:unused_signal

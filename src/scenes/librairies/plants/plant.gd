@@ -45,13 +45,16 @@ func _on_Area2D_area_shape_exited(area_rid: RID, area: Area2D, area_shape_index:
 func _input(event: InputEvent) -> void:
 	if not has_mouse:
 		return
-	if not event is InputEventMouse:
-		return
 	var info = Info.new("Master Plant" if is_master_plant else "Plant")
 	info.add_info("Connect roots to your plant")
 	info.add_info("Each additional Plants generate Sun token")
 	info.add_info("Each additional Plants generate Sun token", 1)
 	Events.emit_signal("info_request", info)
+	
+	if Globals.entity_manager.builder_mode or Globals.entity_manager.eraser_mode:
+		return
+	if event.is_action_pressed("ui_accept"):
+		Events.emit_signal("open_plant_shop")
 
 
 func _on_MouseDetector_mouse_entered() -> void:
