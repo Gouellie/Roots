@@ -37,14 +37,12 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	_move_blueprint(get_global_mouse_position())
 
-
 func _register_ready_roots() -> void:
 	for tile in get_children():
 		if tile is Tile:
 			var cellv = _terrain.world_to_map(tile.position)
 			tile.cellv = cellv
 			tiles[cellv] = tile 
-
 
 func _move_blueprint(mouse_position: Vector2) -> void:
 	var cellv = _terrain.world_to_map(mouse_position)
@@ -55,7 +53,6 @@ func _move_blueprint(mouse_position: Vector2) -> void:
 		_blueprint.position = snap_position
 		_blueprint.valid = _can_place_tile(cellv)
 
-
 func on_tile_selected(sender : TilePanel, new_selected_blueprint : TileBlueprintBase)-> void:
 	_clear_blueprint()
 	if new_selected_blueprint:
@@ -65,13 +62,12 @@ func on_tile_selected(sender : TilePanel, new_selected_blueprint : TileBlueprint
 		add_child(new_blueprint)
 		_placeable_blueprint = true
 		_blueprint = new_blueprint
+
 	builder_mode = new_selected_blueprint != null
 	Events.emit_signal("building_mode_toggle", builder_mode)
 
-
 func oneraser_mode_toggled()-> void:
 	_seteraser_mode(not eraser_mode)
-
 
 func _seteraser_mode(value : bool) -> void:
 	if eraser_mode == value:
@@ -87,7 +83,6 @@ func _seteraser_mode(value : bool) -> void:
 			_eraser = null
 	if is_instance_valid(_blueprint):
 		_clear_blueprint()
-
 
 func _unhandled_input(event: InputEvent) -> void:
 	_emit_tile_info()
@@ -108,7 +103,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	if eraser_mode and event.is_action_pressed("ui_cancel"):
 		_seteraser_mode(false)
 
-
 func _emit_tile_info() -> void:
 	var cellv = _terrain.world_to_map(get_global_mouse_position())
 	if _plant_master.cellv == cellv:
@@ -121,24 +115,18 @@ func _emit_tile_info() -> void:
 	info.add_info("Regular Terrain")
 	Events.emit_signal("info_request", info)
 
-
 func _can_place_tile(cellv : Vector2) -> bool:
 	if _terrain.get_cellv(cellv) == TileMap.INVALID_CELL:
 		return false
 	return _blueprint.is_connected_to_network(get_tile_at_position(cellv))
-
-
+	
 func _place_tile() -> void:
 	if not _blueprint is TileBlueprint:
 		return
 	if not _blueprint.valid:
 		return
 
-	var _player_resources : Dictionary = Globals.player_resource_manager.get_resource_manager().get_all_resources()
-	var _did_consume = Globals.player_resource_manager.get_resource_manager().try_consume_all(_blueprint.resource_manager)
-	
-	if _did_consume == false:
-		print("Insufficient resources")
+	if _blueprint.try_consume() == false:
 		return
 	
 	Events.emit_signal("building_mode_toggle", false)		
@@ -157,12 +145,10 @@ func _place_tile() -> void:
 	yield(get_tree().create_timer(0.1), "timeout")
 	_update_network_connection()
 
-
 func deplete_tile(_tile : Tile):
 	remove_tile_at_position(_tile.cellv)
 	if _tile.connected:
 		_update_network_connection()
-
 
 func _remove_tile() -> void:
 	var cellv = _terrain.world_to_map(_eraser.position)
@@ -170,13 +156,11 @@ func _remove_tile() -> void:
 		if remove_tile_at_position(cellv):
 			_update_network_connection()
 
-
 func _clear_blueprint() -> void:
 	_placeable_blueprint = false
 	if is_instance_valid(_blueprint):
 		_blueprint.queue_free()
 		_blueprint = null
-
 
 func remove_tile_at_position(cellv: Vector2) -> bool:
 	if tiles.has(cellv):
@@ -186,16 +170,13 @@ func remove_tile_at_position(cellv: Vector2) -> bool:
 		return result
 	return false
 
-
 func get_tile_at_position(cellv: Vector2) -> Tile:
 	if tiles.has(cellv):
 		return tiles[cellv] as Tile
 	return null
 
-
 func is_cell_occupied(cellv: Vector2) -> bool:
 	return tiles.has(cellv)
-
 
 func _update_network_connection() -> void:
 	# assuming all tiles are disconnected
@@ -214,11 +195,9 @@ func _update_network_connection() -> void:
 	_parse_network(head, 1)
 	_update_plants()
 	
-
 func _update_plants() -> void:
 	for _p in _plants:
 		_update_plant(_p)
-
 
 func _update_plant(_plant : Plant) -> void:
 	var head = get_network_head(_plant)
@@ -234,7 +213,6 @@ func _update_plant(_plant : Plant) -> void:
 	head.distance = 0		
 	_parse_network(head, 1)
 
-
 func _parse_network(current : Tile, distance : int) -> void:
 	for tile in current.get_connections():
 		if not tile is Tile:
@@ -244,7 +222,6 @@ func _parse_network(current : Tile, distance : int) -> void:
 		tile.distance = min(tile.distance, distance)
 		tile.connected = true
 		_parse_network(tile, distance + 1)
-
 
 func get_connected_root_tiles() -> Array:
 	var connected_tiles = []
@@ -257,7 +234,6 @@ func get_connected_root_tiles() -> Array:
 			
 	return connected_tiles
 
-
 func on_spawn_plant(pos : Vector2) -> void:
 	var new_plant = plant_scene.instance() as Plant
 	new_plant.position = pos
@@ -267,7 +243,6 @@ func on_spawn_plant(pos : Vector2) -> void:
 	_plants.append(new_plant)
 	add_child(new_plant)
 	_update_plant(new_plant)
-
 
 func get_network_head(_p : Plant) -> Tile:
 	return get_tile_at_position(_p.head_tile_cellv)	
@@ -301,7 +276,6 @@ func get_longest_distance() -> int:
 			_longest_distance = max(_longest_distance, _tile.distance)
 			
 	return _longest_distance
-
 
 func get_plants_count() -> int:
 	return _plants.size()

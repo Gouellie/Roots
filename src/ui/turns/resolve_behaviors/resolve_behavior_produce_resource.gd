@@ -44,4 +44,5 @@ func _execute_resolve_behavior():
 	if _should_yield_amount() == false:
 		return
 	
-	Globals.player_resource_manager.get_resource_manager().add_to_resource(identifier, amount)
+	if is_instance_valid(Globals.player_resource_manager):
+		Globals.player_resource_manager.get_resource_manager().add_to_resource(identifier, amount)

@@ -35,22 +35,21 @@ func _ready() -> void:
 	
 	load_resource_cost()
 
+func can_afford() -> bool:
+	return Globals.player_resource_manager.get_resource_manager().can_consume_all(resource_manager)
+
+func try_consume() -> bool:
+	if can_afford() == false:
+		return false
+	
+	return Globals.player_resource_manager.get_resource_manager().try_consume_all(resource_manager)
+
 func load_resource_cost():
 	var _resource_cost = Resources.Tiles_resource_cost[tile_index]
 	if resource_manager:
 		for _rc in _resource_cost:
 			var _cost = _resource_cost[_rc]
 			resource_manager.add_new_resource(_rc, _cost)
-
-func can_afford(_consumer : ResourceManager) -> bool:
-	return _consumer.can_consume_all(resource_manager)
-
-func try_consume_resource_cost(_consumer : ResourceManager) -> bool:
-	if can_afford(_consumer) == false:
-		return false
-	
-	return _consumer.try_consume_all(self.resource_manager)
-
 
 func rotate_blueprint(cw : bool) -> void:
 	if not can_rotate:
