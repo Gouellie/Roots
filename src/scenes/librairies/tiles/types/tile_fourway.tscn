@@ -91,6 +91,7 @@ shape = SubResource( 2 )
 
 [node name="ConsumerResolveBehavior" type="Node2D" parent="."]
 script = ExtResource( 4 )
+amount = 3
 
 [node name="NoResourcesDamageResolveBehavior" type="Node2D" parent="."]
 script = ExtResource( 5 )

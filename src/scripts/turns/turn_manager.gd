@@ -37,7 +37,10 @@ func _ready():
 	start_turn()
 
 func _start_end_turn_sequence():
+#	while step != Turns.STEP_ORDER.placing:
+#		next_step()
 	end_turn()
+
 
 func on_turn_end_requested(_sender):
 	next_step()

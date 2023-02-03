@@ -19,6 +19,7 @@ const Tiles := {
 	TILES.FOURWAY : preload("res://src/scenes/librairies/tiles/types/tile_fourway.tscn"),
 }
 
+#placing cost
 const Tiles_resource_cost = {
 	TILES.STRAIGHT : {
 		"sunlight": 1,
