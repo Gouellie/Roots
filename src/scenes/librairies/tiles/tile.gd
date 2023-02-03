@@ -1,9 +1,10 @@
 extends Entity
 class_name Tile
 
+export var real_rotation : float = 0.0
+
 var resource_manager : ResourceManager
 var health_node : ResourceNode
-var real_rotation : float = 0.0
 var connected : bool = true setget set_is_connected,get_is_connected
 var distance : int setget set_distance,get_distance
 var is_leaf_node : bool

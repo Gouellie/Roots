@@ -26,13 +26,23 @@ func _ready() -> void:
 	_plant_master = get_node(plant_master_node_path) as Plant
 	_terrain = get_node(terrain_node_path) as TileMap
 	tile_offset = _terrain.cell_size / 2
+	_register_ready_roots()
 	Events.connect("tilepanel_selected", self, "on_tile_selected")
 	Events.connect("eraser_mode_toggled", self, "on_eraser_mode_toggled")
 	Events.connect("spawn_plant", self, "on_spawn_plant")
 	Events.emit_signal("init_entity_manager", self)
 
+
 func _process(_delta: float) -> void:
 	_move_blueprint(get_global_mouse_position())
+
+
+func _register_ready_roots() -> void:
+	for tile in get_children():
+		if tile is Tile:
+			var cellv = _terrain.world_to_map(tile.position)
+			tile.cellv = cellv
+			tiles[cellv] = tile 
 
 
 func _move_blueprint(mouse_position: Vector2) -> void:
@@ -125,10 +135,12 @@ func _place_tile() -> void:
 	yield(get_tree().create_timer(0.1), "timeout")
 	_update_network_connection()
 
+
 func deplete_tile(_tile : Tile):
 	remove_tile_at_position(_tile.cellv)
 	if _tile.connected:
 		_update_network_connection()
+
 
 func _remove_tile() -> void:
 	var cellv = _terrain.world_to_map(_eraser.position)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/ui/gui.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/scenes/camera_controller.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://src/scenes/librairies/managers/entity_manager.gd" type="Script" id=5]
 [ext_resource path="res://src/scenes/resources/player_resource_manager.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/background/background_graadient.png" type="Texture" id=7]
+[ext_resource path="res://src/scenes/librairies/tiles/types/tile_fourway.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/scenes/librairies/plants/plant.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/scripts/turns/turn_manager.gd" type="Script" id=10]
 [ext_resource path="res://src/scenes/terrain_moderate_2.tscn" type="PackedScene" id=11]
@@ -44,6 +45,9 @@ tile_data = PoolIntArray( -524287, 4, 0, -327697, 0, 0, -327696, 0, 0, -327695, 
 script = ExtResource( 5 )
 terrain_node_path = NodePath("../Terrain")
 plant_master_node_path = NodePath("../Plant_Master")
+
+[node name="Tile_FourWay" parent="EntityManager" instance=ExtResource( 8 )]
+position = Vector2( 928, 288 )
 
 [node name="Plant_Master" parent="." instance=ExtResource( 9 )]
 position = Vector2( 928, 224 )
