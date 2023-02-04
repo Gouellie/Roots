@@ -26,14 +26,23 @@ custom_constants/separation = 0
 
 [node name="CurrentTurnBar" type="ProgressBar" parent="VBoxContainer"]
 margin_right = 400.0
-margin_bottom = 32.0
+margin_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_min_size = Vector2( 0, 32 )
 rect_pivot_offset = Vector2( 320, 0 )
+size_flags_vertical = 3
 step = 1.0
 value = 5.0
 percent_visible = false
+
+[node name="Turn" type="Label" parent="VBoxContainer/CurrentTurnBar"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 2 )
+text = "0"
+align = 1
+valign = 1
 
 [node name="TimeRemainingBar" type="ProgressBar" parent="VBoxContainer"]
 visible = false
@@ -46,17 +55,6 @@ rect_min_size = Vector2( 400, 12 )
 rect_pivot_offset = Vector2( 320, 0 )
 value = 100.0
 percent_visible = false
-
-[node name="Turn" type="Label" parent="."]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -20.0
-margin_right = 20.0
-margin_bottom = 32.0
-theme = ExtResource( 2 )
-text = "0"
-align = 1
-valign = 1
 
 [node name="Step" type="Label" parent="."]
 visible = false

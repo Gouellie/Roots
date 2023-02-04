@@ -28,6 +28,7 @@ func _ready() -> void:
 	_terrain = get_node(terrain_node_path) as TileMap
 	tile_offset = _terrain.cell_size / 2
 	_register_ready_roots()
+
 	Events.connect("tilepanel_selected", self, "on_tile_selected")
 	Events.connect("eraser_mode_toggled", self, "oneraser_mode_toggled")
 	Events.connect("spawn_plant", self, "on_spawn_plant")
@@ -35,15 +36,17 @@ func _ready() -> void:
 	Events.connect("consumption_amount_changed", self, "on_resource_consumption_changed")
 	step_resolver.ready(self)
 
+
 func _process(_delta: float) -> void:
 	_move_blueprint(get_global_mouse_position())
+
 
 func _register_ready_roots() -> void:
 	for tile in get_children():
 		if tile is Tile:
 			var cellv = _terrain.world_to_map(tile.position)
-			tile.cellv = cellv
-			tiles[cellv] = tile 
+			_initiliaze_tile(tile, cellv)
+
 
 func _move_blueprint(mouse_position: Vector2) -> void:
 	var cellv = _terrain.world_to_map(mouse_position)
@@ -134,27 +137,32 @@ func _place_tile() -> void:
 	builder_mode = false
 	
 	var cellv = _terrain.world_to_map(_blueprint.position)
-	
-	var tile_name = Utils.get_tile_name(_terrain, cellv)
-	var tile_cost = Resources.get_tile_cost(tile_name)
-	
-	assert(tile_cost != Resources.INVALID_TILE_COST, "Coulnd't retrieve tile cost from tile name : %s" % tile_name)
 
 	remove_tile_at_position(cellv)
 
 	var new_tile = _blueprint.tile_scene.instance() as Tile
 	new_tile.position = _blueprint.position
 	new_tile.real_rotation = _blueprint.real_rotation
-	new_tile.cellv = cellv
-	new_tile.terrain_tile_cost = tile_cost
+	
+	_initiliaze_tile(new_tile, cellv)
+
 	add_child(new_tile)
-	tiles[cellv] = new_tile
 	Events.emit_signal("tile_placed", new_tile)
 	_clear_blueprint()
 	# physics takes a few frame before it registers overlapping areas... 
 	yield(get_tree().create_timer(0.1), "timeout")
 	_update_network_connection()
+
+
+func _initiliaze_tile(tile : Tile, cellv : Vector2) -> void:
+	tiles[cellv] = tile
+	tile.cellv = cellv
+	var tile_name = Utils.get_tile_name(_terrain, cellv)
+	var tile_cost = Resources.get_tile_cost(tile_name)
+	assert(tile_cost != Resources.INVALID_TILE_COST, "Coulnd't retrieve tile cost from tile name : %s" % tile_name)
+	tile.terrain_tile_cost = tile_cost
 	
+
 func deplete_tile(_tile : Tile):
 	remove_tile_at_position(_tile.cellv)
 	if _tile.connected:
