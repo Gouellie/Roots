@@ -120,6 +120,7 @@ func _emit_tile_info() -> void:
 	var cellv = _terrain.world_to_map(get_global_mouse_position())
 	if cellv == last_mouse_over_cell:
 		return
+	last_mouse_over_cell = cellv		
 	
 	if _plant_master.cellv == cellv:
 		return
