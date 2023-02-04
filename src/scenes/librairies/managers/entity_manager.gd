@@ -33,7 +33,6 @@ func _ready() -> void:
 	_terrain = get_node(terrain_node_path) as TileMap
 	_bedrock = get_node(bedrock_node_path) as TileMap
 	tile_offset = _terrain.cell_size / 2
-	_register_ready_roots()
 	Events.connect("main_scene_loaded", self, "on_main_scene_loaded")
 	Events.connect("tilepanel_selected", self, "on_tile_selected")
 	Events.connect("eraser_mode_toggled", self, "oneraser_mode_toggled")
@@ -44,17 +43,13 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	if not eraser_mode and not builder_mode:
+		return
 	_move_blueprint(get_global_mouse_position())
 
 
-func _register_ready_roots() -> void:
-	for tile in get_children():
-		if tile is Tile:
-			var cellv = _terrain.world_to_map(tile.position)
-			_initiliaze_tile(tile, cellv)
-
 func on_main_scene_loaded() -> void:
-	_update_network_connection()
+	pass
 
 
 func _move_blueprint(mouse_position: Vector2) -> void:
@@ -106,7 +101,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			_blueprint.rotate_blueprint(true)
 		if event.is_action_pressed("rotate_ccw"):
 			_blueprint.rotate_blueprint(false)
-		
+	
+	
 	if not event is InputEventMouseButton: 
 		return
 	if event.is_action_pressed("ui_select"):

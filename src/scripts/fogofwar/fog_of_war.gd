@@ -3,9 +3,13 @@ class_name FogManager
 
 
 export (NodePath)var terrain_node_path
+export (NodePath)var master_plant_node_path
 
 var terrain_tiles : Array
 var fog_tiles : Array
+var master_plant : Plant
+var master_plant_tiles : Array
+
 
 func _init():
 	Events.connect("tile_placed", self, "on_tile_placed")
@@ -16,13 +20,19 @@ func _init():
 	Events.emit_signal("init_fog_manager", self)
 
 func on_init_entity_manager(_entity_manager : EntityManager):
-	evaluate_all_tiles()
+	Events.connect("main_scene_loaded", self, "on_main_scene_loaded")
 
 
 func _ready():
 	var _t : TileMap = get_node(terrain_node_path) as TileMap
 	terrain_tiles = _t.get_used_cells()
 	reload_fog()
+	master_plant = get_node(master_plant_node_path) as Plant
+
+
+func on_main_scene_loaded() -> void:
+	master_plant_tiles = get_circle_around(master_plant.cellv, Globals.FOG_REVEAL_RADIUS_MASTER_PLANT)
+	evaluate_all_tiles()
 
 
 func reload_fog():
@@ -55,6 +65,11 @@ func update_fog(_new_grid_position : Vector2, _visible : bool):
 		_ing.set_fog_revealed(_visible)
 
 
+func unfog_master_plant(_mp : Plant):
+	for _v2 in get_circle_around(_mp.cellv, Globals.FOG_REVEAL_RADIUS_MASTER_PLANT):
+		update_fog(_v2, true)
+
+
 func on_tile_placed(_tile : Tile):
 	for _v2 in get_circle_around(_tile.cellv, _tile.fog_reveal_radius):
 		update_fog(_v2, true)
@@ -74,6 +89,9 @@ func evaluate_all_tiles():
 	for _tile in Globals.entity_manager.tiles.values():
 		for _v2 in get_circle_around(_tile.cellv, _tile.fog_reveal_radius):
 			update_fog(_v2, true)
+
+	for _v2 in master_plant_tiles:
+		update_fog(_v2, true)
 
 
 func get_circle_around(_from : Vector2, _distance : int) -> Array:

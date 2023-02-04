@@ -25,6 +25,7 @@ rect_scale = Vector2( 0.2, 0.2 )
 
 [node name="Sprite_Straight" type="Sprite" parent="skin"]
 visible = false
+rotation = 1.5708
 texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 128, 128, 64, 64 )

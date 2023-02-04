@@ -27,7 +27,7 @@ func _ready() -> void:
 
 func _delay_animation() -> void:
 	yield(get_tree().create_timer(rand_range(0.1, 0.3)), "timeout")
-	$AnimationPlayer.play("Idle")
+	animation_player.play("idle")
 
 
 func _process(delta: float) -> void:

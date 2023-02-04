@@ -21,8 +21,8 @@ func _ready() -> void:
 	match tile_index:
 		Resources.TILES.STRAIGHT:
 			$skin/Sprite_Straight.visible = true
-			_connection_n.disabled = true
-			_connection_s.disabled = true
+			_connection_e.disabled = true
+			_connection_w.disabled = true
 		Resources.TILES.ELBOW:
 			$skin/Sprite_Elbow.visible = true
 			_connection_e.disabled = true

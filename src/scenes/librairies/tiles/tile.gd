@@ -10,7 +10,7 @@ var terrain_tile_cost : int
 
 var connected : bool = true setget set_is_connected,get_is_connected
 var queued_parche : bool = false setget set_queued_parche
-var distance : int setget set_distance,get_distance
+var distance : int = 99 setget set_distance,get_distance
 var is_leaf_node : bool
 
 var building_mode_active : bool = false

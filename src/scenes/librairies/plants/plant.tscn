@@ -10,6 +10,7 @@
 [ext_resource path="res://src/ui/turns/resolve_behaviors/resolve_behavior_condition_lose_damage_plant.gd" type="Script" id=8]
 [ext_resource path="res://assets/plants/tropical_tree_sprite_sheet_3x3.png" type="Texture" id=9]
 [ext_resource path="res://assets/icons/heart_full.png" type="Texture" id=10]
+[ext_resource path="res://assets/shaders/shining_shader.tres" type="Material" id=11]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 14.0
@@ -29,6 +30,7 @@ texture = ExtResource( 9 )
 hframes = 20
 
 [node name="Sprite_Connection" type="Sprite" parent="."]
+material = ExtResource( 11 )
 position = Vector2( 0, 32 )
 z_index = 3
 z_as_relative = false

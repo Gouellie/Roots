@@ -5,6 +5,7 @@ const PLANT_HEALTH : int = 2
 const MASTER_PLANT_HEALTH : int = 3
 const BASE_TILES_DRAW_COUNT : int = 4
 
+const FOG_REVEAL_RADIUS_MASTER_PLANT : int = 4
 const FOG_REVEAL_RADIUS_TILE : int = 4
 
 
@@ -46,4 +47,5 @@ func get_tile_draw_amount() -> int:
 
 func display_game_info() -> void:
 	var info = Info.new("tHrIVE_MIND")
+	info.add_info("Thank you for playing!")
 	Events.emit_signal("info_request", info)
