@@ -12,7 +12,6 @@ corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
 [node name="UpgradesShop" type="Popup"]
-visible = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
