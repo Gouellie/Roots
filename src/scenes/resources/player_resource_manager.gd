@@ -61,16 +61,23 @@ func _update_consumption_amount():
 			if _c_resolver == null:
 				continue
 			
+			var _terrain_tile_cost = 0
+			if is_instance_valid(_c_resolver.owner_node2d) && not _c_resolver.owner_node2d.is_queued_for_deletion():
+				if _c_resolver.owner_node2d as Tile:
+					var _t : Tile = _c_resolver.owner_node2d as Tile
+					_terrain_tile_cost = _t.terrain_tile_cost
+			
 			for _rb in _c_resolver.resolve_behavior:
 				if _rb is ConsumerResolveBehavior:
 					var _c_behav : ConsumerResolveBehavior = _rb as ConsumerResolveBehavior
 					if _c_behav.get_is_enabled() == false:
 						continue
 						
+					var _amount : int = int(max(0, _c_behav.amount + _terrain_tile_cost))
 					if _d.has(_c_behav.identifier):
-						_d[_c_behav.identifier] += _c_behav.amount
+						_d[_c_behav.identifier] += _amount
 					else:
-						_d[_c_behav.identifier] = _c_behav.amount
+						_d[_c_behav.identifier] = _amount
 		
 	set_consumption_amount(_d)
 

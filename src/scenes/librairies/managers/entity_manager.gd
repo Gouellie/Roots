@@ -290,7 +290,7 @@ func get_tiles_to_parche() -> Array:
 	for _t in _sorted_tiles:
 		if _t is Tile:
 			var _tile : Tile = _t as Tile
-			
+						
 			var _did_consume : bool = false
 			for _c in _tile.get_children():
 				if _c is ConsumerResolveBehavior:
