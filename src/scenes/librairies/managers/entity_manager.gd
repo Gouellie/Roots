@@ -134,12 +134,19 @@ func _place_tile() -> void:
 	builder_mode = false
 	
 	var cellv = _terrain.world_to_map(_blueprint.position)
+	
+	var tile_name = Utils.get_tile_name(_terrain, cellv)
+	var tile_cost = Resources.get_tile_cost(tile_name)
+	
+	assert(tile_cost != Resources.INVALID_TILE_COST, "Coulnd't retrieve tile cost from tile name : %s" % tile_name)
+
 	remove_tile_at_position(cellv)
 
 	var new_tile = _blueprint.tile_scene.instance() as Tile
 	new_tile.position = _blueprint.position
 	new_tile.real_rotation = _blueprint.real_rotation
 	new_tile.cellv = cellv
+	new_tile.terrain_tile_cost = tile_cost
 	add_child(new_tile)
 	tiles[cellv] = new_tile
 	Events.emit_signal("tile_placed", new_tile)
@@ -147,7 +154,7 @@ func _place_tile() -> void:
 	# physics takes a few frame before it registers overlapping areas... 
 	yield(get_tree().create_timer(0.1), "timeout")
 	_update_network_connection()
-
+	
 func deplete_tile(_tile : Tile):
 	remove_tile_at_position(_tile.cellv)
 	if _tile.connected:

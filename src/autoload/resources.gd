@@ -49,3 +49,18 @@ const resource_color = {
 	"sunlight" : Color.orange,
 	"water" : Color.blue,
 }
+
+const INVALID_TILE_COST : int = 42
+
+const tiles_cost = {
+	"soft" : -1,
+	"normal" : 0,
+	"hard" : 1
+}
+
+func get_tile_cost(tile_name : String) -> int:
+	for key in tiles_cost:
+		# for tiles that blends between types, we take the cheapest one  
+		if key in tile_name:
+			return tiles_cost[key]
+	return INVALID_TILE_COST
