@@ -60,4 +60,4 @@ func _execute_resolve_behavior():
 		return
 	
 	if is_instance_valid(Globals.player_resource_manager):
-		Globals.player_resource_manager.get_resource_manager().add_to_resource(identifier, amount)
+		Globals.player_resource_manager.get_resource_manager().add_to_resource(identifier, get_amount())
