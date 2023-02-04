@@ -27,7 +27,6 @@ func _ready() -> void:
 		health_node = resource_manager.add_new_resource(Resources.HEALTH, _health)
 		health_node.connect("node_depleted", self, "on_health_depleted")
 		health_node.connect("node_update", self, "on_health_changed")
-		$Label.text = String(health_node.value)
 
 
 func apply_damage(_amount : int):
@@ -44,7 +43,21 @@ func on_health_depleted():
 	self.queue_free()
 
 func on_health_changed():
-	$Label.text = String(health_node.value)
+	var _heart_full = load("res://assets/icons/heart_full.png")
+	var _heart_empty = load("res://assets/icons/heart_empty.png")
+	match health_node.value:
+		1:
+			$HBoxContainer/HP_1.texture = _heart_full
+			$HBoxContainer/HP_2.texture = _heart_empty
+			$HBoxContainer/HP_3.texture = _heart_empty
+		2:
+			$HBoxContainer/HP_1.texture = _heart_full
+			$HBoxContainer/HP_2.texture = _heart_full
+			$HBoxContainer/HP_3.texture = _heart_empty
+		3:
+			$HBoxContainer/HP_1.texture = _heart_full
+			$HBoxContainer/HP_2.texture = _heart_full
+			$HBoxContainer/HP_3.texture = _heart_full
 
 func _on_step_resolved(_step):
 	# setup resolve steps no the Plant.scene, handle logic here
