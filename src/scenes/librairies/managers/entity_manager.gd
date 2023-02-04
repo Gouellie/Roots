@@ -402,6 +402,7 @@ func on_spawn_plant(fertile_soil: Entity, pos : Vector2) -> void:
 func plant_dead(cellv : Vector2) -> void:
 	if _plants.has(cellv):
 		_plants.erase(cellv)
+		Events.emit_signal("num_plants_changed", get_plants_count())
 
 func get_network_head(_p : Plant) -> Tile:
 	return get_tile_at_position(_p.head_tile_cellv)	
