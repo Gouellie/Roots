@@ -107,15 +107,16 @@ func apply_damage(_damage : int):
 
 func set_is_connected(value : bool) -> void:
 	connected = value
-#	$Rig/Disconnected.visible = not connected
-#	$Distance.visible = connected
+	$Rig/Disconnected.visible = not connected
 	for _behavior in step_resolver.get_resolve_behavior():
 		if _behavior is ResolveBehavior:
 			var _b : ResolveBehavior = _behavior as ResolveBehavior
 			_b.set_is_enabled(value)
 
+
 func get_is_connected() -> bool:
 	return connected
+
 
 func get_connections() -> Directory:
 	var connections = []

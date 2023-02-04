@@ -4,6 +4,9 @@ class_name ResourceManager
 # warning-ignore:unused_signal
 signal new_resource_added(resource_node)
 
+signal resource_amount_added(indentifier, amount)
+signal resource_amount_deducted(indentifier, amount)
+
 export (Dictionary)var resource_types : Dictionary = {}
 
 var resource_container : ResourceContainer
@@ -59,9 +62,9 @@ func try_consume(_identifier : String, _amount : int) -> bool:
 	var _consumable = can_consume(_identifier, _amount)
 	if _consumable == false:
 		return false
-	
 	var _resource_node : ResourceNode = get_resource(_identifier)
 	_resource_node.deduct_resource(_amount)
+	emit_signal("resource_amount_deducted", _identifier, _amount)
 	return true
 
 func get_all_resources() -> Dictionary:
@@ -99,15 +102,15 @@ func add_to_resource(_identifier:String, _amount:int) -> void:
 	var rsc = get_resource(_identifier)
 	if is_instance_valid(rsc) == false:
 		return
-	
 	rsc.add_resource(_amount)
+	emit_signal("resource_amount_added", _identifier, _amount)
 
 func deduct_from_resource(_identifier:String, _amount:int) -> void:
 	var rsc = get_resource(_identifier)
 	if is_instance_valid(rsc) == false:
 		return
-	
 	rsc.deduct_resource(_amount)
+	emit_signal("resource_amount_deducted", _identifier, _amount)
 
 func initialize_gui():
 	for _c in resource_container.get_children():

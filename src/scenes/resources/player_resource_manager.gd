@@ -1,6 +1,7 @@
 extends Node2D
 class_name PlayerResourceManager
 
+
 onready var resource_manager = $ResourceManager setget , get_resource_manager
 
 var consumption_amount = {} setget set_consumption_amount, get_consumption_amount
@@ -26,8 +27,10 @@ func _ready():
 			
 			if _node.identifier == Resources.SUNLIGHT:
 				_node.reset_on_next_turn = false
-	
 	Events.emit_signal("init_player_resource_manager", self)
+	resource_manager.connect("resource_amount_added", self, "on_resource_amount_added")
+	resource_manager.connect("resource_amount_deducted", self, "on_resource_amount_deducted")
+
 
 func set_consumption_amount(_dictionary : Dictionary):
 	consumption_amount = _dictionary
@@ -125,3 +128,12 @@ func _update_production_amount():
 						_d[_c_behav.identifier] = _c_behav.get_amount()
 			
 	production_amount =_d
+
+
+func on_resource_amount_added(_identifier, _amount) -> void:
+	Events.emit_signal("player_resource_amount_added", _identifier, _amount)
+
+
+func on_resource_amount_deducted(_identifier, _amount) -> void:
+	Events.emit_signal("player_resource_amount_deducted", _identifier, _amount)	
+
