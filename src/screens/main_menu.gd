@@ -4,8 +4,7 @@ onready var button_quit : Button = $HBoxContainer/Button_Quit
 
 
 func _ready() -> void:
-	if OS.get_name() == "HTML5":
-		button_quit.visible = false
+	button_quit.visible = not Utils.in_web_browser()
 	
 
 func _on_Button_NewGame_pressed() -> void:

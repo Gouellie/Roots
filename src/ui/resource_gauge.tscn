@@ -1,47 +1,73 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/GUI/icons/icon_soil.png" type="Texture" id=1]
-[ext_resource path="res://assets/theme/fonts/RubikDirt-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://assets/theme/small_font.tres" type="DynamicFont" id=2]
 [ext_resource path="res://assets/theme/main_theme.tres" type="Theme" id=3]
 [ext_resource path="res://src/ui/scripts/resource_gauge.gd" type="Script" id=4]
 
-[sub_resource type="DynamicFont" id=1]
-font_data = ExtResource( 2 )
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.121569, 0.305882, 0.0666667, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.168627, 0.152941, 0.152941, 1 )
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
-[node name="ResourceGauge" type="Control"]
-margin_right = 130.0
-margin_bottom = 154.0
-rect_min_size = Vector2( 130, 130 )
-rect_scale = Vector2( 0.5, 0.5 )
+[node name="ResourceGauge" type="MarginContainer"]
+margin_right = 64.0
+margin_bottom = 100.0
 theme = ExtResource( 3 )
 script = ExtResource( 4 )
 
-[node name="Margin" type="MarginContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Margin"]
-margin_right = 130.0
-margin_bottom = 154.0
-
-[node name="CenterContainer" type="CenterContainer" parent="Margin/VBoxContainer"]
-margin_right = 130.0
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_right = 112.0
 margin_bottom = 100.0
 
-[node name="TextureRect" type="TextureRect" parent="Margin/VBoxContainer/CenterContainer"]
-margin_left = 15.0
-margin_right = 115.0
-margin_bottom = 100.0
+[node name="TextureControl" type="CenterContainer" parent="VBoxContainer"]
+margin_right = 112.0
+margin_bottom = 64.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/TextureControl"]
+margin_left = 24.0
+margin_right = 88.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+size_flags_horizontal = 2
 texture = ExtResource( 1 )
+expand = true
+stretch_mode = 1
 
-[node name="Amount" type="Label" parent="."]
-margin_top = 102.0
-margin_right = 63.0
-margin_bottom = 124.0
-rect_scale = Vector2( 2, 2 )
-custom_fonts/font = SubResource( 1 )
-text = "NAN"
+[node name="Control" type="MarginContainer" parent="VBoxContainer"]
+margin_top = 68.0
+margin_right = 112.0
+margin_bottom = 100.0
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="VBoxContainer/Control"]
+margin_right = 112.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 112, 32 )
+custom_styles/panel = SubResource( 2 )
+
+[node name="Amount" type="Label" parent="VBoxContainer/Control/Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -46.5
+margin_top = -14.0
+margin_right = 46.5
+margin_bottom = 14.0
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 2 )
+text = "999/999"
 align = 1
+valign = 1
 
-[connection signal="mouse_entered" from="." to="." method="_on_ResourceGauge_mouse_entered"]
-[connection signal="mouse_entered" from="Margin/VBoxContainer/CenterContainer/TextureRect" to="." method="_on_TextureRect_mouse_entered"]
+[connection signal="mouse_entered" from="VBoxContainer/TextureControl/TextureRect" to="." method="_on_TextureRect_mouse_entered"]

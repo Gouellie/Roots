@@ -5,9 +5,11 @@ onready var game_control := $GameControlScreen
 onready var header = $GameControlScreen/Panel/CenterContainer/VBoxContainer/Header
 onready var description = $GameControlScreen/Panel/CenterContainer/VBoxContainer/Description
 
+onready var button_quit_to_desktop := $GameControlScreen/Panel/CenterContainer/VBoxContainer/Button_QuitToDeskop
 
 func _ready() -> void:
 	game_control.visible = false
+	button_quit_to_desktop.visible = not Utils.in_web_browser()
 	Events.connect("game_over", self, "on_game_over")
 	Events.connect("victory", self, "on_game_victory")
 
@@ -42,3 +44,7 @@ func _on_Button_GiveUp_pressed() -> void:
 	header.text = "GAME OVER"
 	description.text = "You gave up"
 	
+
+
+func _on_Button_QuitToDeskop_pressed() -> void:
+	get_tree().quit()

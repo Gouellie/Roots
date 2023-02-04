@@ -1,8 +1,8 @@
 tool
 extends Control
 
-onready var texture_rect : TextureRect = $Margin/VBoxContainer/CenterContainer/TextureRect
-onready var amount_label : Label = $Amount
+onready var texture_rect : TextureRect = $VBoxContainer/TextureControl/TextureRect
+onready var amount_label : Label = $VBoxContainer/Control/Panel/Amount
 
 var resource_node : ResourceNode = null setget set_resource_node 
 #var update_frequency : float = 1.0
@@ -11,6 +11,7 @@ var display_string : String = "%s/%s"
 
 func _init():
 	Events.connect("consumption_amount_changed", self, "on_consumption_amount_changed")
+
 func _ready():
 	Events.connect("tile_placed", self, "on_tile_placed")
 
@@ -25,17 +26,12 @@ func set_resource_node(_resource_node:ResourceNode):
 		if _icon:
 			texture_rect.texture = _icon
 
+
 func on_tile_placed(_tile):
 	_update_values()
 	
 func on_node_updated():
 	_update_values()
-
-#func _process(_delta):
-#	update_timer += _delta
-#	if update_timer >= update_frequency:
-#		update_timer = 0
-#		_update_values()
 
 func _update_values():
 #	update_timer = 0
