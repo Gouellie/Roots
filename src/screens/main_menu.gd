@@ -1,7 +1,6 @@
 extends CanvasLayer
 
-onready var button_quit : Button = $HBoxContainer/Button_Quit
-
+onready var button_quit : Button = $CenterContainer/VBoxContainer/Button_Quit
 
 func _ready() -> void:
 	button_quit.visible = not Utils.in_web_browser()

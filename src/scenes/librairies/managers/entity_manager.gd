@@ -151,14 +151,18 @@ func _emit_tile_info() -> void:
 	
 	var descriptions = Resources.get_terrain_descriptions(tile_name)
 	var info = Info.new(descriptions["name"])
+	var _i = 0
 	for desc in descriptions["info"]:
-		info.add_info(desc)
+		info.add_info(desc, _i)
+		_i += 1
 	Events.emit_signal("info_request", info)
 
 
 func _bedrock_info() -> void:
 	var info = Info.new("Bedrock")
-	info.add_info("You have reach the edge of the map")
+	info.add_info("You have reached the edge of the map")
+	info.add_info("Turn around or you will despawn!!", 1)
+	info.add_info("jk", 1)
 	Events.emit_signal("info_request", info)
 
 
