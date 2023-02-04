@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/scenes/librairies/ingredients/fertile_soil.gd" type="Script" id=1]
 [ext_resource path="res://assets/tiles/roots_tile_sheet_export_no_gap.png" type="Texture" id=2]
 [ext_resource path="res://src/scripts/resources/resource_manager.gd" type="Script" id=3]
+[ext_resource path="res://assets/shaders/shimmer_shader.tres" type="Material" id=4]
 [ext_resource path="res://src/ui/resource_cost.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
@@ -48,6 +49,7 @@ region_enabled = true
 region_rect = Rect2( 0, 384, 192, 64 )
 
 [node name="Sprite_Attention" type="Sprite" parent="."]
+material = ExtResource( 4 )
 position = Vector2( 0, 32 )
 rotation = 1.26241
 scale = Vector2( 1.19392, 1.19392 )

@@ -37,17 +37,15 @@ func reload_fog():
 	
 	
 func update_fog(_new_grid_position : Vector2, _visible : bool):
-	var _index : int
 	if _visible:
-		_index = 1
 		if fog_tiles.has(_new_grid_position):
 			fog_tiles.remove(fog_tiles.find(_new_grid_position))
+			set_cellv(_new_grid_position, TileMap.INVALID_CELL)
 	else:
-		_index = 0
 		if not fog_tiles.has(_new_grid_position):
+			set_cellv(_new_grid_position, 0)
 			fog_tiles.append(_new_grid_position)
 		
-	set_cellv(_new_grid_position, _index)
 	
 	if Globals.entity_manager == null:
 		return

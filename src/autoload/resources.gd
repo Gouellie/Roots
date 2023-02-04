@@ -5,9 +5,9 @@ const SUNLIGHT : String = "sunlight"
 const SOIL : String = "soil"
 const HEALTH : String = "health"
 
-func get_plant_cost(_num_plants : int) -> int:
-	return _num_plants * _num_plants + 1
-	
+var is_shimmering : bool = false
+var shimmer_amount : float = 0.0 setget set_shimmer_amount
+
 enum TILES {
 	STRAIGHT = 1, 
 	ELBOW = 2, 
@@ -15,12 +15,29 @@ enum TILES {
 	FOURWAY = 4
 }
 
+
+enum TERRAIN_TYPES {
+	SOFT = -1, 
+	NORMAL = 0, 
+	HARD = 1, 
+}
+
+
+const INVALID_TILE : int = 42
+const INVALID_TILE_COST : int = 42
+
+
+func get_plant_cost(_num_plants : int) -> int:
+	return _num_plants * _num_plants + 1
+	
+
 const Tiles := {
 	TILES.STRAIGHT : preload("res://src/scenes/librairies/tiles/types/tile_straight.tscn"),
 	TILES.ELBOW : preload("res://src/scenes/librairies/tiles/types/tile_elbow.tscn"),
 	TILES.THREEWAY : preload("res://src/scenes/librairies/tiles/types/tile_threeway.tscn"),
 	TILES.FOURWAY : preload("res://src/scenes/librairies/tiles/types/tile_fourway.tscn"),
 }
+
 
 #placing cost
 const Tiles_resource_cost = {
@@ -38,11 +55,13 @@ const Tiles_resource_cost = {
 	},
 }
 
+
 const icons = {
 	"soil" : preload("res://assets/GUI/icons/icon_soil.png"),
 	"sunlight" : preload("res://assets/GUI/icons/icon_sunlight.png"),
 	"water" : preload("res://assets/GUI/icons/icon_water.png"),
 }
+
 
 const resource_color = {
 	"soil" : Color.green,
@@ -50,14 +69,7 @@ const resource_color = {
 	"water" : Color.blue,
 }
 
-const INVALID_TILE : int = 42
-const INVALID_TILE_COST : int = 42
 
-enum TERRAIN_TYPES {
-	SOFT = -1, 
-	NORMAL = 0, 
-	HARD = 1, 
-}
 
 const terrain_types = {
 	"soft" : TERRAIN_TYPES.SOFT,
@@ -70,6 +82,7 @@ const terrain_cost = {
 	TERRAIN_TYPES.NORMAL : TERRAIN_TYPES.NORMAL,
 	TERRAIN_TYPES.HARD : TERRAIN_TYPES.HARD,
 }
+
 
 const terrain_descriptions = {
 	TERRAIN_TYPES.SOFT : {
@@ -110,3 +123,37 @@ func get_terrain_descriptions(tile_name : String) -> Dictionary:
 			"info" : [] 
 		}
 	return terrain_descriptions[tile_type]
+	
+
+func _ready():
+	Events.connect("ingredient_unfogged", self, "on_ingredient_unfogged")
+	
+var _shimmer_speed = .25
+func _process(delta : float):
+	if is_shimmering:
+		set_shimmer_amount((delta * _shimmer_speed) + shimmer_amount)
+		if shimmer_amount >= 1.0:
+			end_shimmer()
+			
+func set_shimmer_amount(_amount : float):
+	shimmer_amount = _amount
+	
+	var _shimmer_shader : ShaderMaterial = load("res://assets/shaders/shimmer_shader.tres")
+	if _shimmer_shader:
+		_shimmer_shader.set_shader_param("shine_progress", _amount)
+
+func on_ingredient_unfogged(_ingredient):
+	start_shimmer()
+	
+func start_shimmer():
+	if is_shimmering:
+		return
+		
+	is_shimmering = true
+	shimmer_amount = 0
+
+func end_shimmer():
+	if is_shimmering == false:
+		return
+	
+	is_shimmering = false
