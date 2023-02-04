@@ -86,7 +86,7 @@ func on_num_plants_changed(_num_plants):
 	if resource_manager as ResourceManager:
 		var _rm : ResourceManager = resource_manager
 		for _identifier in _rm.get_all_resources():
-			_rm.get_resource(_identifier).set_value(Resources.get_plant_cost()) 
+			_rm.get_resource(_identifier).set_value(Resources.get_plant_cost(_num_plants)) 
 
 
 func plant_is_dead() -> void:

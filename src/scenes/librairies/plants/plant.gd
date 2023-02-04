@@ -4,6 +4,9 @@ class_name Plant
 export (NodePath) var terrain_node_path
 export (bool) var is_master_plant
 
+onready var resource_manager = $ResourceManager
+
+var health_node : ResourceNode
 var head_tile_cellv : Vector2
 var connected : bool = true setget set_is_connected,get_is_connected
 var unrooted : bool = false
@@ -15,16 +18,32 @@ func _ready() -> void:
 		cellv = terrain.world_to_map(position)
 		head_tile_cellv = cellv
 		head_tile_cellv.y += 1
+	
+	if resource_manager:
+		var _health : int = Globals.PLANT_HEALTH
+		if is_master_plant:
+			_health = Globals.MASTER_PLANT_HEALTH
+			
+		health_node = resource_manager.add_new_resource(Resources.HEALTH, _health)
+		health_node.connect("node_depleted", self, "on_health_depleted")
+		health_node.connect("node_update", self, "on_health_changed")
 
+
+func apply_damage(_amount : int):
+	if resource_manager:
+		resource_manager.deduct_from_resource(Resources.HEALTH, _amount)
 
 func on_health_depleted():
 	if is_master_plant:
-		Events.emit_signal("game_over")
+		Events.emit_signal("game_over", $PlantDamageResolveBehavior)
 		return
+		
 	fertile_soil.plant_is_dead()
 	Globals.entity_manager.plant_dead(cellv)
 	self.queue_free()
 
+func on_health_changed():
+	pass
 
 func _on_step_resolved(_step):
 	# setup resolve steps no the Plant.scene, handle logic here

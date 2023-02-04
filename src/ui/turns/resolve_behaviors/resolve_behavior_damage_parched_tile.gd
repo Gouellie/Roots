@@ -1,5 +1,5 @@
 extends ResolveBehavior
-class_name NoResourcesDamageResolveBehavior
+class_name ParchedTileDamageResolveBehavior
 
 export (String)var identifier : String = "water"
 export var base_amount : int = 1

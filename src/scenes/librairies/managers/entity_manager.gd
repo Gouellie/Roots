@@ -295,6 +295,8 @@ func on_spawn_plant(fertile_soil: Entity, pos : Vector2) -> void:
 	_plants[cellv] = new_plant
 	add_child(new_plant)
 	_update_plant(new_plant)
+	
+	Events.emit_signal("num_plants_changed", get_plants_count())
 
 # using cellv instead of 'Plant' to avoid dealing with invalid instances
 func plant_dead(cellv : Vector2) -> void:

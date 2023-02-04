@@ -1,7 +1,10 @@
 extends Node
 
 const TILE_HEALTH : int = 3
+const PLANT_HEALTH : int = 2
+const MASTER_PLANT_HEALTH : int = 3
 const BASE_TILES_DRAW_COUNT : int = 3
+
 
 var player_resource_manager : PlayerResourceManager
 var entity_manager : EntityManager

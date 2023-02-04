@@ -5,18 +5,8 @@ const SUNLIGHT : String = "sunlight"
 const SOIL : String = "soil"
 const HEALTH : String = "health"
 
-var num_plants = 1
-
-func _init():
-	Events.connect("spawn_plant", self, "on_plant_spawned")
-
-func get_plant_cost() -> int:
-	return num_plants * num_plants + 1
-
-# doesn't trigger for MainPlant
-func on_plant_spawned(_fertile_soil, _position):
-	num_plants += 1
-	Events.emit_signal("num_plants_changed", num_plants)
+func get_plant_cost(_num_plants : int) -> int:
+	return _num_plants * _num_plants + 1
 	
 enum TILES {
 	STRAIGHT = 1, 
