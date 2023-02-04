@@ -15,6 +15,7 @@ var can_rotate : bool = true
 var real_rotation : float = 0.0
 var valid : bool setget set_is_valid,get_is_valid
 
+
 func _ready() -> void:
 	tile_scene = Resources.Tiles[tile_index]
 	match tile_index:
@@ -62,6 +63,7 @@ func rotate_blueprint(cw : bool) -> void:
 func set_is_valid(value : bool) -> void:
 	valid = value
 	$Sprite_Invalid.visible = not valid
+	$ResourceManager.visible = valid
 
 
 func get_is_valid() -> bool:

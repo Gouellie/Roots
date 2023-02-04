@@ -1,7 +1,7 @@
 extends Panel
 
 onready var header :Label= $MarginContainer/VBoxContainer/ColorRect/Label_Header
-onready var messages := $MarginContainer/VBoxContainer/Messages
+onready var messages := $MarginContainer/VBoxContainer/MarginContainer/Messages
 
 
 func _ready() -> void:

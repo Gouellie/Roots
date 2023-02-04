@@ -25,6 +25,9 @@ signal tile_placed(new_tile)
 signal tile_removed_at(cellv)
 
 # warning-ignore:unused_signal
+signal tile_deleted(at_position) # todo remove and use other one above
+
+# warning-ignore:unused_signal
 signal tile_network_updated
 
 # warning-ignore:unused_signal
@@ -83,3 +86,8 @@ signal production_amount_changed(_dictionary)
 
 # warning-ignore:unused_signal
 signal consumption_amount_changed(_dictionary)
+
+# warning-ignore:unused_signal
+signal player_resource_amount_added(indentifier, amount)
+# warning-ignore:unused_signal
+signal player_resource_amount_deducted(indentifier, amount)

@@ -59,7 +59,7 @@ func deduct_resource(amount:int) -> void:
 	value -= amount
 	if has_limits:
 		value = int(clamp(value, min_value, max_value))
-		
+
 	is_depleted = _is_depleted()
 	emit_signal("node_update")
 	if is_depleted:

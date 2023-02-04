@@ -2,18 +2,18 @@
 
 [ext_resource path="res://src/scripts/resources/resource_cost_stack_panel.gd" type="Script" id=2]
 
-[node name="ResourceCostStackPanel" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_right = -905.0
-margin_bottom = -620.0
+[node name="ResourceCostStackPanel" type="MarginContainer"]
+margin_right = 119.0
+margin_bottom = 64.0
+mouse_filter = 2
 script = ExtResource( 2 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-anchor_right = 2.33333
-anchor_bottom = 1.0
+margin_right = 119.0
+margin_bottom = 64.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": true
 }
