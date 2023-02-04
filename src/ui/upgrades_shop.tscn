@@ -12,6 +12,7 @@ corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
 [node name="UpgradesShop" type="Popup"]
+visible = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -52,6 +53,7 @@ size_flags_vertical = 3
 margin_right = 380.0
 margin_bottom = 110.0
 rect_min_size = Vector2( 0, 20 )
+mouse_filter = 2
 color = Color( 0.235294, 0.552941, 0.231373, 1 )
 
 [node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/MarginContainer"]
@@ -71,8 +73,8 @@ custom_constants/separation = 5
 margin_right = 380.0
 margin_bottom = 76.0
 upgrade_name = "SUNBURN"
-details = "Increase Sun production"
-extra_info = PoolStringArray( "Each Plants produces additional Sun Tiles each turn" )
+details = "Increase Sunlight production"
+extra_info = PoolStringArray( "Each Plants produces additional Sunlight each turn" )
 base_price = 4
 max_level = 3
 max_price = 15
@@ -95,8 +97,8 @@ margin_top = 162.0
 margin_right = 380.0
 margin_bottom = 238.0
 upgrade_name = "EAT DIRTH"
-details = "Increase Nutrients production"
-extra_info = PoolStringArray( "Increase Nutrients extracted from connected nutrients Tiles" )
+details = "Increase Soil production"
+extra_info = PoolStringArray( "Increase Soils extracted from connected Soils Tiles" )
 base_price = 2
 fibo_mod = 1
 signal_to_emit = "shop_buy_soil_upgrade"
@@ -122,3 +124,5 @@ extra_info = PoolStringArray( "Heal all connected Root Tiles " )
 base_price = 4
 max_level = -1
 signal_to_emit = "shop_heal_all_tiles"
+
+[connection signal="mouse_entered" from="Panel/MarginContainer/VBoxContainer/MarginContainer" to="." method="_on_MarginContainer_mouse_entered"]

@@ -60,13 +60,6 @@ func _update_level_text() -> void:
 		label_level.text = "%d/%d" % [current_level, max_level]
 
 
-func _on_UpgradeEntry_mouse_entered() -> void:
-	var info = Info.new(upgrade_name)
-	for i in extra_info:
-		info.add_info(i)
-	Events.emit_signal("info_request", info)
-
-
 func on_upgrade_shop_open() -> void:
 	_check_if_can_buy()
 
@@ -82,3 +75,10 @@ func _check_if_can_buy() -> void:
 
 func _try_buying() -> bool:
 	return Globals.player_resource_manager.get_resource_manager().try_consume(Resources.SUNLIGHT, current_price)
+
+
+func _on_MarginContainer_mouse_entered() -> void:
+	var info = Info.new(upgrade_name)
+	for i in extra_info:
+		info.add_info(i)
+	Events.emit_signal("info_request", info)
