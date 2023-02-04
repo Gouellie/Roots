@@ -12,12 +12,8 @@ var display_string : String = "%s/%s"
 func _init():
 	Events.connect("consumption_amount_changed", self, "on_consumption_amount_changed")
 
-func _ready():
-	Events.connect("tile_placed", self, "on_tile_placed")
-
 func set_resource_node(_resource_node:ResourceNode):
 	resource_node = _resource_node
-	resource_node.connect("node_update", self, "on_node_updated")
 	resource_node.initialize()
 
 	# assign icon & color accent based on the identifier
@@ -26,23 +22,20 @@ func set_resource_node(_resource_node:ResourceNode):
 		if _icon:
 			texture_rect.texture = _icon
 
-
-func on_tile_placed(_tile):
-	_update_values()
-	
-func on_node_updated():
-	_update_values()
-
 func _update_values():
 #	update_timer = 0
 	if resource_node:
 		if resource_node.identifier == Resources.SUNLIGHT:
 			amount_label.text = String(resource_node.value)
 		else:
-			var _prod_amount = String(Globals.player_resource_manager.get_production_amount_by_resource(resource_node.identifier))
-			var _cons_amount = String(Globals.player_resource_manager.get_consumption_amount_by_resource(resource_node.identifier))
+			var _prod_amount = Globals.player_resource_manager.get_production_amount_by_resource(resource_node.identifier)
+			var _cons_amount = Globals.player_resource_manager.get_consumption_amount_by_resource(resource_node.identifier)
 			amount_label.text = display_string % [_cons_amount, _prod_amount]
-
+			
+			if _cons_amount > _prod_amount:
+				$VBoxContainer/Control/Panel/Amount.add_color_override("font_color", Color.red)
+			else:
+				$VBoxContainer/Control/Panel/Amount.add_color_override("font_color", Color.white)
 
 func _on_TextureRect_mouse_entered() -> void:
 	var info = Info.new(resource_node.identifier)

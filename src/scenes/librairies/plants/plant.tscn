@@ -48,7 +48,7 @@ trigger_on_game_start = true
 [node name="ConsumerResolveBehavior" type="Node2D" parent="."]
 script = ExtResource( 5 )
 identifier = "soil"
-amount = 5
+amount = 3
 
 [node name="ResourceManager" type="Node2D" parent="."]
 script = ExtResource( 7 )
