@@ -28,6 +28,7 @@ onready var connected_pos : PoolIntArray = []
 var start_rect : Rect2
 
 func _init():
+	fog_reveal_radius = Globals.FOG_REVEAL_RADIUS_TILE
 	resource_manager = ResourceManager.new()
 	resource_manager.name = "ResourceManager"
 	add_child(resource_manager)

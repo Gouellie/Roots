@@ -202,6 +202,8 @@ func _remove_tile() -> void:
 	if is_cell_occupied(cellv):
 		if remove_tile_at_position(cellv):
 			_update_network_connection()
+			
+	Events.emit_signal("tile_removed_at", cellv)
 
 func _clear_blueprint() -> void:
 	_placeable_blueprint = false

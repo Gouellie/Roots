@@ -39,6 +39,8 @@ tracks/1/keys = {
 
 [node name="FertileSoil" type="Node2D"]
 script = ExtResource( 1 )
+reveal_upon_unfog = false
+sprite_node_path = NodePath("Sprite")
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )

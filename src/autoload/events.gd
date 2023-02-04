@@ -22,6 +22,9 @@ signal eraser_mode_toggled
 signal tile_placed(new_tile)
 
 # warning-ignore:unused_signal
+signal tile_removed_at(cellv)
+
+# warning-ignore:unused_signal
 signal tile_network_updated
 
 # warning-ignore:unused_signal
