@@ -1,6 +1,9 @@
 extends Node
 
 # warning-ignore:unused_signal
+signal main_scene_loaded
+
+# warning-ignore:unused_signal
 signal tick
 
 # warning-ignore:unused_signal

@@ -31,7 +31,7 @@ func _ready() -> void:
 	_terrain = get_node(terrain_node_path) as TileMap
 	tile_offset = _terrain.cell_size / 2
 	_register_ready_roots()
-
+	Events.connect("main_scene_loaded", self, "on_main_scene_loaded")
 	Events.connect("tilepanel_selected", self, "on_tile_selected")
 	Events.connect("eraser_mode_toggled", self, "oneraser_mode_toggled")
 	Events.connect("spawn_plant", self, "on_spawn_plant")
@@ -49,6 +49,9 @@ func _register_ready_roots() -> void:
 		if tile is Tile:
 			var cellv = _terrain.world_to_map(tile.position)
 			_initiliaze_tile(tile, cellv)
+
+func on_main_scene_loaded() -> void:
+	_update_network_connection()
 
 
 func _move_blueprint(mouse_position: Vector2) -> void:

@@ -10,7 +10,12 @@ var resource_node : ResourceNode = null setget set_resource_node
 var display_string : String = "%s/%s"
 
 func _init():
+	Events.connect("main_scene_loaded", self, "on_main_scene_loaded")
 	Events.connect("consumption_amount_changed", self, "on_consumption_amount_changed")
+
+func on_main_scene_loaded() -> void:
+	_update_values()
+
 
 func set_resource_node(_resource_node:ResourceNode):
 	resource_node = _resource_node
