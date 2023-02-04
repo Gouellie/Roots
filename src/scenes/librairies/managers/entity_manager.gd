@@ -217,7 +217,6 @@ func remove_tile_at_position(cellv: Vector2) -> bool:
 		var tile = tiles[cellv]
 		var result := tiles.erase(cellv)
 		tile.queue_free()
-		Events.emit_signal("tile_deleted", cellv)
 		return result
 	return false
 

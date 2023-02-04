@@ -14,7 +14,7 @@ onready var animation_player :AnimationPlayer= $AnimationPlayer
 
 func _init():
 	Events.connect("num_plants_changed", self, "on_num_plants_changed")
-	Events.connect("tile_deleted", self, "on_tile_deleted")
+	Events.connect("tile_removed_at", self, "on_tile_deleted")
 
 
 func _ready() -> void:
