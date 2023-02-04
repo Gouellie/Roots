@@ -1,6 +1,5 @@
 extends Panel
 
-export var use_random : bool = false
 export var max_tiles_count : int = 10
 
 const tile_panel_scene := preload("res://src/ui/tilepanel.tscn")
@@ -14,12 +13,8 @@ func _ready() -> void:
 	Events.connect("tilepanel_selected", self, "on_selected_tile_changed")
 	Events.connect("shop_draw_tiles", self, "on_draw_tiles")
 	Turns.connect("turn_next", self, "on_next_turn")
-	if use_random:
-		_draw_tiles()
-		Events.connect("tile_placed", self, "on_tile_placed")
-	else:
-		_draw_tiles_no_random()
-		$MarginContainer/TileContainer/VBoxContainer/Button_DrawTile.disabled = true
+	Events.connect("tile_placed", self, "on_tile_placed")
+	_draw_first_hand()
 
 
 func on_selected_tile_changed(new_selection : TilePanel, tile : TileBlueprint) -> void:
@@ -28,6 +23,16 @@ func on_selected_tile_changed(new_selection : TilePanel, tile : TileBlueprint) -
 	if selection :
 		selection.is_selected = false
 	selection = new_selection
+
+
+func _draw_first_hand() -> void:
+	var original_hand := [1,1,2,3,3,4]
+	original_hand.shuffle()
+	for i in range(Globals.BASE_TILES_DRAW_COUNT):
+		var new_tile = tile_panel_scene.instance()
+		new_tile.random_tile = false
+		new_tile.tile_index = original_hand[i]
+		tile_container.add_child(new_tile) 
 
 
 func _draw_tiles() -> void:
@@ -44,14 +49,6 @@ func _draw_tiles() -> void:
 		var new_tile = tile_panel_scene.instance()
 		tile_container.add_child(new_tile)
 
-
-func _draw_tiles_no_random() -> void:
-	for i in range(4):
-		var new_tile = tile_panel_scene.instance()
-		new_tile.random_tile = false
-		new_tile.tile_index = i + 1
-		tile_container.add_child(new_tile)
- 
 
 func on_tile_placed(tile) -> void:
 	if is_instance_valid(selection):

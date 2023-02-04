@@ -3,22 +3,26 @@
 [ext_resource path="res://assets/tiles/roots_tile_sheet_export_no_gap.png" type="Texture" id=1]
 [ext_resource path="res://src/scenes/librairies/ingredients/base/ingredient.gd" type="Script" id=2]
 
-[sub_resource type="CircleShape2D" id=1]
-radius = 29.0172
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 20.0
 
 [node name="Rock" type="Node2D"]
 script = ExtResource( 2 )
 is_blocking_tiles = true
 sprite_node_path = NodePath("Sprite")
+ingredient_name = "Rock"
+additional_information = PoolStringArray( "Block root tiles placement", "You need to go around it" )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 192, 256, 64, 64 )
+region_rect = Rect2( 192, 320, 64, 64 )
 
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 4
-collision_mask = 0
+[node name="MouseDetector" type="Area2D" parent="."]
+monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MouseDetector"]
 shape = SubResource( 1 )
+
+[connection signal="mouse_entered" from="MouseDetector" to="." method="_on_MouseDetector_mouse_entered"]
+[connection signal="mouse_exited" from="MouseDetector" to="." method="_on_MouseDetector_mouse_exited"]

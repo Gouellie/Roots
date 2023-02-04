@@ -132,6 +132,13 @@ func _emit_tile_info() -> void:
 	if Globals.ingredient_manager.is_cell_occupied(cellv):
 		return
 	
+	if _plant_master.has_mouse:
+		return
+
+	for p in _plants.values():
+		if p.has_mouse:
+			return
+
 	var tile_index = _terrain.get_cellv(cellv)
 	if tile_index == TileMap.INVALID_CELL:
 		Globals.display_game_info()

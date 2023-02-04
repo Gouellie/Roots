@@ -88,7 +88,7 @@ mouse_filter = 2
 
 [node name="InfoPanel" parent="Margin/Control_InfoPanel" instance=ExtResource( 2 )]
 margin_left = -214.0
-margin_top = -198.0
+margin_top = -230.0
 
 [node name="GameControlScreen" type="ColorRect" parent="."]
 visible = false
@@ -157,7 +157,6 @@ margin_bottom = 212.0
 text = "QUIT TO DESKTOP"
 
 [node name="UpgradesShop" parent="." instance=ExtResource( 7 )]
-visible = false
 margin_top = -288.0
 margin_bottom = 246.0
 
