@@ -75,9 +75,10 @@ func _input(event: InputEvent) -> void:
 	if not has_mouse:
 		return
 	var info = Info.new("Master Plant" if is_master_plant else "Plant")
-	info.add_info("Connect roots to your plant")
-	info.add_info("Each additional Plants generate Sun token")
-	info.add_info("Each additional Plants generate Sun token", 1)
+	info.add_info("Plants generate sunlights",1)
+	info.add_info("Click any plant to open the Upgrade Shop",2)
+	info.add_info("Your plant will die if your network doesn't produce enough soil", 3)
+	info.add_info("If the Master Plant dies, it's game over", 4)
 	Events.emit_signal("info_request", info)
 	
 	if Globals.entity_manager.builder_mode or Globals.entity_manager.eraser_mode:

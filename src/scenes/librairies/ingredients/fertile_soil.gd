@@ -1,6 +1,5 @@
 extends Ingredient
 
-
 var _root_tile : Tile
 var fertilized : bool = false
 var can_be_fertilized : bool = false
@@ -91,13 +90,12 @@ func _toggle_visibility(show_button, show_icon) -> void:
 	sprite_attention.visible = show_icon
 	resource_control.visible = show_button and not fertilized
 	if show_button:
-		animation_player.play("Buy_In")
+		animation_player.play("buy_ease_in")
 
 
 func on_animation_finished(animation_name) -> void:
-	if animation_name == "Buy_In":
-		animation_player.stop()
-		animation_player.play("Buy_Idle")
+	if animation_name == "buy_ease_in":
+		animation_player.play("idle_buy")
 
 
 func on_num_plants_changed(_num_plants):
@@ -109,25 +107,12 @@ func on_num_plants_changed(_num_plants):
 
 func plant_is_dead() -> void:
 	fertilized = false
+	animation_player.play("idle")	
 	_toggle_visibility(false, true)
 
-
-func _on_MouseDetector_mouse_entered() -> void:
-	has_mouse = true
-
-
-func _on_MouseDetector_mouse_exited() -> void:
-	has_mouse = false
-	
 
 func _input(event: InputEvent) -> void:
 	if fertilized or not has_mouse:
 		return
-	var info = Info.new("Fertile Soil")
-	info.add_info("Connect your network to this Fertile Soil to grow a new plant")
-	info.add_info("Growing a plant cost Sunlight and increases with the number of plants", 1)
-	info.add_info("Current cost %d" % 1, 2)
-	Events.emit_signal("info_request", info)
-	
 	if can_be_fertilized and event.is_action_pressed("ui_accept"):
 		_on_Button_pressed()
