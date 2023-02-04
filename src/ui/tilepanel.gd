@@ -19,6 +19,8 @@ onready var tile_blueprint : TileBlueprint
 func _init():
 	Events.connect("init_player_resource_manager", self, "on_init_player_resource_manager")
 	Events.connect("tile_placed", self, "on_tile_placed")
+	Events.connect("shop_upgrade_bought", self, "on_upgrade_bought")
+	Turns.connect("turn_next", self, "on_next_turn")
 
 func on_init_player_resource_manager(_player_resource_manager):
 	for _rsc in Globals.player_resource_manager.get_resource_manager().get_all_resources():
@@ -39,6 +41,12 @@ func on_resource_updated():
 	update_color()
 
 func on_tile_placed(_tile):
+	update_color()
+	
+func on_upgrade_bought():
+	update_color()
+	
+func on_next_turn(_turn):
 	update_color()
 
 func update_color():
