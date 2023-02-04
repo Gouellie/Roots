@@ -7,15 +7,13 @@ onready var resource_manager = $ResourceManager setget , get_resource_manager
 var consumption_amount = {} setget set_consumption_amount, get_consumption_amount
 var production_amount = {} setget set_production_amount, get_production_amount
 
+
 func _init():
 	Events.connect("tile_network_updated", self, "on_tile_network_updated")
+	Turns.connect("turn_next", self, "on_turn_next")
+	Events.connect("num_plants_changed", self, "on_num_plants_changed")
+	Events.connect("shop_upgrade_level_changed", self, "on_shop_upgrade_level_changed")
 
-func on_tile_network_updated():
-	_update_production_amount()
-	_update_consumption_amount()
-
-func get_resource_manager() -> ResourceManager:
-	return resource_manager as ResourceManager
 
 func _ready():
 	for _rsc in get_resource_manager().get_all_resources():
@@ -27,9 +25,34 @@ func _ready():
 			
 			if _node.identifier == Resources.SUNLIGHT:
 				_node.reset_on_next_turn = false
+				
 	Events.emit_signal("init_player_resource_manager", self)
 	resource_manager.connect("resource_amount_added", self, "on_resource_amount_added")
 	resource_manager.connect("resource_amount_deducted", self, "on_resource_amount_deducted")
+	
+
+func _refresh_income():
+	_update_production_amount()
+	_update_consumption_amount()
+	Events.emit_signal("income_amount_changed")
+
+func on_num_plants_changed(_num_plants):
+	_refresh_income()
+
+
+func on_shop_upgrade_level_changed():
+	_refresh_income()
+
+func on_turn_next(_turn):
+	_refresh_income()
+
+
+func on_tile_network_updated():
+	_refresh_income()
+	
+
+func get_resource_manager() -> ResourceManager:
+	return resource_manager as ResourceManager
 
 
 func set_consumption_amount(_dictionary : Dictionary):

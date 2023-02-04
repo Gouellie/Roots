@@ -45,6 +45,9 @@ signal open_plant_shop
 signal shop_upgrade_bought
 
 # warning-ignore:unused_signal
+signal shop_upgrade_level_changed
+
+# warning-ignore:unused_signal
 signal shop_buy_sun_upgrade(level)
 
 # warning-ignore:unused_signal
@@ -88,6 +91,9 @@ signal production_amount_changed(_dictionary)
 
 # warning-ignore:unused_signal
 signal consumption_amount_changed(_dictionary)
+
+# warning-ignore:unused_signal
+signal income_amount_changed()
 
 # warning-ignore:unused_signal
 signal ingredient_unfogged(_ingredient)

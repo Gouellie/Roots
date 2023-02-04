@@ -24,9 +24,24 @@ func on_manager_init(_manager):
 	_execute_resolve_behavior();
 		
 
+func get_amount_from_upgrades() -> int:
+	var _amount = 0
+	match identifier:
+		Resources.WATER:
+			_amount = Globals.upgrades_manager.water_level * Resources.UPGRADE_AMOUNT_PER_LEVEL_WATER
+			
+		Resources.SOIL:
+			_amount = Globals.upgrades_manager.soil_level * Resources.UPGRADE_AMOUNT_PER_LEVEL_SOIL
+			
+		Resources.SUNLIGHT:
+			_amount = Globals.upgrades_manager.sun_level * Resources.UPGRADE_AMOUNT_PER_LEVEL_SUNLIGHT
+	
+	return _amount
+
 func get_amount() -> int:
 	if _should_yield_amount():
-		return amount
+		var _final_amount = amount + get_amount_from_upgrades()
+		return _final_amount
 	
 	return 0
 

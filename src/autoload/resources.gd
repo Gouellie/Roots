@@ -5,6 +5,10 @@ const SUNLIGHT : String = "sunlight"
 const SOIL : String = "soil"
 const HEALTH : String = "health"
 
+const UPGRADE_AMOUNT_PER_LEVEL_WATER : int = 1
+const UPGRADE_AMOUNT_PER_LEVEL_SOIL : int = 1
+const UPGRADE_AMOUNT_PER_LEVEL_SUNLIGHT : int = 1
+
 var is_shimmering : bool = false
 var shimmer_amount : float = 0.0 setget set_shimmer_amount
 
