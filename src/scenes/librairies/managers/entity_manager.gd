@@ -2,6 +2,7 @@ extends Node2D
 class_name EntityManager
 
 export (NodePath) var terrain_node_path
+export (NodePath) var bedrock_node_path
 export (NodePath) var plant_master_node_path
 
 const plant_scene := preload("res://src/scenes/librairies/plants/plant.tscn")
@@ -24,11 +25,13 @@ var last_mouse_over_cell : Vector2
 
 onready var _plant_master : Plant
 onready var _terrain : TileMap
+onready var _bedrock : TileMap
 onready var tile_offset : Vector2
 
 func _ready() -> void:
 	_plant_master = get_node(plant_master_node_path) as Plant
 	_terrain = get_node(terrain_node_path) as TileMap
+	_bedrock = get_node(bedrock_node_path) as TileMap
 	tile_offset = _terrain.cell_size / 2
 	_register_ready_roots()
 	Events.connect("main_scene_loaded", self, "on_main_scene_loaded")
@@ -125,6 +128,10 @@ func _emit_tile_info() -> void:
 		return
 	last_mouse_over_cell = cellv		
 	
+	if _bedrock.get_cellv(cellv) != TileMap.INVALID_CELL:
+		_bedrock_info()
+		return
+	
 	if _plant_master.cellv == cellv:
 		return
 	if is_cell_occupied(cellv):
@@ -147,12 +154,15 @@ func _emit_tile_info() -> void:
 	var tile_name = Utils.get_tile_name(_terrain, tile_index)
 	
 	var descriptions = Resources.get_terrain_descriptions(tile_name)
-
 	var info = Info.new(descriptions["name"])
-	
 	for desc in descriptions["info"]:
 		info.add_info(desc)
-		
+	Events.emit_signal("info_request", info)
+
+
+func _bedrock_info() -> void:
+	var info = Info.new("Bedrock")
+	info.add_info("You have reach the edge of the map")
 	Events.emit_signal("info_request", info)
 
 
