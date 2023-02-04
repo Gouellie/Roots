@@ -27,6 +27,7 @@ func _ready() -> void:
 		health_node = resource_manager.add_new_resource(Resources.HEALTH, _health)
 		health_node.connect("node_depleted", self, "on_health_depleted")
 		health_node.connect("node_update", self, "on_health_changed")
+		$Label.text = String(health_node.value)
 
 
 func apply_damage(_amount : int):
@@ -43,7 +44,7 @@ func on_health_depleted():
 	self.queue_free()
 
 func on_health_changed():
-	pass
+	$Label.text = String(health_node.value)
 
 func _on_step_resolved(_step):
 	# setup resolve steps no the Plant.scene, handle logic here
@@ -92,3 +93,6 @@ func _on_MouseDetector_mouse_entered() -> void:
 
 func _on_MouseDetector_mouse_exited() -> void:
 	has_mouse = false
+
+func get_distance() -> int:
+	return 0

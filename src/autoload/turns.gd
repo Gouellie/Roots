@@ -29,6 +29,9 @@ signal step_resource_produce()
 signal step_resource_consume()
 
 # warning-ignore:unused_signal
+signal step_plant_damage()
+
+# warning-ignore:unused_signal
 signal step_roots_damage_severed()
 
 # warning-ignore:unused_signal
@@ -46,8 +49,9 @@ enum STEP_ORDER {
 	resources_consume = 3,
 	roots_damage_severed = 4,
 	roots_damage_connected = 5,
-	condition_win = 6,
-	condition_lose = 7,
+	plant_damage = 6,
+	condition_win = 7,
+	condition_lose = 8,
 }
 
 # careful when renaming, it's using the "VALUE" to find the corresponding signal
@@ -57,6 +61,7 @@ const step_order = {
 	STEP_ORDER.resources_consume: "step_resource_consume",
 	STEP_ORDER.roots_damage_severed: "step_roots_damage_severed",
 	STEP_ORDER.roots_damage_connected: "step_roots_damage_connected",
+	STEP_ORDER.plant_damage: "step_plant_damage",
 	STEP_ORDER.condition_win: "step_condition_win",
 	STEP_ORDER.condition_lose: "step_condition_lose",
 }

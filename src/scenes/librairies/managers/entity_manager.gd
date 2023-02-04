@@ -274,6 +274,49 @@ func _update_parche_preview():
 			var _tile = _t as Tile
 			_tile.queued_parche = _parche_tiles.has(_tile) || _tile.connected == false
 	
+func get_plants_to_parche() -> Array:
+	var _identifier = Resources.SOIL
+	var rsc : ResourceNode = Globals.player_resource_manager.get_resource_manager().get_resource(_identifier) as ResourceNode
+	if rsc == null || rsc._is_depleted() == false:
+		return []
+
+	var _sorted_plants = _plants.values()
+	_sorted_plants.sort_custom(self, "sort_distance_descending")
+	
+	var _consumption = Globals.player_resource_manager.get_consumption_amount_by_resource(_identifier)
+	var _production = Globals.player_resource_manager.get_production_amount_by_resource(_identifier)
+	var _net_resources : int = _production - _consumption
+	
+	if _net_resources >= 0:
+		return []
+	
+	if _sorted_plants.size() == 0:
+		return [_plant_master]
+		
+	var _i = 0
+	var _parched_plants = []
+	for _p in _sorted_plants:
+		if _p is Plant:
+			var _plant : Plant = _p as Plant
+						
+			var _did_consume : bool = false
+			for _c in _plant.get_children():
+				if _c is ConsumerResolveBehavior:
+					var _consumer = _c as ConsumerResolveBehavior
+					if _consumer.identifier != _identifier:
+						continue
+					
+					_net_resources += _consumer.amount
+					_did_consume = true
+			
+			if _did_consume:
+				_parched_plants.append(_plant)
+			
+			if _net_resources >= 0:
+				return _parched_plants
+	
+	return _parched_plants
+	
 func get_tiles_to_parche() -> Array:
 	var _identifier = Resources.WATER
 	var rsc : ResourceNode = Globals.player_resource_manager.get_resource_manager().get_resource(_identifier) as ResourceNode
@@ -365,11 +408,11 @@ func get_connected_root_tiles_by_distance(_distance : int) -> Array:
 				_tiles.append(_tile)
 	return _tiles
 
-func sort_distance_ascending(a : Tile, b : Tile) -> bool:
-	return a.distance < b.distance
+func sort_distance_ascending(a, b) -> bool:
+	return a.get_distance() < b.get_distance()
 	
-func sort_distance_descending(a : Tile, b : Tile) -> bool:
-	return a.distance > b.distance
+func sort_distance_descending(a , b) -> bool:
+	return a.get_distance() > b.get_distance()
 
 func get_tiles_sorted_by_distance() -> Array:
 	var _tiles = get_connected_root_tiles()

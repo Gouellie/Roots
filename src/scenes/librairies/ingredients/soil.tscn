@@ -28,4 +28,4 @@ shape = SubResource( 1 )
 [node name="ProducerResolveBehavior" type="Node2D" parent="."]
 script = ExtResource( 3 )
 identifier = "soil"
-amount = 10
+amount = 4

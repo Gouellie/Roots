@@ -5,7 +5,7 @@ var description : String = "###INSERT LOSE CONDITION###"
 
 func _init():
 	._init()
-	resolve_step = Turns.STEP_ORDER.condition_win
+	resolve_step = Turns.STEP_ORDER.condition_lose
 
 func _lose() -> void:
 	Events.emit_signal("game_over", self)

@@ -56,6 +56,15 @@ script = ExtResource( 7 )
 [node name="PlantDamageResolveBehavior" type="Node2D" parent="."]
 script = ExtResource( 8 )
 
+[node name="Label" type="Label" parent="."]
+margin_left = -20.0
+margin_top = -47.0
+margin_right = 20.0
+margin_bottom = -33.0
+text = "3"
+align = 1
+valign = 1
+
 [connection signal="area_shape_entered" from="Area2D" to="." method="_on_Area2D_area_shape_entered"]
 [connection signal="area_shape_exited" from="Area2D" to="." method="_on_Area2D_area_shape_exited"]
 [connection signal="mouse_entered" from="MouseDetector" to="." method="_on_MouseDetector_mouse_entered"]

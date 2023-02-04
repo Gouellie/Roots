@@ -80,6 +80,11 @@ _global_script_classes=[ {
 "path": "res://src/scenes/librairies/managers/ingredients_manager.gd"
 }, {
 "base": "ResolveBehavior",
+"class": "ParchedPlantDamageResolveBehavior",
+"language": "GDScript",
+"path": "res://src/ui/turns/resolve_behaviors/resolve_behavior_damage_parched_plant.gd"
+}, {
+"base": "ResolveBehavior",
 "class": "ParchedTileDamageResolveBehavior",
 "language": "GDScript",
 "path": "res://src/ui/turns/resolve_behaviors/resolve_behavior_damage_parched_tile.gd"
@@ -199,6 +204,7 @@ _global_script_class_icons={
 "Info": "",
 "Ingredient": "",
 "IngredientManager": "",
+"ParchedPlantDamageResolveBehavior": "",
 "ParchedTileDamageResolveBehavior": "",
 "Plant": "",
 "PlantDamageLoseConditionResolveBehavior": "",
