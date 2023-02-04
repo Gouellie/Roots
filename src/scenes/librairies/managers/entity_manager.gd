@@ -92,6 +92,7 @@ func _seteraser_mode(value : bool) -> void:
 	if is_instance_valid(_blueprint):
 		_clear_blueprint()
 
+
 func _unhandled_input(event: InputEvent) -> void:
 	_emit_tile_info()
 	if _blueprint:
@@ -110,6 +111,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	if eraser_mode and event.is_action_pressed("ui_cancel"):
 		_seteraser_mode(false)
+
 
 func _emit_tile_info() -> void:
 	if Globals.is_upgrade_menu_opened:
@@ -146,15 +148,18 @@ func _emit_tile_info() -> void:
 func _can_place_tile(cellv : Vector2) -> bool:
 	if _terrain.get_cellv(cellv) == TileMap.INVALID_CELL:
 		return false
+	var ing = Globals.ingredient_manager.get_ingredient_at(cellv)
+	if ing is Ingredient and ing.is_blocking_tiles:
+		return false
 	return _blueprint.is_connected_to_network(get_tile_at_position(cellv))
-	
+
+
 func _place_tile() -> void:
 	if not _blueprint is TileBlueprint:
 		return
 	if not _blueprint.valid:
 		return
-
-	if _blueprint.try_consume() == false:
+	if not _blueprint.try_consume():
 		return
 	
 	Events.emit_signal("building_mode_toggle", false)

@@ -16,6 +16,9 @@ func on_closed() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if not visible:
+		return
+	
 	if event is InputEventMouse:
 		_display_info()
 
