@@ -125,15 +125,17 @@ func get_terrain_descriptions(tile_name : String) -> Dictionary:
 	return terrain_descriptions[tile_type]
 	
 
-func _ready():
-	Events.connect("ingredient_unfogged", self, "on_ingredient_unfogged")
 	
 var _shimmer_speed = .25
 func _process(delta : float):
 	if is_shimmering:
 		set_shimmer_amount((delta * _shimmer_speed) + shimmer_amount)
-		if shimmer_amount >= 1.0:
+		if shimmer_amount >= 2.0:
 			end_shimmer()
+		return
+		
+	start_shimmer()
+	
 			
 func set_shimmer_amount(_amount : float):
 	shimmer_amount = _amount
@@ -142,9 +144,6 @@ func set_shimmer_amount(_amount : float):
 	if _shimmer_shader:
 		_shimmer_shader.set_shader_param("shine_progress", _amount)
 
-func on_ingredient_unfogged(_ingredient):
-	start_shimmer()
-	
 func start_shimmer():
 	if is_shimmering:
 		return
