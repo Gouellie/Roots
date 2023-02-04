@@ -13,6 +13,7 @@ var entity_manager : EntityManager
 var turn_manager : TurnManager
 var ingredient_manager : IngredientManager
 var upgrades_manager : UpgradesManager
+var fog_manager : FogManager
 
 var is_upgrade_menu_opened : bool = false
 
@@ -22,6 +23,7 @@ func _init():
 	Events.connect("init_entity_manager", self, "on_entity_manager_init")
 	Events.connect("init_turn_manager", self, "on_turn_manager_init")
 	Events.connect("init_ingredient_manager", self, "on_ingredient_manager_init")
+	Events.connect("init_fog_manager", self, "on_fog_manager_init")
 
 
 func on_player_resource_manager_init(_player_resource_manager):
@@ -35,6 +37,9 @@ func on_turn_manager_init(_turn_manager):
 	
 func on_ingredient_manager_init(_ingredient_manager):
 	ingredient_manager = _ingredient_manager as IngredientManager	
+	
+func on_fog_manager_init(_fog_manager):
+	fog_manager = _fog_manager as FogManager
 
 func get_tile_draw_amount() -> int:
 	return min(BASE_TILES_DRAW_COUNT + entity_manager.get_plants_count(), 10) as int

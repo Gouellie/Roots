@@ -172,7 +172,6 @@ tile_data = PoolIntArray( -327697, 0, 0, -327696, 0, 0, -327695, 0, 0, -327694, 
 
 [node name="FogOfWar" parent="." instance=ExtResource( 15 )]
 terrain_node_path = NodePath("../Terrain")
-LIGHT_SIZE = 2
 
 [node name="EntityManager" type="Node2D" parent="."]
 script = ExtResource( 5 )

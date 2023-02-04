@@ -15,7 +15,7 @@ font_data = ExtResource( 4 )
 size = 120
 font_data = ExtResource( 4 )
 
-[sub_resource type="Shader" id=3]
+[sub_resource type="Shader" id=5]
 code = "/*
 Shader from Godot Shaders - the free shader library.
 godotshaders.com/shader/god-rays
@@ -125,7 +125,7 @@ void fragment()
 }"
 
 [sub_resource type="ShaderMaterial" id=4]
-shader = SubResource( 3 )
+shader = SubResource( 5 )
 shader_param/angle = -0.3
 shader_param/position = -0.2
 shader_param/spread = 0.5

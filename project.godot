@@ -40,7 +40,7 @@ _global_script_classes=[ {
 "path": "res://src/scenes/librairies/managers/entity_manager.gd"
 }, {
 "base": "TileMap",
-"class": "FogOfWar",
+"class": "FogManager",
 "language": "GDScript",
 "path": "res://src/scripts/fogofwar/fog_of_war.gd"
 }, {
@@ -191,7 +191,7 @@ _global_script_class_icons={
 "ConsumerResolveBehavior": "",
 "Entity": "",
 "EntityManager": "",
-"FogOfWar": "",
+"FogManager": "",
 "Harvestable": "",
 "HarvestableSoil": "",
 "HarvestableSunlight": "",

@@ -67,6 +67,9 @@ signal init_turn_manager(_turn_manager)
 signal init_ingredient_manager(_ingredient_manager)
 
 # warning-ignore:unused_signal
+signal init_fog_manager(_fog_manager)
+
+# warning-ignore:unused_signal
 signal spawn_plant(fertile_soil, position)
 
 # warning-ignore:unused_signal
