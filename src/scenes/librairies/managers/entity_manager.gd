@@ -53,17 +53,13 @@ func _register_ready_roots() -> void:
 
 func _move_blueprint(mouse_position: Vector2) -> void:
 	var cellv = _terrain.world_to_map(mouse_position)
-
-	if last_mouse_over_cell == cellv:
-		return
-	last_mouse_over_cell = cellv
-
 	var snap_position = _terrain.map_to_world(cellv) + tile_offset
 	if eraser_mode and _eraser:
 		_eraser.position = snap_position
 	elif _blueprint:
 		_blueprint.position = snap_position
 		_blueprint.valid = _can_place_tile(cellv)
+
 
 func on_tile_selected(sender : TilePanel, new_selected_blueprint : TileBlueprintBase)-> void:
 	_clear_blueprint()
@@ -116,8 +112,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		_seteraser_mode(false)
 
 func _emit_tile_info() -> void:
+	if Globals.is_upgrade_menu_opened:
+		return
+
 	var cellv = _terrain.world_to_map(get_global_mouse_position())
-	
 	if cellv == last_mouse_over_cell:
 		return
 	

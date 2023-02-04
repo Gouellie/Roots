@@ -7,7 +7,7 @@ func _ready() -> void:
 
 
 func on_open_plant_shop() -> void:
-	Globals.is_upgrade_menu_opened = false	
+	Globals.is_upgrade_menu_opened = true	
 	popup()
 
 
