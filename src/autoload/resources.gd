@@ -50,17 +50,63 @@ const resource_color = {
 	"water" : Color.blue,
 }
 
+const INVALID_TILE : int = 42
 const INVALID_TILE_COST : int = 42
 
-const tiles_cost = {
-	"soft" : -1,
-	"normal" : 0,
-	"hard" : 1
+enum TERRAIN_TYPES {
+	SOFT = -1, 
+	NORMAL = 0, 
+	HARD = 1, 
 }
 
-func get_tile_cost(tile_name : String) -> int:
-	for key in tiles_cost:
+const terrain_types = {
+	"soft" : TERRAIN_TYPES.SOFT,
+	"normal" : TERRAIN_TYPES.NORMAL,
+	"hard" : TERRAIN_TYPES.HARD
+}
+
+const terrain_cost = {
+	TERRAIN_TYPES.SOFT : TERRAIN_TYPES.SOFT,
+	TERRAIN_TYPES.NORMAL : TERRAIN_TYPES.NORMAL,
+	TERRAIN_TYPES.HARD : TERRAIN_TYPES.HARD,
+}
+
+const terrain_descriptions = {
+	TERRAIN_TYPES.SOFT : {
+		"name" : "Soft Terrain",
+		"info" : ["Tiles placed here consume less water", "%d water consumed" % terrain_cost[TERRAIN_TYPES.SOFT]]
+	},
+	TERRAIN_TYPES.NORMAL : {
+		"name" : "Normal Terrain",
+		"info" : ["Tiles placed here consume their regular water intakes"]
+	},
+	TERRAIN_TYPES.HARD : {
+		"name" : "Hard Terrain",
+		"info" : ["Tiles placed here consume more water", "+%d water consumed" % terrain_cost[TERRAIN_TYPES.HARD]]
+	}
+}
+
+
+func get_terrain_type(tile_name : String) -> int:
+	for key in terrain_types:
 		# for tiles that blends between types, we take the cheapest one  
 		if key in tile_name:
-			return tiles_cost[key]
-	return INVALID_TILE_COST
+			return terrain_types[key]
+	return INVALID_TILE
+
+
+func get_terrain_cost(tile_name : String) -> int:
+	var tile_type = get_terrain_type(tile_name)
+	if tile_type == INVALID_TILE:
+		return INVALID_TILE_COST
+	return terrain_cost[tile_type]
+
+
+func get_terrain_descriptions(tile_name : String) -> Dictionary:
+	var tile_type = get_terrain_type(tile_name)
+	if tile_type == INVALID_TILE:
+		return {
+			"name" : "",
+			"info" : [] 
+		}
+	return terrain_descriptions[tile_type]

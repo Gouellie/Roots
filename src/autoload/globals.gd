@@ -36,3 +36,7 @@ func on_ingredient_manager_init(_ingredient_manager):
 
 func get_tile_draw_amount() -> int:
 	return min(BASE_TILES_DRAW_COUNT + entity_manager.get_plants_count(), 10) as int
+
+func display_game_info() -> void:
+	var info = Info.new("tHrIVE_MIND")
+	Events.emit_signal("info_request", info)

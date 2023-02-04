@@ -15,7 +15,6 @@
 [ext_resource path="res://src/ui/turns/resolve_behaviors/resolve_behavior_condition_win_max_turns.gd" type="Script" id=13]
 [ext_resource path="res://src/scenes/librairies/managers/upgrades_manager.gd" type="Script" id=14]
 
-
 [node name="MainScene" type="Node2D"]
 script = ExtResource( 4 )
 

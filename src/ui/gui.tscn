@@ -88,6 +88,7 @@ margin_bottom = 710.0
 mouse_filter = 2
 
 [node name="InfoPanel" parent="Margin/Control_InfoPanel" instance=ExtResource( 2 )]
+margin_left = -214.0
 
 [node name="GameControlScreen" type="ColorRect" parent="."]
 visible = false

@@ -19,6 +19,9 @@ var step_resolver : StepResolver = StepResolver.new()
 var builder_mode : bool = false
 var eraser_mode : bool = false
 
+# caching last mouse over cell to avoid spamming on mouse movement
+var last_mouse_over_cell : Vector2
+
 onready var _plant_master : Plant
 onready var _terrain : TileMap
 onready var tile_offset : Vector2
@@ -50,6 +53,11 @@ func _register_ready_roots() -> void:
 
 func _move_blueprint(mouse_position: Vector2) -> void:
 	var cellv = _terrain.world_to_map(mouse_position)
+
+	if last_mouse_over_cell == cellv:
+		return
+	last_mouse_over_cell = cellv
+
 	var snap_position = _terrain.map_to_world(cellv) + tile_offset
 	if eraser_mode and _eraser:
 		_eraser.position = snap_position
@@ -103,21 +111,39 @@ func _unhandled_input(event: InputEvent) -> void:
 			_place_tile()
 		elif eraser_mode:
 			_remove_tile()
-		
+
 	if eraser_mode and event.is_action_pressed("ui_cancel"):
 		_seteraser_mode(false)
 
 func _emit_tile_info() -> void:
 	var cellv = _terrain.world_to_map(get_global_mouse_position())
+	
+	if cellv == last_mouse_over_cell:
+		return
+	
 	if _plant_master.cellv == cellv:
 		return
 	if is_cell_occupied(cellv):
 		return
 	if Globals.ingredient_manager.is_cell_occupied(cellv):
 		return
-	var info = Info.new("Terrain Tiles")
-	info.add_info("Regular Terrain")
+	
+	var tile_index = _terrain.get_cellv(cellv)
+	if tile_index == TileMap.INVALID_CELL:
+		Globals.display_game_info()
+		return
+
+	var tile_name = Utils.get_tile_name(_terrain, tile_index)
+	
+	var descriptions = Resources.get_terrain_descriptions(tile_name)
+
+	var info = Info.new(descriptions["name"])
+	
+	for desc in descriptions["info"]:
+		info.add_info(desc)
+		
 	Events.emit_signal("info_request", info)
+
 
 func _can_place_tile(cellv : Vector2) -> bool:
 	if _terrain.get_cellv(cellv) == TileMap.INVALID_CELL:
@@ -157,8 +183,8 @@ func _place_tile() -> void:
 func _initiliaze_tile(tile : Tile, cellv : Vector2) -> void:
 	tiles[cellv] = tile
 	tile.cellv = cellv
-	var tile_name = Utils.get_tile_name(_terrain, cellv)
-	var tile_cost = Resources.get_tile_cost(tile_name)
+	var tile_name = Utils.get_tile_name_at_position(_terrain, cellv)
+	var tile_cost = Resources.get_terrain_cost(tile_name)
 	assert(tile_cost != Resources.INVALID_TILE_COST, "Coulnd't retrieve tile cost from tile name : %s" % tile_name)
 	tile.terrain_tile_cost = tile_cost
 	
@@ -328,7 +354,6 @@ func get_connected_root_tiles_by_distance(_distance : int) -> Array:
 			var _tile : Tile = _t as Tile
 			if _tile.distance == _distance:
 				_tiles.append(_tile)
-			
 	return _tiles
 
 func sort_distance_ascending(a : Tile, b : Tile) -> bool:
