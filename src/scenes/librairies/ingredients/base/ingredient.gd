@@ -44,6 +44,8 @@ func _on_MouseDetector_mouse_exited() -> void:
 func _input(event: InputEvent) -> void:
 	if not has_mouse:
 		return
+	if Globals.is_upgrade_menu_opened :
+		return		
 	var info = Info.new(ingredient_name)
 	var current :int= 0
 	for _add_info in additional_information:

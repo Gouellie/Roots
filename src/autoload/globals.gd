@@ -4,6 +4,7 @@ const TILE_HEALTH : int = 3
 const PLANT_HEALTH : int = 2
 const MASTER_PLANT_HEALTH : int = 3
 const BASE_TILES_DRAW_COUNT : int = 4
+const NUMB_PLANT_PLACED_TO_OPEN_STORE : int = 2
 
 const FOG_REVEAL_RADIUS_MASTER_PLANT : int = 3
 const FOG_REVEAL_RADIUS_TILE : int = 4

@@ -15,13 +15,12 @@ margin_right = 400.0
 grow_vertical = 0
 rect_min_size = Vector2( 800, 80 )
 script = ExtResource( 2 )
-use_random = true
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-custom_constants/margin_right = 10
+custom_constants/margin_right = 40
 custom_constants/margin_top = 10
 custom_constants/margin_left = 10
 custom_constants/margin_bottom = 10
@@ -29,7 +28,7 @@ custom_constants/margin_bottom = 10
 [node name="TileContainer" type="HBoxContainer" parent="MarginContainer"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 790.0
+margin_right = 760.0
 margin_bottom = 74.0
 rect_min_size = Vector2( 437, 64 )
 custom_constants/separation = 13
