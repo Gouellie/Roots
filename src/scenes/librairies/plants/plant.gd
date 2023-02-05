@@ -32,6 +32,7 @@ func _ready() -> void:
 func apply_damage(_amount : int):
 	if resource_manager:
 		resource_manager.deduct_from_resource(Resources.HEALTH, _amount)
+		Globals.turn_manager.plant_damage_in_turn += _amount
 
 func on_health_depleted():
 	if is_master_plant:

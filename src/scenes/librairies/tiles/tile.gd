@@ -103,7 +103,7 @@ func on_health_changed():
 
 func apply_damage(_damage : int):
 	resource_manager.deduct_from_resource(Resources.HEALTH, _damage)
-
+	Globals.turn_manager.tile_damage_in_turn += _damage
 
 func set_is_connected(value : bool) -> void:
 	connected = value

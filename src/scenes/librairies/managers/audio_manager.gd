@@ -7,6 +7,8 @@ var track_03 = preload("res://assets/music/airtone_-_aether_5.mp3")
 
 export (AudioStream)var tile_place_audio : AudioStream
 export (AudioStream)var tile_removed_audio : AudioStream
+export (AudioStream)var plant_spawned_audio : AudioStream
+export (AudioStream)var received_damage_audio : AudioStream
 
 onready var background_track  : AudioStreamPlayer2D = $BackgroundTrack
 
@@ -19,6 +21,8 @@ var players = []
 func _init():
 	Events.connect("tile_placed", self, "on_tile_placed")
 	Events.connect("tile_removed_at", self, "on_tile_removed_at")
+	Events.connect("spawn_plant", self, "on_plant_spawned")
+	Turns.connect("turn_end_damage_received", self, "on_turn_end_damage_received")
 
 func clean_players():
 	for _p in players:
@@ -64,4 +68,10 @@ func on_tile_placed(_tile):
 	
 func on_tile_removed_at(_pos):
 	play_audio_once(tile_removed_audio)
+	
+func on_plant_spawned(_soil, _pos):
+	play_audio_once(plant_spawned_audio)
+	
+func on_turn_end_damage_received():
+	play_audio_once(received_damage_audio)
 	

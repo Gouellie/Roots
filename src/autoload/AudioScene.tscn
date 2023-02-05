@@ -1,14 +1,18 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/scenes/librairies/managers/audio_manager.gd" type="Script" id=1]
 [ext_resource path="res://assets/music/airtone_-_aether_5.mp3" type="AudioStream" id=2]
 [ext_resource path="res://assets/audio/UI/woosh_001.wav" type="AudioStream" id=3]
 [ext_resource path="res://assets/audio/UI/rollover2.ogg" type="AudioStream" id=4]
+[ext_resource path="res://assets/audio/clicks/click2.ogg" type="AudioStream" id=5]
+[ext_resource path="res://assets/audio/impact/sfx_sounds_impact1.wav" type="AudioStream" id=6]
 
 [node name="AudioScene" type="Node2D"]
 script = ExtResource( 1 )
 tile_place_audio = ExtResource( 3 )
 tile_removed_audio = ExtResource( 4 )
+plant_spawned_audio = ExtResource( 5 )
+received_damage_audio = ExtResource( 6 )
 
 [node name="BackgroundTrack" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 2 )

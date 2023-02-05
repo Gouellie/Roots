@@ -6,6 +6,10 @@ signal time_remaining_changed(_time_remaining)
 
 export (int)var max_turns : int = 30
 
+
+var plant_damage_in_turn : int = 0
+var tile_damage_in_turn : int = 0
+
 var turn : int = 1
 var step : int = Turns.STEP_ORDER.placing
 var step_resolvers = {}
@@ -99,7 +103,10 @@ func next_step():
 func start_turn():
 	if turn > max_turns:
 		return
-		
+	
+	plant_damage_in_turn = 0
+	tile_damage_in_turn = 0
+	
 	time_remaining = Turns.time_per_turn
 	step = 0
 	
@@ -107,9 +114,12 @@ func start_turn():
 		next_step()
 	
 func end_turn():
+	if plant_damage_in_turn > 0 || tile_damage_in_turn > 0:
+		Turns.emit_signal("turn_end_damage_received")
+
 	turn += 1
 	Turns.emit_signal("turn_next", turn)
 	start_turn()
-
+	
 func is_last_turn() -> bool:
 	return turn >= max_turns
