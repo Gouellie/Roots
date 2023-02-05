@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/airtone_-_aether_5.mp3-e99e1aef3df687126535b4ac5d30a45f.mp3str"
+
+[deps]
+
+source_file="res://assets/music/airtone_-_aether_5.mp3"
+dest_files=[ "res://.import/airtone_-_aether_5.mp3-e99e1aef3df687126535b4ac5d30a45f.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

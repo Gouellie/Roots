@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/airtone_-_snowdaze.mp3-4fa8fcd1ed3cac4642067c83f2555662.mp3str"
+
+[deps]
+
+source_file="res://assets/music/airtone_-_snowdaze.mp3"
+dest_files=[ "res://.import/airtone_-_snowdaze.mp3-4fa8fcd1ed3cac4642067c83f2555662.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
