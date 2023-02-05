@@ -10,7 +10,7 @@ onready var spring = $Panel/CenterContainer/VBoxContainer/Spring
 var visible_time = 4.0
 var timer = 0.0
 var is_started = false
-
+var has_timer = false
 
 func _init():
 	Events.connect("season_changed", self, "on_season_changed")
@@ -19,6 +19,9 @@ func _ready():
 	end_notif()
 
 func _process(delta):
+	if has_timer == false:
+		return
+		
 	if is_started == false:
 		return
 	
