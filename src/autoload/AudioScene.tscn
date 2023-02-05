@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/scenes/librairies/managers/audio_manager.gd" type="Script" id=1]
 [ext_resource path="res://assets/music/airtone_-_aether_5.mp3" type="AudioStream" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://assets/audio/UI/drop_003.ogg" type="AudioStream" id=8]
 [ext_resource path="res://assets/audio/UI/toggle_002.ogg" type="AudioStream" id=9]
 [ext_resource path="res://assets/audio/UI/toggle_001.ogg" type="AudioStream" id=10]
+[ext_resource path="res://assets/audio/UI/confirmation_002.ogg" type="AudioStream" id=11]
 
 [node name="AudioScene" type="Node2D"]
 script = ExtResource( 1 )
@@ -21,6 +22,7 @@ received_damage_audio = ExtResource( 6 )
 next_turn_audio = ExtResource( 8 )
 mode_eraser_audio = ExtResource( 10 )
 mode_building_audio = ExtResource( 9 )
+season_changed_audio = ExtResource( 11 )
 
 [node name="BackgroundTrack" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 2 )

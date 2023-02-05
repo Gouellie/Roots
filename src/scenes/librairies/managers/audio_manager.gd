@@ -13,6 +13,7 @@ export (AudioStream)var received_damage_audio : AudioStream
 export (AudioStream)var next_turn_audio : AudioStream
 export (AudioStream)var mode_eraser_audio : AudioStream
 export (AudioStream)var mode_building_audio : AudioStream
+export (AudioStream)var season_changed_audio : AudioStream
 
 onready var background_track  : AudioStreamPlayer2D = $BackgroundTrack
 
@@ -31,6 +32,7 @@ func _init():
 	Turns.connect("turn_next", self, "on_next_turn")
 	Events.connect("building_mode_toggle", self, "on_building_mode")
 	Events.connect("eraser_mode_toggled", self, "on_eraser_mode")
+	Events.connect("season_changed", self, "on_season_changed")
 
 func clean_players():
 	for _p in players:
@@ -95,3 +97,6 @@ func on_building_mode(_builder_mode : bool):
 
 func on_eraser_mode():
 	play_audio_once(mode_building_audio)
+
+func on_season_changed(_season):
+	play_audio_once(season_changed_audio)
