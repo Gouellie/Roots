@@ -21,4 +21,3 @@ margin_bottom = 32.0
 
 [connection signal="gui_input" from="." to="." method="_on_TilePanel_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_TilePanel_mouse_entered"]
-[connection signal="mouse_exited" from="." to="." method="_on_TilePanel_mouse_exited"]

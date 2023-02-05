@@ -18,7 +18,7 @@ onready var tile_blueprint : TileBlueprint
 func _init():
 	Events.connect("init_player_resource_manager", self, "on_init_player_resource_manager")
 	Events.connect("tile_placed", self, "on_tile_placed")
-	Events.connect("shop_upgrade_bought", self, "on_upgrade_bought")
+	Events.connect("player_resource_amount_deducted", self, "on_resource_deducted")
 	Turns.connect("turn_next", self, "on_next_turn")
 
 func on_init_player_resource_manager(_player_resource_manager):
@@ -42,8 +42,9 @@ func on_resource_updated():
 func on_tile_placed(_tile):
 	update_color()
 	
-func on_upgrade_bought():
-	update_color()
+func on_resource_deducted(id, amount):
+	if id == Resources.SUNLIGHT:
+		update_color()
 	
 func on_next_turn(_turn):
 	update_color()
@@ -69,15 +70,12 @@ func _on_TilePanel_mouse_entered() -> void:
 	Events.emit_signal("info_request", info)
 
 
-func _on_TilePanel_mouse_exited() -> void:
-	is_hovering = false
-	update_color()
-
 func _on_TilePanel_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.pressed :
 			set_is_selected(!is_selected)
 			Events.emit_signal("tilepanel_selected", self, tile_blueprint if is_selected else null)
+
 
 func set_is_selected(value : bool) -> void:
 	if tile_blueprint.can_afford() == false:
