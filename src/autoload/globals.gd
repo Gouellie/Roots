@@ -25,7 +25,7 @@ const SEASON_CONSUMPTION_MODIFIER = {
 		"soil":1
 	},
 	"winter" : {
-		"soil":2,
+		"soil":3,
 		"water":2,
 	},
 	"spring" : {
