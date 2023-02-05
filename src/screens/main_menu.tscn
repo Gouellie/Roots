@@ -149,7 +149,7 @@ script = ExtResource( 2 )
 [node name="ColorRect2" type="ColorRect" parent="."]
 margin_right = 1280.0
 margin_bottom = 712.0
-color = Color( 0.14902, 0.184314, 0.145098, 1 )
+color = Color( 0.25098, 0.396078, 0.407843, 1 )
 
 [node name="IconMonochromeDark" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0.0156863 )
@@ -207,7 +207,7 @@ text = "PLAY"
 [node name="Button_Quit" type="Button" parent="CenterContainer/VBoxContainer"]
 margin_top = 54.0
 margin_right = 150.0
-margin_bottom = 89.0
+margin_bottom = 88.0
 rect_min_size = Vector2( 143, 0 )
 theme = ExtResource( 3 )
 text = "QUIT"
