@@ -39,7 +39,6 @@ func on_step_next(_step):
 
 	
 func on_turn_next(_turn):
-	end_turn_button.disabled = true	
 	turn_label.text = String(_turn)
 	progress_bar.value = _turn
 
