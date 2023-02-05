@@ -5,7 +5,6 @@ var _max_turns : int = 0
 onready var progress_bar : ProgressBar = $VBoxContainer/CurrentTurnBar
 onready var time_remaining_bar : ProgressBar = $VBoxContainer/TimeRemainingBar
 onready var turn_label : Label = $VBoxContainer/CurrentTurnBar/Turn
-onready var step_label : Label = $Step
 onready var end_turn_button : Button = $EndTurn_Button
 
 var turn_manager : TurnManager
@@ -28,8 +27,7 @@ func _ready():
 	
 	time_remaining_bar.min_value = 0
 	time_remaining_bar.max_value = Turns.time_per_turn
-	
-	step_label.text = String(Turns.step_order[turn_manager.step])
+
 	turn_label.text = String(turn_manager.turn)
 	
 func on_turn_manager_initialized(_turn_manager):
@@ -37,7 +35,8 @@ func on_turn_manager_initialized(_turn_manager):
 	turn_manager.connect("time_remaining_changed", self, "on_time_remaining_changed")
 	
 func on_step_next(_step):
-	step_label.text = String(Turns.step_order[_step])
+	pass
+
 	
 func on_turn_next(_turn):
 	end_turn_button.disabled = true	
@@ -61,3 +60,9 @@ func _on_EndTurn_Button_mouse_entered() -> void:
 	info.add_info("Make sure that your network has enough water and soil to sustain itself or your Roots and Plants will receive damage", 1)
 	Events.emit_signal("info_request", info)
 
+
+
+func _on_CurrentTurnBar_mouse_entered() -> void:
+	var info = Info.new("Current Turn")
+	info.add_info("Survive %d turns to win the game" % _max_turns)
+	Events.emit_signal("info_request", info)

@@ -174,7 +174,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/scenes/librairies/tiles/blueprints/tile_eraser.gd"
 }, {
-"base": "ColorRect",
+"base": "Button",
 "class": "TilePanel",
 "language": "GDScript",
 "path": "res://src/ui/tilepanel.gd"

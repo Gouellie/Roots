@@ -2,6 +2,7 @@ extends Control
 
 
 onready var game_control := $GameControlScreen
+onready var confirm_control := $GameControlScreen_Confirm
 onready var header = $GameControlScreen/Panel/CenterContainer/VBoxContainer/Header
 onready var description = $GameControlScreen/Panel/CenterContainer/VBoxContainer/Description
 
@@ -40,11 +41,19 @@ func _on_Button_Retry_pressed() -> void:
 
 
 func _on_Button_GiveUp_pressed() -> void:
-	game_control.visible = true
-	header.text = "GAME OVER"
-	description.text = "You gave up"
-	
+	confirm_control.visible = true
 
 
 func _on_Button_QuitToDeskop_pressed() -> void:
 	get_tree().quit()
+
+
+func _on_Button_Confirm_pressed() -> void:
+	confirm_control.visible = false
+	game_control.visible = true
+	header.text = "GAME OVER"
+	description.text = "You gave up"
+
+
+func _on_Button_Cancel_pressed() -> void:
+	confirm_control.visible = false

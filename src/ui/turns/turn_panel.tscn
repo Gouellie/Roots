@@ -58,17 +58,6 @@ rect_pivot_offset = Vector2( 320, 0 )
 value = 100.0
 percent_visible = false
 
-[node name="Step" type="Label" parent="."]
-visible = false
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -68.0
-margin_top = 40.0
-margin_right = 66.0
-margin_bottom = 68.0
-text = "Current Step"
-align = 1
-valign = 1
-
 [connection signal="mouse_entered" from="EndTurn_Button" to="." method="_on_EndTurn_Button_mouse_entered"]
 [connection signal="pressed" from="EndTurn_Button" to="." method="_on_EndTurn_Button_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/CurrentTurnBar" to="." method="_on_CurrentTurnBar_mouse_entered"]

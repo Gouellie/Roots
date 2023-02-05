@@ -1,4 +1,4 @@
-extends ColorRect
+extends Button
 class_name TilePanel
 
 export (PackedScene) var tile_scene
@@ -13,7 +13,6 @@ var is_selected : bool = false setget set_is_selected
 export var random_tile : bool = true
 export var tile_index : int = 0
 
-onready var default := color
 onready var tile_blueprint : TileBlueprint
 
 func _init():
@@ -50,25 +49,18 @@ func on_next_turn(_turn):
 	update_color()
 
 func update_color():
-	if tile_blueprint.can_afford() == false:
-		color = insufficient_resources
-		return
-		
-	if is_hovering:
-		color = mouse_over
-		return
-		
-	if is_selected and tile_blueprint:
-		color = selected_color
-		return
-		
-	color = default
+	self.disabled = not tile_blueprint.can_afford()
+
 
 func _on_TilePanel_mouse_entered() -> void:
 	is_hovering = true
 	update_color()
 	var info = Info.new("Tile")
 	info.add_info("Connect the tile to your root network")
+
+	if not tile_blueprint.can_afford():
+		info.add_info("You do not have enough Sunlight to afford the Tile", 1)	
+	
 	Events.emit_signal("info_request", info)
 
 
