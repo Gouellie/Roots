@@ -77,5 +77,8 @@ func get_tile_draw_amount() -> int:
 
 func display_game_info() -> void:
 	var info = Info.new("tHrIVE_MIND")
-	info.add_info("Thank you for playing!")
+	info.add_info("GAME BY : Lambo, Ivo Geelhoed, Cmacarthur, and Gouellie")
+	info.add_info("MUSIC BY : airtone", 1)
+	info.add_info("SONGS aether, noodleSoup, snowdaze", 1)
+	info.add_info("Thank you for playing!", 2)
 	Events.emit_signal("info_request", info)

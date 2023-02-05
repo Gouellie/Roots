@@ -280,6 +280,7 @@ hframes = 20
 position = Vector2( 704, 304 )
 frames = SubResource( 31 )
 frame = 21
+frame = 15
 playing = true
 
 [node name="Sprite_Cactus" type="Sprite" parent="."]
