@@ -279,7 +279,7 @@ hframes = 20
 [node name="AnimatedSprite_Bunny" type="AnimatedSprite" parent="."]
 position = Vector2( 704, 304 )
 frames = SubResource( 31 )
-frame = 10
+frame = 24
 playing = true
 
 [node name="Sprite_Cactus" type="Sprite" parent="."]
