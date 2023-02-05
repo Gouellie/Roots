@@ -120,12 +120,11 @@ margin_right = 415.0
 margin_bottom = 263.0
 
 [node name="SeasonUI" parent="." instance=ExtResource( 9 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 440.0
-margin_top = 65.0
-margin_right = 841.0
-margin_bottom = 99.0
+margin_top = 64.0
+margin_right = 840.0
+margin_bottom = 79.0
+rect_min_size = Vector2( 0, 15 )
 
 [node name="GameControlScreen" type="ColorRect" parent="."]
 visible = false
