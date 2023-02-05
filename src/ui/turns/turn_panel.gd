@@ -6,6 +6,7 @@ onready var progress_bar : ProgressBar = $VBoxContainer/CurrentTurnBar
 onready var time_remaining_bar : ProgressBar = $VBoxContainer/TimeRemainingBar
 onready var turn_label : Label = $VBoxContainer/CurrentTurnBar/Turn
 onready var step_label : Label = $Step
+onready var end_turn_button : Button = $EndTurn_Button
 
 var turn_manager : TurnManager
 
@@ -13,6 +14,8 @@ func _init():
 	Turns.connect("turn_manager_initialized", self, "on_turn_manager_initialized")
 	
 func _ready():
+	end_turn_button.disabled = true
+	Events.connect("tile_placed", self, "on_first_tile_placed")
 	Turns.connect("step_next", self, "on_step_next")
 	Turns.connect("turn_next", self, "on_turn_next")
 		
@@ -37,6 +40,7 @@ func on_step_next(_step):
 	step_label.text = String(Turns.step_order[_step])
 	
 func on_turn_next(_turn):
+	end_turn_button.disabled = true	
 	turn_label.text = String(_turn)
 	progress_bar.value = _turn
 
@@ -45,3 +49,15 @@ func _on_EndTurn_Button_pressed():
 
 func on_time_remaining_changed(_time_remaining : float):
 	time_remaining_bar.value = _time_remaining
+
+
+func on_first_tile_placed(tile) -> void:
+	end_turn_button.disabled = false
+
+
+func _on_EndTurn_Button_mouse_entered() -> void:
+	var info = Info.new("End Turn")
+	info.add_info("Move on to the next turn")
+	info.add_info("Make sure that your network has enough water and soil to sustain itself or your Roots and Plants will receive damage", 1)
+	Events.emit_signal("info_request", info)
+

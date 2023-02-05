@@ -90,6 +90,10 @@ mouse_filter = 2
 margin_left = -214.0
 margin_top = -230.0
 
+[node name="UpgradesShop" parent="." instance=ExtResource( 7 )]
+margin_top = -288.0
+margin_bottom = 246.0
+
 [node name="GameControlScreen" type="ColorRect" parent="."]
 visible = false
 anchor_right = 1.0
@@ -118,7 +122,7 @@ margin_right = 271.0
 margin_bottom = 273.0
 
 [node name="Header" type="Label" parent="GameControlScreen/Panel/CenterContainer/VBoxContainer"]
-margin_right = 234.0
+margin_right = 222.0
 margin_bottom = 29.0
 text = "GAME OVER"
 align = 1
@@ -126,7 +130,7 @@ uppercase = true
 
 [node name="Description" type="Label" parent="GameControlScreen/Panel/CenterContainer/VBoxContainer"]
 margin_top = 33.0
-margin_right = 234.0
+margin_right = 222.0
 margin_bottom = 62.0
 text = "GAME OVER"
 align = 1
@@ -134,31 +138,51 @@ autowrap = true
 
 [node name="Label_Space" type="Label" parent="GameControlScreen/Panel/CenterContainer/VBoxContainer"]
 margin_top = 66.0
-margin_right = 234.0
+margin_right = 222.0
 margin_bottom = 95.0
 align = 1
 
 [node name="Button_Retry" type="Button" parent="GameControlScreen/Panel/CenterContainer/VBoxContainer"]
 margin_top = 99.0
-margin_right = 234.0
-margin_bottom = 134.0
+margin_right = 222.0
+margin_bottom = 133.0
 text = "RETRY"
 
 [node name="Button_Quit" type="Button" parent="GameControlScreen/Panel/CenterContainer/VBoxContainer"]
-margin_top = 138.0
-margin_right = 234.0
-margin_bottom = 173.0
+margin_top = 137.0
+margin_right = 222.0
+margin_bottom = 171.0
 text = "QUIT TO MAIN"
 
 [node name="Button_QuitToDeskop" type="Button" parent="GameControlScreen/Panel/CenterContainer/VBoxContainer"]
-margin_top = 177.0
-margin_right = 234.0
-margin_bottom = 212.0
+margin_top = 175.0
+margin_right = 222.0
+margin_bottom = 209.0
 text = "QUIT TO DESKTOP"
 
-[node name="UpgradesShop" parent="." instance=ExtResource( 7 )]
-margin_top = -288.0
-margin_bottom = 246.0
+[node name="GameControlScreen_Confirm" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.113725, 0.0941176, 0.0941176, 0.54902 )
+
+[node name="Panel_Confirm" type="Panel" parent="GameControlScreen_Confirm"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.0
+margin_top = -53.5
+margin_right = 100.0
+margin_bottom = 53.5
+
+[node name="Label" type="Label" parent="GameControlScreen_Confirm/Panel_Confirm"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -86.0
+margin_right = 86.0
+margin_bottom = 29.0
+text = "Are you sure?"
 
 [connection signal="pressed" from="Margin/Control/Button_GiveUp" to="." method="_on_Button_GiveUp_pressed"]
 [connection signal="pressed" from="GameControlScreen/Panel/CenterContainer/VBoxContainer/Button_Retry" to="." method="_on_Button_Retry_pressed"]

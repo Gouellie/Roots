@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/tiles/roots_tile_sheet_export_no_gap.png" type="Texture" id=1]
 [ext_resource path="res://src/scenes/librairies/ingredients/resources/harvestable_soil.gd" type="Script" id=2]
@@ -8,9 +8,14 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 29.0172
 
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 20.0
+
 [node name="Soil" type="Node2D"]
 script = ExtResource( 2 )
 sprite_node_path = NodePath("Sprite")
+ingredient_name = "Soil"
+additional_information = PoolStringArray( "Root tiles placed on this tile will add soil to the network", "Your plants needs soil to survive", "When your network\'s soil production is deficient, your furthest plants receive damage" )
 
 [node name="Sprite" type="Sprite" parent="."]
 material = ExtResource( 4 )
@@ -29,3 +34,12 @@ shape = SubResource( 1 )
 script = ExtResource( 3 )
 identifier = "soil"
 amount = 4
+
+[node name="MouseDetector" type="Area2D" parent="."]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MouseDetector"]
+shape = SubResource( 2 )
+
+[connection signal="mouse_entered" from="MouseDetector" to="." method="_on_MouseDetector_mouse_entered"]
+[connection signal="mouse_exited" from="MouseDetector" to="." method="_on_MouseDetector_mouse_exited"]

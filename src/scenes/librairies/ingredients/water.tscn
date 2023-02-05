@@ -15,7 +15,7 @@ radius = 20.0
 script = ExtResource( 2 )
 sprite_node_path = NodePath("Sprite")
 ingredient_name = "Water"
-additional_information = PoolStringArray( "Root tiles placed on this tile will add water to the network", "Your network needs water to sustain itself", "If your network\'s water production is deficient, your furthest roots will take damage" )
+additional_information = PoolStringArray( "Root tiles placed on this tile will add water to the network", "Your network needs water to sustain itself", "When your network\'s water production is deficient, your furthest roots receive damage" )
 
 [node name="Sprite" type="Sprite" parent="."]
 material = ExtResource( 4 )
