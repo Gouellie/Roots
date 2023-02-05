@@ -255,7 +255,7 @@ shader_param/seed = 5.0
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource( 2 )
 
-[node name="ColorRect2" type="ColorRect" parent="."]
+[node name="ColorRect_Background" type="ColorRect" parent="."]
 margin_right = 1280.0
 margin_bottom = 712.0
 color = Color( 0.25098, 0.396078, 0.407843, 1 )
@@ -279,7 +279,7 @@ hframes = 20
 [node name="AnimatedSprite_Bunny" type="AnimatedSprite" parent="."]
 position = Vector2( 704, 304 )
 frames = SubResource( 31 )
-frame = 14
+frame = 10
 playing = true
 
 [node name="Sprite_Cactus" type="Sprite" parent="."]
