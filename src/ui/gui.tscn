@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/ui/gui.gd" type="Script" id=1]
 [ext_resource path="res://src/ui/info_panel.tscn" type="PackedScene" id=2]
@@ -7,6 +7,11 @@
 [ext_resource path="res://src/ui/player_resource_gauge_manager.gd" type="Script" id=5]
 [ext_resource path="res://assets/theme/main_theme.tres" type="Theme" id=6]
 [ext_resource path="res://src/ui/upgrades_shop.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/theme/fonts/RubikDirt-Regular.ttf" type="DynamicFontData" id=8]
+
+[sub_resource type="DynamicFont" id=1]
+size = 48
+font_data = ExtResource( 8 )
 
 [node name="Gui" type="Control"]
 anchor_right = 1.0
@@ -171,20 +176,65 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -100.0
-margin_top = -53.5
-margin_right = 100.0
-margin_bottom = 53.5
+margin_left = -160.0
+margin_top = -53.0
+margin_right = 160.0
+margin_bottom = 129.0
+
+[node name="Label_GiveUp" type="Label" parent="GameControlScreen_Confirm/Panel_Confirm"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -132.0
+margin_top = -85.5
+margin_right = 132.0
+margin_bottom = -28.5
+custom_fonts/font = SubResource( 1 )
+text = "Give up"
+align = 1
 
 [node name="Label" type="Label" parent="GameControlScreen_Confirm/Panel_Confirm"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -86.0
+margin_top = 72.0
 margin_right = 86.0
-margin_bottom = 29.0
+margin_bottom = 101.0
 text = "Are you sure?"
+
+[node name="MarginContainer" type="MarginContainer" parent="GameControlScreen_Confirm/Panel_Confirm"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -45.0
+margin_bottom = -11.0
+custom_constants/margin_right = 15
+custom_constants/margin_left = 15
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GameControlScreen_Confirm/Panel_Confirm/MarginContainer"]
+margin_left = 15.0
+margin_right = 305.0
+margin_bottom = 34.0
+
+[node name="Button_Confirm" type="Button" parent="GameControlScreen_Confirm/Panel_Confirm/MarginContainer/HBoxContainer"]
+margin_right = 143.0
+margin_bottom = 34.0
+rect_min_size = Vector2( 124, 0 )
+size_flags_horizontal = 3
+text = "Confirm"
+
+[node name="Button_Cancel" type="Button" parent="GameControlScreen_Confirm/Panel_Confirm/MarginContainer/HBoxContainer"]
+margin_left = 147.0
+margin_right = 290.0
+margin_bottom = 34.0
+rect_min_size = Vector2( 124, 0 )
+size_flags_horizontal = 3
+text = "Cancel"
 
 [connection signal="pressed" from="Margin/Control/Button_GiveUp" to="." method="_on_Button_GiveUp_pressed"]
 [connection signal="pressed" from="GameControlScreen/Panel/CenterContainer/VBoxContainer/Button_Retry" to="." method="_on_Button_Retry_pressed"]
 [connection signal="pressed" from="GameControlScreen/Panel/CenterContainer/VBoxContainer/Button_Quit" to="." method="_on_Button_Quit_pressed"]
 [connection signal="pressed" from="GameControlScreen/Panel/CenterContainer/VBoxContainer/Button_QuitToDeskop" to="." method="_on_Button_QuitToDeskop_pressed"]
+[connection signal="pressed" from="GameControlScreen_Confirm/Panel_Confirm/MarginContainer/HBoxContainer/Button_Confirm" to="." method="_on_Button_Confirm_pressed"]
+[connection signal="pressed" from="GameControlScreen_Confirm/Panel_Confirm/MarginContainer/HBoxContainer/Button_Cancel" to="." method="_on_Button_Cancel_pressed"]
