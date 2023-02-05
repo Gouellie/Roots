@@ -323,7 +323,7 @@ func get_plants_to_parche() -> Array:
 					if _consumer.identifier != _identifier:
 						continue
 					
-					_net_resources += _consumer.amount
+					_net_resources += _consumer.get_amount()
 					_did_consume = true
 			
 			if _did_consume:
@@ -362,7 +362,7 @@ func get_tiles_to_parche() -> Array:
 					if _consumer.identifier != _identifier:
 						continue
 					
-					_net_resources += _consumer.amount
+					_net_resources += _consumer.get_amount()
 					_did_consume = true
 			
 			if _did_consume:

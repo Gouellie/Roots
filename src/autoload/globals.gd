@@ -8,10 +8,27 @@ const BASE_TILES_DRAW_COUNT : int = 4
 const FOG_REVEAL_RADIUS_MASTER_PLANT : int = 3
 const FOG_REVEAL_RADIUS_TILE : int = 4
 
+
 const SEASON_CONFIG : Dictionary = {
 	1 : "summer",
 	8 : "autumn",
-	22 : "winter",
+	20 : "winter",
+	29 : "spring",
+}
+
+const SEASON_CONSUMPTION_MODIFIER = {
+	"summer" : {
+	},
+	"autumn" : {
+		"soil":1
+	},
+	"winter" : {
+		"water":1,
+		"soil":2,
+	},
+	"spring" : {
+		"water":2,
+	},
 }
 
 
@@ -21,6 +38,7 @@ var turn_manager : TurnManager
 var ingredient_manager : IngredientManager
 var upgrades_manager : UpgradesManager
 var fog_manager : FogManager
+var season_manager : SeasonManager
 
 var is_upgrade_menu_opened : bool = false
 
@@ -31,6 +49,7 @@ func _init():
 	Events.connect("init_turn_manager", self, "on_turn_manager_init")
 	Events.connect("init_ingredient_manager", self, "on_ingredient_manager_init")
 	Events.connect("init_fog_manager", self, "on_fog_manager_init")
+	Events.connect("init_season_manager", self, "on_season_manager_init")
 
 
 func on_player_resource_manager_init(_player_resource_manager):
@@ -47,6 +66,9 @@ func on_ingredient_manager_init(_ingredient_manager):
 	
 func on_fog_manager_init(_fog_manager):
 	fog_manager = _fog_manager as FogManager
+	
+func on_season_manager_init(_season_manager):
+	season_manager = _season_manager
 
 func get_tile_draw_amount() -> int:
 	return min(BASE_TILES_DRAW_COUNT + entity_manager.get_plants_count(), 10) as int

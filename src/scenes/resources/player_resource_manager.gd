@@ -99,7 +99,7 @@ func _update_consumption_amount():
 					if _c_behav.get_is_enabled() == false:
 						continue
 						
-					var _amount : int = int(max(0, _c_behav.amount + _terrain_tile_cost))
+					var _amount : int = int(max(0, _c_behav.get_amount() + _terrain_tile_cost))
 					if _d.has(_c_behav.identifier):
 						_d[_c_behav.identifier] += _amount
 					else:
@@ -159,4 +159,3 @@ func on_resource_amount_added(_identifier, _amount) -> void:
 
 func on_resource_amount_deducted(_identifier, _amount) -> void:
 	Events.emit_signal("player_resource_amount_deducted", _identifier, _amount)	
-
