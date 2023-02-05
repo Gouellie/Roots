@@ -14,6 +14,8 @@ export (AudioStream)var next_turn_audio : AudioStream
 export (AudioStream)var mode_eraser_audio : AudioStream
 export (AudioStream)var mode_building_audio : AudioStream
 export (AudioStream)var season_changed_audio : AudioStream
+export (AudioStream)var victory_audio : AudioStream
+export (AudioStream)var defeat_audio : AudioStream
 
 onready var background_track  : AudioStreamPlayer2D = $BackgroundTrack
 
@@ -33,6 +35,8 @@ func _init():
 	Events.connect("building_mode_toggle", self, "on_building_mode")
 	Events.connect("eraser_mode_toggled", self, "on_eraser_mode")
 	Events.connect("season_changed", self, "on_season_changed")
+	Events.connect("game_over", self, "on_game_over")
+	Events.connect("victory", self, "on_game_victory")
 
 func clean_players():
 	for _p in players:
@@ -100,3 +104,9 @@ func on_eraser_mode():
 
 func on_season_changed(_season):
 	play_audio_once(season_changed_audio)
+
+func on_game_over():
+	play_audio_once(victory_audio)
+	
+func on_game_victory():
+	play_audio_once(defeat_audio)
