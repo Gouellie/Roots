@@ -39,6 +39,7 @@ func _ready() -> void:
 	rig.rotation_degrees = real_rotation
 	if resource_manager:
 		health_node = resource_manager.add_new_resource(Resources.HEALTH, Globals.TILE_HEALTH)
+		health_node.max_value = Globals.TILE_HEALTH
 		health_node.connect("node_depleted", self, "on_health_depleted")
 		health_node.connect("node_update", self, "on_health_changed")
 			
@@ -99,6 +100,12 @@ func set_queued_parche(_is_parched_preview : bool):
 
 func on_health_changed():
 	update_sprite_region()
+
+func heal() -> void:
+	var res = resource_manager.get_resource(Resources.HEALTH)
+	var diff = res.max_value - res.value
+	if diff > 0 :
+		resource_manager.add_to_resource(Resources.HEALTH, diff)
 	
 
 func apply_damage(_damage : int):

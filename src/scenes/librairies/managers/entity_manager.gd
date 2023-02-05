@@ -39,6 +39,7 @@ func _ready() -> void:
 	Events.connect("spawn_plant", self, "on_spawn_plant")
 	Events.emit_signal("init_entity_manager", self)
 	Events.connect("consumption_amount_changed", self, "on_resource_consumption_changed")
+	Events.connect("shop_heal_all_tiles", self, "on_heal_all_tiles")
 	step_resolver.ready(self)
 
 
@@ -451,3 +452,10 @@ func get_plants_count() -> int:
 
 func on_resource_consumption_changed(_dictionary : Dictionary):
 	_update_parche_preview()
+
+
+func on_heal_all_tiles() -> void:
+	for _t in get_connected_root_tiles():
+		if _t is Tile and is_instance_valid(_t):
+			_t.heal()
+	
