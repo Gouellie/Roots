@@ -15,6 +15,8 @@ var can_rotate : bool = true
 var real_rotation : float = 0.0
 var valid : bool setget set_is_valid,get_is_valid
 
+var tile_name : String
+var details : PoolStringArray = []
 
 func _ready() -> void:
 	tile_scene = Resources.Tiles[tile_index]
@@ -23,16 +25,24 @@ func _ready() -> void:
 			$skin/Sprite_Straight.visible = true
 			_connection_e.disabled = true
 			_connection_w.disabled = true
+			tile_name = "Straight"
+			details = ["This tile consumes 1 water"]
 		Resources.TILES.ELBOW:
 			$skin/Sprite_Elbow.visible = true
 			_connection_e.disabled = true
 			_connection_s.disabled = true
+			tile_name = "Elbow"
+			details = ["This tile consumes 1 water"]			
 		Resources.TILES.THREEWAY:
 			$skin/Sprite_ThreeWay.visible = true
 			_connection_e.disabled = true
+			tile_name = "Three way"
+			details = ["This tile consumes 2 water"]			
 		Resources.TILES.FOURWAY:
 			$skin/Sprite_FourWay.visible = true
 			can_rotate = false
+			tile_name = "Four way"
+			details = ["This tile consumes 3 water"]			
 	
 	load_resource_cost()
 

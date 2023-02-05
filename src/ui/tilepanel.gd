@@ -55,11 +55,16 @@ func update_color():
 func _on_TilePanel_mouse_entered() -> void:
 	is_hovering = true
 	update_color()
-	var info = Info.new("Tile")
+	
+	var info = Info.new(tile_blueprint.tile_name)
 	info.add_info("Connect the tile to your root network")
+	info.add_info("It cost 1 Sunlight to place a tile")
+	
+	for detail in tile_blueprint.details:
+		info.add_info(detail, 1)
 
 	if not tile_blueprint.can_afford():
-		info.add_info("You do not have enough Sunlight to afford the Tile", 1)	
+		info.add_info("You do not have enough Sunlight to afford the Tile", 2)	
 	
 	Events.emit_signal("info_request", info)
 
