@@ -7,8 +7,12 @@ var track_03 = preload("res://assets/music/airtone_-_aether_5.mp3")
 
 export (AudioStream)var tile_place_audio : AudioStream
 export (AudioStream)var tile_removed_audio : AudioStream
+export (AudioStream)var tile_selected_audio : AudioStream
 export (AudioStream)var plant_spawned_audio : AudioStream
 export (AudioStream)var received_damage_audio : AudioStream
+export (AudioStream)var next_turn_audio : AudioStream
+export (AudioStream)var mode_eraser_audio : AudioStream
+export (AudioStream)var mode_building_audio : AudioStream
 
 onready var background_track  : AudioStreamPlayer2D = $BackgroundTrack
 
@@ -21,8 +25,12 @@ var players = []
 func _init():
 	Events.connect("tile_placed", self, "on_tile_placed")
 	Events.connect("tile_removed_at", self, "on_tile_removed_at")
+	Events.connect("tile_selected", self, "on_tile_selected")
 	Events.connect("spawn_plant", self, "on_plant_spawned")
 	Turns.connect("turn_end_damage_received", self, "on_turn_end_damage_received")
+	Turns.connect("turn_next", self, "on_next_turn")
+	Events.connect("building_mode_toggle", self, "on_building_mode")
+	Events.connect("eraser_mode_toggled", self, "on_eraser_mode")
 
 func clean_players():
 	for _p in players:
@@ -69,9 +77,21 @@ func on_tile_placed(_tile):
 func on_tile_removed_at(_pos):
 	play_audio_once(tile_removed_audio)
 	
+func on_tile_selected(_tile):
+	play_audio_once(tile_selected_audio)
+	
 func on_plant_spawned(_soil, _pos):
 	play_audio_once(plant_spawned_audio)
 	
 func on_turn_end_damage_received():
 	play_audio_once(received_damage_audio)
 	
+func on_next_turn(_turn):
+	play_audio_once(next_turn_audio)
+
+func on_building_mode(_builder_mode : bool):
+	if _builder_mode == false:
+		play_audio_once(mode_eraser_audio)
+
+func on_eraser_mode():
+	play_audio_once(mode_building_audio)

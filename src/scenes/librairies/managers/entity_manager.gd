@@ -74,6 +74,7 @@ func on_tile_selected(sender : TilePanel, new_selected_blueprint : TileBlueprint
 
 	builder_mode = new_selected_blueprint != null
 	Events.emit_signal("building_mode_toggle", builder_mode)
+	Events.emit_signal("tile_selected", _blueprint)
 
 func oneraser_mode_toggled()-> void:
 	_seteraser_mode(not eraser_mode)
