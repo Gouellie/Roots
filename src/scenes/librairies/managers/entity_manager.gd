@@ -182,12 +182,11 @@ func _place_tile() -> void:
 		return
 	if not _blueprint.try_consume():
 		return
-	
+
 	Events.emit_signal("building_mode_toggle", false)
 	builder_mode = false
-	
-	var cellv = _terrain.world_to_map(_blueprint.position)
 
+	var cellv = _terrain.world_to_map(_blueprint.position)
 	remove_tile_at_position(cellv)
 
 	var new_tile = _blueprint.tile_scene.instance() as Tile
