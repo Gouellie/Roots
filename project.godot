@@ -149,6 +149,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/ui/turns/resolve_behavior_resources.gd"
 }, {
+"base": "Node2D",
+"class": "SeasonManager",
+"language": "GDScript",
+"path": "res://src/scripts/seasons/seasons_manager.gd"
+}, {
+"base": "Control",
+"class": "SeasonUI",
+"language": "GDScript",
+"path": "res://src/ui/scripts/season_ui.gd"
+}, {
 "base": "ResolveBehavior",
 "class": "SeveredConnectionDamageResolveBehavior",
 "language": "GDScript",
@@ -223,6 +233,8 @@ _global_script_class_icons={
 "ResourceManager": "",
 "ResourceNode": "",
 "ResourceResolveBehavior": "",
+"SeasonManager": "",
+"SeasonUI": "",
 "SeveredConnectionDamageResolveBehavior": "",
 "StepResolver": "",
 "Tile": "",

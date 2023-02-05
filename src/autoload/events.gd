@@ -78,6 +78,9 @@ signal init_ingredient_manager(_ingredient_manager)
 signal init_fog_manager(_fog_manager)
 
 # warning-ignore:unused_signal
+signal init_season_manager(_season_manager)
+
+# warning-ignore:unused_signal
 signal spawn_plant(fertile_soil, position)
 
 # warning-ignore:unused_signal
@@ -103,3 +106,8 @@ signal player_resource_amount_added(indentifier, amount)
 
 # warning-ignore:unused_signal
 signal player_resource_amount_deducted(indentifier, amount)
+
+# warning-ignore:unused_signal
+signal season_changed(season)
+
+

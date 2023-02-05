@@ -8,6 +8,12 @@ const BASE_TILES_DRAW_COUNT : int = 4
 const FOG_REVEAL_RADIUS_MASTER_PLANT : int = 3
 const FOG_REVEAL_RADIUS_TILE : int = 4
 
+const SEASON_CONFIG : Dictionary = {
+	1 : "summer",
+	8 : "autumn",
+	22 : "winter",
+}
+
 
 var player_resource_manager : PlayerResourceManager
 var entity_manager : EntityManager
