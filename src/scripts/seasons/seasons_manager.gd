@@ -26,4 +26,20 @@ func set_season(_season : String):
 		
 	season = _season
 	Events.emit_signal("season_changed", season)
-	print("season changed")
+
+
+func get_next_season() -> String:
+	match season:
+		"winter": return "spring"
+		"spring": return "summer"
+		"summer": return "autumn"
+		"autumn": return "winter"
+	
+	return ""
+
+func get_turns_til_next_season() -> int:
+	for _turns in Globals.SEASON_CONFIG:
+		if Globals.SEASON_CONFIG[_turns] == get_next_season():
+			return _turns - Globals.turn_manager.turn
+	
+	return 0

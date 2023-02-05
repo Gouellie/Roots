@@ -90,9 +90,9 @@ uppercase = true
 
 [node name="Autumn" type="HBoxContainer" parent="Panel/CenterContainer/VBoxContainer"]
 visible = false
-margin_top = 107.0
-margin_right = 159.0
-margin_bottom = 121.0
+margin_top = 135.0
+margin_right = 279.0
+margin_bottom = 149.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/CenterContainer/VBoxContainer/Autumn"]
 margin_right = 15.0
@@ -110,29 +110,165 @@ text = "x1"
 
 [node name="Winter" type="HBoxContainer" parent="Panel/CenterContainer/VBoxContainer"]
 visible = false
-margin_top = 107.0
-margin_right = 159.0
-margin_bottom = 121.0
+margin_top = 135.0
+margin_right = 279.0
+margin_bottom = 149.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/CenterContainer/VBoxContainer/Winter"]
+[node name="VBoxContainer" type="HBoxContainer" parent="Panel/CenterContainer/VBoxContainer/Winter"]
+margin_right = 99.0
+margin_bottom = 14.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/CenterContainer/VBoxContainer/Winter/VBoxContainer"]
 margin_right = 15.0
 margin_bottom = 14.0
 
-[node name="Sprite" type="Sprite" parent="Panel/CenterContainer/VBoxContainer/Winter/HBoxContainer"]
+[node name="Sprite" type="Sprite" parent="Panel/CenterContainer/VBoxContainer/Winter/VBoxContainer/HBoxContainer"]
 position = Vector2( 51, 13 )
 scale = Vector2( 0.203125, 0.203125 )
 texture = ExtResource( 2 )
 
-[node name="Label" type="Label" parent="Panel/CenterContainer/VBoxContainer/Winter/HBoxContainer"]
+[node name="Label" type="Label" parent="Panel/CenterContainer/VBoxContainer/Winter/VBoxContainer/HBoxContainer"]
+margin_right = 15.0
+margin_bottom = 14.0
+text = "x2"
+
+[node name="EmptyLine3" type="Label" parent="Panel/CenterContainer/VBoxContainer/Winter/VBoxContainer"]
+margin_left = 19.0
+margin_right = 20.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 1, 0.890196, 0.0313726, 1 )
+align = 1
+autowrap = true
+uppercase = true
+
+[node name="EmptyLine4" type="Label" parent="Panel/CenterContainer/VBoxContainer/Winter/VBoxContainer"]
+margin_left = 24.0
+margin_right = 25.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 1, 0.890196, 0.0313726, 1 )
+align = 1
+autowrap = true
+uppercase = true
+
+[node name="EmptyLine5" type="Label" parent="Panel/CenterContainer/VBoxContainer/Winter/VBoxContainer"]
+margin_left = 29.0
+margin_right = 30.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 1, 0.890196, 0.0313726, 1 )
+align = 1
+autowrap = true
+uppercase = true
+
+[node name="EmptyLine6" type="Label" parent="Panel/CenterContainer/VBoxContainer/Winter/VBoxContainer"]
+margin_left = 34.0
+margin_right = 35.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 1, 0.890196, 0.0313726, 1 )
+align = 1
+autowrap = true
+uppercase = true
+
+[node name="EmptyLine7" type="Label" parent="Panel/CenterContainer/VBoxContainer/Winter/VBoxContainer"]
+margin_left = 39.0
+margin_right = 40.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 1, 0.890196, 0.0313726, 1 )
+align = 1
+autowrap = true
+uppercase = true
+
+[node name="EmptyLine9" type="Label" parent="Panel/CenterContainer/VBoxContainer/Winter/VBoxContainer"]
+margin_left = 44.0
+margin_right = 45.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 1, 0.890196, 0.0313726, 1 )
+align = 1
+autowrap = true
+uppercase = true
+
+[node name="EmptyLine10" type="Label" parent="Panel/CenterContainer/VBoxContainer/Winter/VBoxContainer"]
+margin_left = 49.0
+margin_right = 50.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 1, 0.890196, 0.0313726, 1 )
+align = 1
+autowrap = true
+uppercase = true
+
+[node name="EmptyLine11" type="Label" parent="Panel/CenterContainer/VBoxContainer/Winter/VBoxContainer"]
+margin_left = 54.0
+margin_right = 55.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 1, 0.890196, 0.0313726, 1 )
+align = 1
+autowrap = true
+uppercase = true
+
+[node name="EmptyLine12" type="Label" parent="Panel/CenterContainer/VBoxContainer/Winter/VBoxContainer"]
+margin_left = 59.0
+margin_right = 60.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 1, 0.890196, 0.0313726, 1 )
+align = 1
+autowrap = true
+uppercase = true
+
+[node name="EmptyLine13" type="Label" parent="Panel/CenterContainer/VBoxContainer/Winter/VBoxContainer"]
+margin_left = 64.0
+margin_right = 65.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 1, 0.890196, 0.0313726, 1 )
+align = 1
+autowrap = true
+uppercase = true
+
+[node name="EmptyLine14" type="Label" parent="Panel/CenterContainer/VBoxContainer/Winter/VBoxContainer"]
+margin_left = 69.0
+margin_right = 70.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 1, 0.890196, 0.0313726, 1 )
+align = 1
+autowrap = true
+uppercase = true
+
+[node name="EmptyLine15" type="Label" parent="Panel/CenterContainer/VBoxContainer/Winter/VBoxContainer"]
+margin_left = 74.0
+margin_right = 75.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 1, 0.890196, 0.0313726, 1 )
+align = 1
+autowrap = true
+uppercase = true
+
+[node name="EmptyLine8" type="Label" parent="Panel/CenterContainer/VBoxContainer/Winter/VBoxContainer"]
+margin_left = 79.0
+margin_right = 80.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 1, 0.890196, 0.0313726, 1 )
+align = 1
+autowrap = true
+uppercase = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/CenterContainer/VBoxContainer/Winter/VBoxContainer"]
+margin_left = 84.0
+margin_right = 99.0
+margin_bottom = 14.0
+
+[node name="Sprite" type="Sprite" parent="Panel/CenterContainer/VBoxContainer/Winter/VBoxContainer/HBoxContainer2"]
+position = Vector2( 51, 13 )
+scale = Vector2( 0.203125, 0.203125 )
+texture = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="Panel/CenterContainer/VBoxContainer/Winter/VBoxContainer/HBoxContainer2"]
 margin_right = 15.0
 margin_bottom = 14.0
 text = "x2"
 
 [node name="Spring" type="HBoxContainer" parent="Panel/CenterContainer/VBoxContainer"]
 visible = false
-margin_top = 107.0
-margin_right = 159.0
-margin_bottom = 121.0
+margin_top = 135.0
+margin_right = 279.0
+margin_bottom = 149.0
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Panel/CenterContainer/VBoxContainer/Spring"]
 margin_right = 15.0
@@ -146,6 +282,6 @@ texture = ExtResource( 3 )
 [node name="Label" type="Label" parent="Panel/CenterContainer/VBoxContainer/Spring/HBoxContainer2"]
 margin_right = 15.0
 margin_bottom = 14.0
-text = "x1"
+text = "x2"
 
 [connection signal="button_down" from="Panel/Button" to="." method="_on_Button_button_down"]

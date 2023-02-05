@@ -4,12 +4,14 @@ class_name SeasonUI
 
 var season_manager : SeasonManager
 
-onready var season_label = $SeasonLabel
+onready var season_label = $ProgressBar/SeasonLabel
+onready var progress_bar = $ProgressBar
 
 
 func _init():
 	Events.connect("init_season_manager", self, "on_season_manager_init")
 	Events.connect("season_changed", self, "on_season_changed")
+	Turns.connect("turn_next", self, "on_next_turn")
 	
 
 func on_season_manager_init(_season_manager):
@@ -19,5 +21,13 @@ func on_season_changed(_season):
 	update_season()
 
 
+func get_turns_til_next_season() -> int:
+	return Globals.season_manager.get_turns_til_next_season()
+
 func update_season():
 	season_label.text = season_manager.season
+	progress_bar.value = 0
+	progress_bar.max_value = get_turns_til_next_season()
+
+func on_next_turn(turn):
+	progress_bar.value += 1

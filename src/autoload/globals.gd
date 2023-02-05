@@ -19,15 +19,17 @@ const SEASON_CONFIG : Dictionary = {
 
 const SEASON_CONSUMPTION_MODIFIER = {
 	"summer" : {
+		# WATER 4 - post gamejam stuff, should skip 1st season
 	},
 	"autumn" : {
 		"soil":1
 	},
 	"winter" : {
 		"soil":2,
+		"water":2,
 	},
 	"spring" : {
-		"water":1,
+		"water":2,
 	},
 }
 
