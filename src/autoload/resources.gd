@@ -74,6 +74,33 @@ const resource_color = {
 }
 
 
+const resource_info = {
+	"soil" : {
+		"name" : "Soil",
+		"details" : [
+			"Your Plants need Soil to survive",
+		],
+		"prod" : "Soil produced : %d",
+		"cons" : "Soil consumed : %d",
+	},
+	"sunlight" : {
+		"name" : "Sunlight",
+		"details" : [
+			"Your Plants generates Sunlight each turn",
+			"Use Sunlight to place tiles and buy Upgrades"
+		],
+		"prod" : "Sunlight genereted each turn : %d"
+	},
+	"water" : {
+		"name" : "Water",
+		"details" : [
+			"Your Roots need water to survive"
+		],
+		"prod" : "Water produced : %d",
+		"cons" : "Water consumed : %d",
+	}
+}
+
 
 const terrain_types = {
 	"soft" : TERRAIN_TYPES.SOFT,

@@ -2,12 +2,12 @@
 
 importer="ogg_vorbis"
 type="AudioStreamOGGVorbis"
-path="res://.import/swosh-43.ogg-c39773ba1663724b39f1ed4adcc78e03.oggstr"
+path="res://.import/swosh-43.ogg-966892e50a15ec9c9c1be3a98ca584b6.oggstr"
 
 [deps]
 
-source_file="res://assets/audio/Jump/swosh-43.ogg"
-dest_files=[ "res://.import/swosh-43.ogg-c39773ba1663724b39f1ed4adcc78e03.oggstr" ]
+source_file="res://assets/audio/tiles/swosh-43.ogg"
+dest_files=[ "res://.import/swosh-43.ogg-966892e50a15ec9c9c1be3a98ca584b6.oggstr" ]
 
 [params]
 

@@ -42,9 +42,21 @@ func _update_values():
 			else:
 				$VBoxContainer/Control/Panel/Amount.add_color_override("font_color", Color.white)
 
+
 func _on_TextureRect_mouse_entered() -> void:
-	var info = Info.new(resource_node.identifier)
-	info.add_info("Enter information")
+	var _prod_amount = Globals.player_resource_manager.get_production_amount_by_resource(resource_node.identifier)	
+	var _cons_amount = Globals.player_resource_manager.get_consumption_amount_by_resource(resource_node.identifier)
+
+	var resource_info = Resources.resource_info[resource_node.identifier]
+	var info = Info.new(resource_info["name"])
+	
+	for _d in resource_info["details"]:
+		info.add_info(_d)
+
+	info.add_info(resource_info["prod"] % _prod_amount, 1)
+	if resource_node.identifier != Resources.SUNLIGHT:
+		info.add_info(resource_info["cons"] % _cons_amount, 1)
+
 	Events.emit_signal("info_request", info)
 
 
