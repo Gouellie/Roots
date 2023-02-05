@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/ui/gui.gd" type="Script" id=1]
 [ext_resource path="res://src/ui/info_panel.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://src/ui/upgrades_shop.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/theme/fonts/RubikDirt-Regular.ttf" type="DynamicFontData" id=8]
 [ext_resource path="res://src/screens/season_scene.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/scenes/season_changed_notif.tscn" type="PackedScene" id=10]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -240,6 +241,8 @@ margin_bottom = 34.0
 rect_min_size = Vector2( 124, 0 )
 size_flags_horizontal = 3
 text = "Cancel"
+
+[node name="SeasonChangedNotif" parent="." instance=ExtResource( 10 )]
 
 [connection signal="pressed" from="Margin/Control/Button_GiveUp" to="." method="_on_Button_GiveUp_pressed"]
 [connection signal="pressed" from="GameControlScreen/Panel/CenterContainer/VBoxContainer/Button_Retry" to="." method="_on_Button_Retry_pressed"]
