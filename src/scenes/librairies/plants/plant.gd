@@ -90,15 +90,14 @@ func _input(event: InputEvent) -> void:
 		return
 	var info = Info.new("Master Plant" if is_master_plant else "Plant")
 	info.add_info("Plants generate sunlights",1)
-	info.add_info("Click any plant to open the Upgrade Shop",2)
-	info.add_info("Your plant will die if your network doesn't produce enough soil", 3)
-	info.add_info("If the Master Plant dies, it's game over", 4)
+	info.add_info("Your plant will die if your network doesn't produce enough soil", 2)
+	info.add_info("If the Master Plant dies, it's game over", 3)
 	Events.emit_signal("info_request", info)
 	
-	if Globals.entity_manager.builder_mode or Globals.entity_manager.eraser_mode:
-		return
-	if event.is_action_pressed("ui_accept"):
-		Events.emit_signal("open_plant_shop")
+#	if Globals.entity_manager.builder_mode or Globals.entity_manager.eraser_mode:
+#		return
+#	if event.is_action_pressed("ui_accept"):
+#		Events.emit_signal("open_plant_shop")
 
 
 func _on_MouseDetector_mouse_entered() -> void:

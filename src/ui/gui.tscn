@@ -104,9 +104,28 @@ mouse_filter = 2
 margin_left = -214.0
 margin_top = -230.0
 
+[node name="Control_ButtonShop" type="Control" parent="Margin"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 1270.0
+margin_bottom = 710.0
+mouse_filter = 2
+
+[node name="Button_OpenShop" type="Button" parent="Margin/Control_ButtonShop"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -78.0
+margin_right = 222.0
+text = "BUY UPGRADES"
+
 [node name="UpgradesShop" parent="." instance=ExtResource( 7 )]
-margin_top = -288.0
-margin_bottom = 246.0
+visible = false
+anchor_left = 0.0
+anchor_right = 0.0
+margin_left = 15.0
+margin_top = -228.0
+margin_right = 415.0
+margin_bottom = 263.0
 
 [node name="GameControlScreen" type="ColorRect" parent="."]
 visible = false
@@ -242,6 +261,8 @@ size_flags_horizontal = 3
 text = "Cancel"
 
 [connection signal="pressed" from="Margin/Control/Button_GiveUp" to="." method="_on_Button_GiveUp_pressed"]
+[connection signal="mouse_entered" from="Margin/Control_ButtonShop/Button_OpenShop" to="." method="_on_Button_OpenShop_mouse_entered"]
+[connection signal="pressed" from="Margin/Control_ButtonShop/Button_OpenShop" to="." method="_on_Button_OpenShop_pressed"]
 [connection signal="pressed" from="GameControlScreen/Panel/CenterContainer/VBoxContainer/Button_Retry" to="." method="_on_Button_Retry_pressed"]
 [connection signal="pressed" from="GameControlScreen/Panel/CenterContainer/VBoxContainer/Button_Quit" to="." method="_on_Button_Quit_pressed"]
 [connection signal="pressed" from="GameControlScreen/Panel/CenterContainer/VBoxContainer/Button_QuitToDeskop" to="." method="_on_Button_QuitToDeskop_pressed"]

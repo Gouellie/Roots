@@ -114,5 +114,7 @@ func plant_is_dead() -> void:
 func _input(event: InputEvent) -> void:
 	if fertilized or not has_mouse:
 		return
+	if Globals.is_upgrade_menu_opened :
+		return
 	if can_be_fertilized and event.is_action_pressed("ui_accept"):
 		_on_Button_pressed()
