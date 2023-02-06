@@ -4,6 +4,7 @@ onready var button_quit : Button = $CenterContainer/VBoxContainer/Button_Quit
 
 func _ready() -> void:
 	button_quit.visible = not Utils.in_web_browser()
+	$AnimatedSprite_Bunny.play("default")
 	
 
 func _on_Button_NewGame_pressed() -> void:
