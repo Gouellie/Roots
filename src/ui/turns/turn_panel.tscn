@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/ui/turns/turn_panel.gd" type="Script" id=1]
 [ext_resource path="res://assets/theme/main_theme.tres" type="Theme" id=2]
@@ -9,7 +9,52 @@
 font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=2]
+size = 13
 font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color( 0.505882, 0.752941, 0.776471, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 20
+
+[sub_resource type="Animation" id=4]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Position2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "pulse"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Position2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
 
 [node name="TurnPanel" type="HBoxContainer"]
 anchor_left = 0.5
@@ -61,10 +106,28 @@ rect_min_size = Vector2( 0, 15 )
 margin_left = 312.0
 margin_right = 402.0
 margin_bottom = 52.0
+rect_min_size = Vector2( 90, 52 )
 size_flags_vertical = 3
 theme = ExtResource( 2 )
 custom_fonts/font = SubResource( 2 )
 text = "END TURN"
 
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 360, 24 )
+
+[node name="Panel" type="Panel" parent="Position2D"]
+margin_left = -48.0
+margin_top = -24.0
+margin_right = 42.0
+margin_bottom = 23.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+anims/idle = SubResource( 4 )
+anims/pulse = SubResource( 5 )
+
 [connection signal="mouse_entered" from="." to="." method="_on_TurnPanel_mouse_entered"]
+[connection signal="mouse_entered" from="EndTurn_Button" to="." method="_on_EndTurn_Button_mouse_entered"]
 [connection signal="pressed" from="EndTurn_Button" to="." method="_on_EndTurn_Button_pressed"]

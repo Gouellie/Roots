@@ -5,6 +5,8 @@ var _max_turns : int = 0
 onready var progress_bar : ProgressBar = $VBoxContainer/CurrentTurnBar
 onready var turn_label : Label = $VBoxContainer/CurrentTurnBar/Turn
 onready var end_turn_button : Button = $EndTurn_Button
+onready var animation : AnimationPlayer = $AnimationPlayer
+
 
 var turn_manager : TurnManager
 
@@ -14,6 +16,7 @@ func _init():
 func _ready():
 	end_turn_button.disabled = true
 	Events.connect("tile_placed", self, "on_first_tile_placed")
+	Events.connect("player_resource_amount_deducted", self, "on_player_resource_amount_deducted")
 	Turns.connect("step_next", self, "on_step_next")
 	Turns.connect("turn_next", self, "on_turn_next")
 		
@@ -35,6 +38,7 @@ func on_step_next(_step):
 
 	
 func on_turn_next(_turn):
+	animation.play("idle")
 	turn_label.text = String(_turn)
 	progress_bar.value = _turn
 
@@ -59,3 +63,12 @@ func _on_TurnPanel_mouse_entered() -> void:
 	var info = Info.new("Current Turn")
 	info.add_info("Survive %d turns to win the game" % _max_turns)
 	Events.emit_signal("info_request", info)
+
+
+func on_player_resource_amount_deducted(resource, amount) -> void:
+	if resource != Resources.SUNLIGHT:
+		return
+	var money_left = Globals.player_resource_manager.get_resource_manager().can_consume(Resources.SUNLIGHT, 1)
+	if not money_left:
+		animation.play("pulse")
+

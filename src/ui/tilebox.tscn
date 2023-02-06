@@ -88,4 +88,5 @@ region_rect = Rect2( 256, 128, 64, 64 )
 visible = false
 texture = ExtResource( 5 )
 
+[connection signal="mouse_entered" from="Control/Button_Erase" to="." method="_on_Button_Erase_mouse_entered"]
 [connection signal="pressed" from="Control/Button_Erase" to="." method="_on_Button_Erase_pressed"]
