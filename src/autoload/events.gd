@@ -42,6 +42,9 @@ signal victory(resolve_behavior)
 signal open_plant_shop
 
 # warning-ignore:unused_signal
+signal close_plant_shop
+
+# warning-ignore:unused_signal
 signal shop_upgrade_bought
 
 # warning-ignore:unused_signal
@@ -61,6 +64,9 @@ signal shop_draw_tiles
 
 # warning-ignore:unused_signal
 signal shop_heal_all_tiles
+
+# warning-ignore:unused_signal
+signal plant_shop_closed
 
 # warning-ignore:unused_signal
 signal init_player_resource_manager(_resource_manager)

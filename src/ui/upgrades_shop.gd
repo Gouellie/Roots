@@ -1,26 +1,28 @@
-extends Popup
+extends Panel
 
 
 func _ready() -> void:
-	connect("popup_hide", self, "on_closed")
 	Events.connect("open_plant_shop", self, "on_open_plant_shop")
+	Events.connect("close_plant_shop", self, "on_close_plant_shop")
 
 
 func on_open_plant_shop() -> void:
 	Globals.is_upgrade_menu_opened = true	
-	popup()
+	visible = true
 
-
-func on_closed() -> void:
+func on_close_plant_shop() -> void:
+	visible = false
 	Globals.is_upgrade_menu_opened = false
+	Events.emit_signal("plant_shop_closed")	
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not visible:
 		return
-	
 	if event is InputEventMouse:
 		_display_info()
+	if event is InputEventMouseButton:
+		on_close_plant_shop()
 
 
 var wait_until_next_request : bool
