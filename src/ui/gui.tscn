@@ -8,8 +8,8 @@
 [ext_resource path="res://assets/theme/main_theme.tres" type="Theme" id=6]
 [ext_resource path="res://src/ui/upgrades_shop.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/theme/fonts/RubikDirt-Regular.ttf" type="DynamicFontData" id=8]
-[ext_resource path="res://src/screens/season_scene.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/scenes/season_changed_notif.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/icons/icon_settings.png" type="Texture" id=11]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -47,27 +47,21 @@ custom_constants/separation = 14
 script = ExtResource( 5 )
 visible_resources = [ "water", "soil", "sunlight" ]
 
-[node name="TurnPanel" parent="Margin" instance=ExtResource( 4 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 1270.0
-margin_bottom = 710.0
-
-[node name="Control" type="Control" parent="Margin"]
+[node name="Control_Options" type="Control" parent="Margin"]
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 1270.0
 margin_bottom = 710.0
 mouse_filter = 2
 
-[node name="Button_GiveUp" type="Button" parent="Margin/Control"]
+[node name="Button_Settings" type="Button" parent="Margin/Control_Options"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -129.0
-margin_bottom = 40.0
-text = "GIVE UP"
+margin_left = -32.0
+margin_bottom = 37.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+icon = ExtResource( 11 )
 
 [node name="Control_Tilebox" type="Control" parent="Margin"]
 margin_left = 10.0
@@ -77,13 +71,6 @@ margin_bottom = 710.0
 mouse_filter = 2
 
 [node name="TileBox" parent="Margin/Control_Tilebox" instance=ExtResource( 3 )]
-mouse_filter = 2
-
-[node name="Resources" type="Control" parent="Margin"]
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 1270.0
-margin_bottom = 710.0
 mouse_filter = 2
 
 [node name="Control_InfoPanel" type="Control" parent="Margin"]
@@ -111,6 +98,23 @@ margin_top = -78.0
 margin_right = 222.0
 text = "BUY UPGRADES"
 
+[node name="Control_TurnPanel" type="Control" parent="Margin"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 1270.0
+margin_bottom = 710.0
+mouse_filter = 2
+
+[node name="TurnPanel" parent="Margin/Control_TurnPanel" instance=ExtResource( 4 )]
+anchor_left = 0.0
+anchor_right = 0.0
+margin_left = 478.0
+margin_top = 6.0
+margin_right = 880.0
+margin_bottom = 58.0
+rect_min_size = Vector2( 402, 0 )
+rect_pivot_offset = Vector2( 0, 0 )
+
 [node name="UpgradesShop" parent="." instance=ExtResource( 7 )]
 anchor_left = 0.0
 anchor_right = 0.0
@@ -118,13 +122,6 @@ margin_left = 15.0
 margin_top = -228.0
 margin_right = 415.0
 margin_bottom = 263.0
-
-[node name="SeasonUI" parent="." instance=ExtResource( 9 )]
-margin_left = 440.0
-margin_top = 72.0
-margin_right = 840.0
-margin_bottom = 88.0
-rect_min_size = Vector2( 0, 15 )
 
 [node name="GameControlScreen" type="ColorRect" parent="."]
 visible = false
@@ -261,7 +258,7 @@ text = "Cancel"
 
 [node name="SeasonChangedNotif" parent="." instance=ExtResource( 10 )]
 
-[connection signal="pressed" from="Margin/Control/Button_GiveUp" to="." method="_on_Button_GiveUp_pressed"]
+[connection signal="pressed" from="Margin/Control_Options/Button_Settings" to="." method="_on_Button_GiveUp_pressed"]
 [connection signal="mouse_entered" from="Margin/Control_ButtonShop/Button_OpenShop" to="." method="_on_Button_OpenShop_mouse_entered"]
 [connection signal="pressed" from="Margin/Control_ButtonShop/Button_OpenShop" to="." method="_on_Button_OpenShop_pressed"]
 [connection signal="pressed" from="GameControlScreen/Panel/CenterContainer/VBoxContainer/Button_Retry" to="." method="_on_Button_Retry_pressed"]

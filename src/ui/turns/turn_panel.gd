@@ -3,7 +3,6 @@ extends Control
 var _max_turns : int = 0
 
 onready var progress_bar : ProgressBar = $VBoxContainer/CurrentTurnBar
-onready var time_remaining_bar : ProgressBar = $VBoxContainer/TimeRemainingBar
 onready var turn_label : Label = $VBoxContainer/CurrentTurnBar/Turn
 onready var end_turn_button : Button = $EndTurn_Button
 
@@ -24,9 +23,6 @@ func _ready():
 	_max_turns = turn_manager.max_turns
 	progress_bar.max_value = _max_turns	
 	progress_bar.value = turn_manager.turn
-	
-	time_remaining_bar.min_value = 0
-	time_remaining_bar.max_value = Turns.time_per_turn
 
 	turn_label.text = String(turn_manager.turn)
 	
@@ -46,8 +42,7 @@ func _on_EndTurn_Button_pressed():
 	Turns.emit_signal("request_turn_end", self)
 
 func on_time_remaining_changed(_time_remaining : float):
-	time_remaining_bar.value = _time_remaining
-
+	pass
 
 func on_first_tile_placed(tile) -> void:
 	end_turn_button.disabled = false
@@ -60,8 +55,7 @@ func _on_EndTurn_Button_mouse_entered() -> void:
 	Events.emit_signal("info_request", info)
 
 
-
-func _on_CurrentTurnBar_mouse_entered() -> void:
+func _on_TurnPanel_mouse_entered() -> void:
 	var info = Info.new("Current Turn")
 	info.add_info("Survive %d turns to win the game" % _max_turns)
 	Events.emit_signal("info_request", info)
