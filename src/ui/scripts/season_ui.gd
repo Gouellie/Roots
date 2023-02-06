@@ -31,3 +31,7 @@ func update_season():
 
 func on_next_turn(turn):
 	progress_bar.value += 1
+
+
+func _on_SeasonUI_mouse_entered() -> void:
+	season_manager.display_info()
