@@ -189,7 +189,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/scenes/librairies/tiles/blueprints/tile_eraser.gd"
 }, {
-"base": "Button",
+"base": "Panel",
 "class": "TilePanel",
 "language": "GDScript",
 "path": "res://src/ui/tilepanel.gd"
@@ -264,6 +264,7 @@ AudioScene="*res://src/autoload/AudioScene.tscn"
 
 [debug]
 
+settings/stdout/print_fps=true
 gdscript/warnings/treat_warnings_as_errors=true
 gdscript/warnings/unused_variable=false
 gdscript/warnings/unused_argument=false

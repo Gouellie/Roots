@@ -13,6 +13,15 @@ signal tilepanel_selected(sender, selected_blueprint)
 signal tile_selected(tile)
 
 # warning-ignore:unused_signal
+signal tile_rotated(tile)
+
+# warning-ignore:unused_signal
+signal ui_click_disabled
+
+# warning-ignore:unused_signal
+signal blueprint_created(blueprint)
+
+# warning-ignore:unused_signal
 signal building_mode_toggle(is_active)
 
 # warning-ignore:unused_signal

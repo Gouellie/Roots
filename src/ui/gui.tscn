@@ -71,7 +71,6 @@ margin_bottom = 710.0
 mouse_filter = 2
 
 [node name="TileBox" parent="Margin/Control_Tilebox" instance=ExtResource( 3 )]
-mouse_filter = 2
 
 [node name="Control_InfoPanel" type="Control" parent="Margin"]
 margin_left = 10.0

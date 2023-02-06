@@ -8,6 +8,8 @@ var track_03 = preload("res://assets/music/airtone_-_aether_5.mp3")
 export (AudioStream)var tile_place_audio : AudioStream
 export (AudioStream)var tile_removed_audio : AudioStream
 export (AudioStream)var tile_selected_audio : AudioStream
+export (AudioStream)var tile_rotated_audio : AudioStream
+export (AudioStream)var ui_click_disabled : AudioStream
 export (AudioStream)var plant_spawned_audio : AudioStream
 export (AudioStream)var received_damage_audio : AudioStream
 export (AudioStream)var next_turn_audio : AudioStream
@@ -29,6 +31,8 @@ func _init():
 	Events.connect("tile_placed", self, "on_tile_placed")
 	Events.connect("tile_removed_at", self, "on_tile_removed_at")
 	Events.connect("tile_selected", self, "on_tile_selected")
+	Events.connect("tile_rotated", self, "on_tile_rotated")
+	Events.connect("ui_click_disabled", self, "on_ui_click_disabled")
 	Events.connect("spawn_plant", self, "on_plant_spawned")
 	Turns.connect("turn_end_damage_received", self, "on_turn_end_damage_received")
 	Turns.connect("turn_next", self, "on_next_turn")
@@ -85,6 +89,12 @@ func on_tile_removed_at(_pos):
 	
 func on_tile_selected(_tile):
 	play_audio_once(tile_selected_audio)
+	
+func on_tile_rotated(_tile):
+	play_audio_once(tile_rotated_audio)	
+
+func on_ui_click_disabled():
+	play_audio_once(ui_click_disabled)
 	
 func on_plant_spawned(_soil, _pos):
 	play_audio_once(plant_spawned_audio)

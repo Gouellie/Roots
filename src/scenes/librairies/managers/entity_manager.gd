@@ -72,6 +72,7 @@ func on_tile_selected(sender : TilePanel, new_selected_blueprint : TileBlueprint
 		add_child(new_blueprint)
 		_placeable_blueprint = true
 		_blueprint = new_blueprint
+		Events.emit_signal("blueprint_created", new_blueprint)
 
 	builder_mode = new_selected_blueprint != null
 	Events.emit_signal("building_mode_toggle", builder_mode)
@@ -85,8 +86,9 @@ func _seteraser_mode(value : bool) -> void:
 		return
 	eraser_mode = value
 	if eraser_mode:
-		_eraser = _eraser_scene.instance() as TileBlueprintBase
+		_eraser = _eraser_scene.instance() as TileBlueprintEraser
 		add_child(_eraser)
+		Events.emit_signal("blueprint_created", _eraser)		
 		Events.emit_signal("building_mode_toggle", false)
 	else:
 		if is_instance_valid(_eraser):

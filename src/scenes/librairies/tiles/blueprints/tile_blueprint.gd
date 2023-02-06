@@ -32,19 +32,37 @@ func _ready() -> void:
 			_connection_e.disabled = true
 			_connection_s.disabled = true
 			tile_name = "Elbow"
-			details = ["This tile consumes 1 water"]			
+			details = ["This tile consumes 1 water"]
 		Resources.TILES.THREEWAY:
 			$skin/Sprite_ThreeWay.visible = true
 			_connection_e.disabled = true
 			tile_name = "Three way"
-			details = ["This tile consumes 2 water"]			
+			details = ["This tile consumes 2 water"]
 		Resources.TILES.FOURWAY:
 			$skin/Sprite_FourWay.visible = true
 			can_rotate = false
 			tile_name = "Four way"
-			details = ["This tile consumes 3 water"]			
-	
+			details = ["This tile consumes 3 water"]
+
 	load_resource_cost()
+
+
+func set_tile_index(index : int) -> void:
+	$skin/Sprite_Straight.visible = false
+	$skin/Sprite_Elbow.visible = false
+	$skin/Sprite_ThreeWay.visible = false
+	$skin/Sprite_FourWay.visible = false
+	
+	match tile_index:
+		Resources.TILES.STRAIGHT:
+			$skin/Sprite_Straight.visible = true
+		Resources.TILES.ELBOW:
+			$skin/Sprite_Elbow.visible = true
+		Resources.TILES.THREEWAY:
+			$skin/Sprite_ThreeWay.visible = true
+		Resources.TILES.FOURWAY:
+			$skin/Sprite_FourWay.visible = true
+
 
 func can_afford() -> bool:
 	return Globals.player_resource_manager.get_resource_manager().can_consume_all(resource_manager)
@@ -62,12 +80,14 @@ func load_resource_cost():
 			var _cost = _resource_cost[_rc]
 			resource_manager.add_new_resource(_rc, _cost)
 
+
 func rotate_blueprint(cw : bool) -> void:
 	if not can_rotate:
 		return
 	var rot = 90.0 if cw else -90.0
 	real_rotation = wrapf(real_rotation + rot, 0.0, 360.0) 
 	$skin.rotation_degrees = real_rotation
+	Events.emit_signal("tile_rotated", self)
 
 
 func set_is_valid(value : bool) -> void:
