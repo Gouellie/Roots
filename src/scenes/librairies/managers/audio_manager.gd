@@ -1,6 +1,9 @@
 extends Node
 class_name AudioManager
 
+const BUS_SFX := "SFX"
+const BUS_UI := "UI"
+
 var track_01 = preload("res://assets/music/airtone_-_noodleSoup_1.mp3")
 var track_02 = preload("res://assets/music/airtone_-_snowdaze.mp3")
 var track_03 = preload("res://assets/music/airtone_-_aether_5.mp3")
@@ -55,6 +58,8 @@ func _ready():
 	_play_random_background_track()
 	
 func _play_random_background_track():
+	if background_track.playing:
+		return
 	var _random_track = rng.randi_range(0, 2)
 	match _random_track:
 		0:
@@ -74,8 +79,9 @@ func _process(delta):
 			current_delay = 0.0
 
 
-func play_audio_once(stream : AudioStream):
+func play_audio_once(stream : AudioStream, bus : String = BUS_SFX):
 	var _player = AudioStreamPlayer2D.new()
+	_player.bus = bus
 	add_child(_player)
 	_player.stream = stream
 	_player.play(0)
