@@ -5,8 +5,9 @@ onready var sfx :Button= $MarginContainer/VBoxContainer/CheckButton_SFX
 
 func _ready() -> void:
 	music.pressed = not AudioServer.is_bus_mute(AudioScene.BUSES.BUS_MUSIC)
+	music.text = "Music ON" if music.pressed else "Music OFF"
 	sfx.pressed = not AudioServer.is_bus_mute(AudioScene.BUSES.BUS_SFX)
-
+	sfx.text = "SFX ON" if sfx.pressed else "SFX OFF"
 	Events.connect("open_settings", self, "on_open_settings")
 	Events.connect("close_settings", self, "on_close_settings")
 
@@ -39,3 +40,4 @@ func _on_CheckButton_Music_toggled(button_pressed: bool) -> void:
 func _on_CheckButton_SFX_toggled(button_pressed: bool) -> void:
 	AudioServer.set_bus_mute(AudioScene.BUSES.BUS_SFX, not button_pressed)
 	sfx.text = "SFX ON" if button_pressed else "SFX OFF"
+
