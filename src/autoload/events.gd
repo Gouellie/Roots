@@ -48,6 +48,9 @@ signal game_over(resolve_behavior)
 signal victory(resolve_behavior)
 
 # warning-ignore:unused_signal
+signal give_up
+
+# warning-ignore:unused_signal
 signal open_plant_shop
 
 # warning-ignore:unused_signal
@@ -125,4 +128,11 @@ signal player_resource_amount_deducted(indentifier, amount)
 # warning-ignore:unused_signal
 signal season_changed(season)
 
+# warning-ignore:unused_signal
+signal open_settings
 
+# warning-ignore:unused_signal
+signal close_settings
+
+# warning-ignore:unused_signal
+signal settings_closed

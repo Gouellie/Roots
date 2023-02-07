@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/theme/main_theme.tres" type="Theme" id=1]
+[ext_resource path="res://src/ui/settings_panel.gd" type="Script" id=2]
+
+[node name="Control_Settings" type="Panel"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -310.0
+margin_right = -38.0
+margin_bottom = 159.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -2.0
+custom_constants/margin_right = 5
+custom_constants/margin_top = 5
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 267.0
+margin_bottom = 152.0
+
+[node name="CheckButton_Music" type="Button" parent="MarginContainer/VBoxContainer"]
+margin_right = 262.0
+margin_bottom = 34.0
+toggle_mode = true
+text = "Music ON"
+
+[node name="CheckButton_SFX" type="Button" parent="MarginContainer/VBoxContainer"]
+margin_top = 38.0
+margin_right = 262.0
+margin_bottom = 72.0
+toggle_mode = true
+text = "SFX ON"
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+margin_top = 76.0
+margin_right = 262.0
+margin_bottom = 105.0
+
+[node name="Button_GiveUp" type="Button" parent="MarginContainer/VBoxContainer"]
+margin_top = 109.0
+margin_right = 262.0
+margin_bottom = 143.0
+text = "Give Up"
+
+[connection signal="toggled" from="MarginContainer/VBoxContainer/CheckButton_Music" to="." method="_on_CheckButton_Music_toggled"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/CheckButton_SFX" to="." method="_on_CheckButton_SFX_toggled"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Button_GiveUp" to="." method="_on_Button_GiveUp_pressed"]

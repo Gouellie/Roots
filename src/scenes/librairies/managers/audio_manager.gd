@@ -1,6 +1,13 @@
 extends Node
 class_name AudioManager
 
+enum BUSES {
+	BUS_MUSIC = 1,
+	BUS_SFX = 2,
+	BUS_UI = 3
+}
+
+const BUS_MUSIC := "Music"
 const BUS_SFX := "SFX"
 const BUS_UI := "UI"
 

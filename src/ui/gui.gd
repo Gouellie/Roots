@@ -10,6 +10,7 @@ onready var button_quit_to_desktop := $GameControlScreen/Panel/CenterContainer/V
 
 onready var shop := $UpgradesShop
 onready var button_shop :Button= $Margin/Control_ButtonShop/Button_OpenShop
+onready var button_settings :Button= $Margin/Control_Options/Button_Settings
 
 func _ready() -> void:
 	button_shop.disabled = true
@@ -18,8 +19,10 @@ func _ready() -> void:
 	button_quit_to_desktop.visible = not Utils.in_web_browser()
 	Events.connect("game_over", self, "on_game_over")
 	Events.connect("victory", self, "on_game_victory")
+	Events.connect("give_up", self, "on_give_up")
 	Events.connect("num_plants_changed", self, "on_first_plant_placed")
 	Events.connect("plant_shop_closed", self, "on_plant_shop_closed")
+	Events.connect("settings_closed", self, "on_settings_closed")
 
 
 func on_game_over(behavior) -> void:
@@ -55,7 +58,7 @@ func _on_Button_QuitToDeskop_pressed() -> void:
 	get_tree().quit()
 
 
-func _on_Button_Confirm_pressed() -> void:
+func on_give_up() -> void:
 	confirm_control.visible = false
 	game_control.visible = true
 	header.text = "GAME OVER"
@@ -93,3 +96,13 @@ func _on_Button_OpenShop_mouse_entered() -> void:
 	Events.emit_signal("info_request", info)
 
 
+func _on_Button_Settings_toggled(button_pressed: bool) -> void:
+	if button_pressed:
+		Events.emit_signal("open_settings")
+	else :
+		Events.emit_signal("close_settings")
+
+
+func on_settings_closed() -> void:
+	if button_settings.pressed : # shop closed by mouse click outside of panel
+		button_settings.pressed = false

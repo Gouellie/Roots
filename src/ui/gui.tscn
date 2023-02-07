@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/ui/gui.gd" type="Script" id=1]
 [ext_resource path="res://src/ui/info_panel.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/theme/main_theme.tres" type="Theme" id=6]
 [ext_resource path="res://src/ui/upgrades_shop.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/theme/fonts/RubikDirt-Regular.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://src/ui/settings_panel.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/scenes/season_changed_notif.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/icons/icon_settings.png" type="Texture" id=11]
 
@@ -61,7 +62,11 @@ margin_left = -32.0
 margin_bottom = 37.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
+toggle_mode = true
 icon = ExtResource( 11 )
+
+[node name="Control_Settings" parent="Margin/Control_Options" instance=ExtResource( 9 )]
+visible = false
 
 [node name="Control_Tilebox" type="Control" parent="Margin"]
 margin_left = 10.0
@@ -256,8 +261,9 @@ size_flags_horizontal = 3
 text = "Cancel"
 
 [node name="SeasonChangedNotif" parent="." instance=ExtResource( 10 )]
+visible = false
 
-[connection signal="pressed" from="Margin/Control_Options/Button_Settings" to="." method="_on_Button_GiveUp_pressed"]
+[connection signal="toggled" from="Margin/Control_Options/Button_Settings" to="." method="_on_Button_Settings_toggled"]
 [connection signal="mouse_entered" from="Margin/Control_ButtonShop/Button_OpenShop" to="." method="_on_Button_OpenShop_mouse_entered"]
 [connection signal="toggled" from="Margin/Control_ButtonShop/Button_OpenShop" to="." method="_on_Button_OpenShop_toggled"]
 [connection signal="pressed" from="GameControlScreen/Panel/CenterContainer/VBoxContainer/Button_Retry" to="." method="_on_Button_Retry_pressed"]
