@@ -75,6 +75,7 @@ func _play_random_background_track():
 			background_track.stream = track_02
 		2:
 			background_track.stream = track_03
+	yield(get_tree().create_timer(1), "timeout")
 	background_track.play(0)
 	
 func _process(delta):
