@@ -8,6 +8,7 @@ export var sprite_node_path : NodePath
 
 export (String) var ingredient_name
 export (PoolStringArray) var additional_information
+export (Color) var modulated_color
 
 var sprite : Sprite
 

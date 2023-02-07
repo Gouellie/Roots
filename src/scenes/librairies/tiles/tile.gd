@@ -17,10 +17,11 @@ var building_mode_active : bool = false
 
 var overlapping_ingredient : Ingredient setget set_overlapping_ingredient, get_overlapping_ingredient
 onready var rig := $Rig
-onready var _leaf := $Leaf
+
 onready var _connections :Area2D= $Rig/Connections
 onready var _ingredient_detector :Area2D= $IngredientDetector
 onready var _sprite : Sprite = $Rig/Sprite
+onready var _connections_sprites := $Rig/ConnectionsSprites
 
 onready var connections_pos :PoolVector2Array = []
 onready var connected_pos : PoolIntArray = []
@@ -51,16 +52,14 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	update()
-
-
-func _draw() -> void:
-	if building_mode_active:
-		var index = 0
-		for pos in connections_pos:
-			if connected_pos[index] == 0:
-				draw_circle(pos, 10, Color.blue)
-			index+=1
+	var index = 0
+	for pos in connections_pos:
+		var child = _connections_sprites.get_child(index)
+		if connected_pos[index] == 0:
+			child.visible = true
+		else:
+			child.visible = false
+		index+=1
 
 
 func on_health_depleted():
@@ -134,9 +133,14 @@ func get_connections() -> Directory:
 #	_leaf.visible = is_leaf_node
 	return connections
 
+
 func set_overlapping_ingredient(_ingredient : Ingredient):
 	overlapping_ingredient = _ingredient
-	
+	$Sprite2_Harvest.visible = overlapping_ingredient != null
+	if _ingredient:
+		$Sprite2_Harvest.modulate = _ingredient.modulated_color
+
+
 func get_overlapping_ingredient() -> Ingredient:
 	if overlapping_ingredient:
 		return overlapping_ingredient
@@ -144,9 +148,9 @@ func get_overlapping_ingredient() -> Ingredient:
 	set_overlapping_ingredient(Globals.ingredient_manager.get_ingredient_at(cellv))
 	return overlapping_ingredient
 
+
 func set_distance(value : int) -> void:
 	distance = value
-#	$Distance.text = str(distance)
 
 
 func get_distance() -> int:

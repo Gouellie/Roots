@@ -16,6 +16,7 @@ script = ExtResource( 2 )
 sprite_node_path = NodePath("Sprite")
 ingredient_name = "Soil"
 additional_information = PoolStringArray( "Root tiles placed on this tile will add soil to the network", "Your plants needs soil to survive", "When your network\'s soil production is deficient, your furthest plants receive damage" )
+modulated_color = Color( 0.843137, 0.713726, 0.580392, 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 material = ExtResource( 4 )

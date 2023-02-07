@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/scenes/librairies/tiles/tile.gd" type="Script" id=1]
 [ext_resource path="res://assets/tiles/roots_tile_sheet_export_no_gap.png" type="Texture" id=2]
-[ext_resource path="res://assets/icons/invalid.png" type="Texture" id=3]
 [ext_resource path="res://src/ui/turns/resolve_behaviors/resolve_behavior_consume_resource.gd" type="Script" id=4]
 [ext_resource path="res://assets/shaders/outline_disconnected_shader.tres" type="Material" id=7]
 [ext_resource path="res://assets/shaders/outline_parched_shader.tres" type="Material" id=8]
@@ -39,40 +38,58 @@ region_rect = Rect2( 256, 128, 64, 64 )
 
 [node name="Connections" type="Area2D" parent="Rig"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Rig/Connections"]
+[node name="CollisionShape2D_1" type="CollisionShape2D" parent="Rig/Connections"]
 position = Vector2( 0, -32 )
 shape = SubResource( 4 )
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Rig/Connections"]
+[node name="CollisionShape2D_2" type="CollisionShape2D" parent="Rig/Connections"]
 position = Vector2( 32, 0 )
 shape = SubResource( 4 )
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Rig/Connections"]
+[node name="CollisionShape2D_3" type="CollisionShape2D" parent="Rig/Connections"]
 position = Vector2( 0, 32 )
 shape = SubResource( 4 )
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Rig/Connections"]
+[node name="CollisionShape2D_4" type="CollisionShape2D" parent="Rig/Connections"]
 position = Vector2( -32, 0 )
 shape = SubResource( 4 )
 
-[node name="Disconnected" type="Sprite" parent="."]
-visible = false
-texture = ExtResource( 3 )
+[node name="ConnectionsSprites" type="Position2D" parent="Rig"]
 
-[node name="Leaf" type="ColorRect" parent="."]
+[node name="Sprite2_1" type="Sprite" parent="Rig/ConnectionsSprites"]
 visible = false
-margin_left = 8.0
-margin_top = 24.0
-margin_right = 13.0
-margin_bottom = 29.0
-color = Color( 0.219608, 1, 0, 1 )
+position = Vector2( 0, -32 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 256, 64, 64 )
 
-[node name="Distance" type="Label" parent="."]
+[node name="Sprite2_2" type="Sprite" parent="Rig/ConnectionsSprites"]
 visible = false
-margin_left = -24.0
-margin_top = -24.0
-margin_right = 16.0
-margin_bottom = -10.0
+position = Vector2( 32, 0 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 256, 64, 64 )
+
+[node name="Sprite2_3" type="Sprite" parent="Rig/ConnectionsSprites"]
+visible = false
+position = Vector2( 0, 29 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 256, 64, 64 )
+
+[node name="Sprite2_4" type="Sprite" parent="Rig/ConnectionsSprites"]
+visible = false
+position = Vector2( -32, 0 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 256, 64, 64 )
+
+[node name="Sprite2_Harvest" type="Sprite" parent="."]
+visible = false
+modulate = Color( 0.396078, 0.415686, 0.980392, 1 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 128, 256, 64, 64 )
 
 [node name="IngredientDetector" type="Area2D" parent="."]
 collision_layer = 0
