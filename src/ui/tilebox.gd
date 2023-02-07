@@ -108,3 +108,9 @@ func _on_Button_Erase_mouse_entered() -> void:
 	info.add_info("Use eraser tool to remove tiles")
 	Events.emit_signal("info_request",info)
 
+
+func _on_TileBox_gui_input(event: InputEvent) -> void:
+	if not event.is_action_pressed("ui_accept"):
+		return
+	Events.emit_signal("tilepanel_selected", null, null)
+	tile_blueprint_ui.visible = false
