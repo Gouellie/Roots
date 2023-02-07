@@ -119,14 +119,6 @@ animations = [ {
 "speed": 24.0
 } ]
 
-[sub_resource type="DynamicFont" id=1]
-size = 31
-font_data = ExtResource( 4 )
-
-[sub_resource type="DynamicFont" id=2]
-size = 120
-font_data = ExtResource( 4 )
-
 [sub_resource type="Shader" id=5]
 code = "/*
 Shader from Godot Shaders - the free shader library.
@@ -252,6 +244,14 @@ shader_param/color = Color( 1, 0.9, 0.65, 0.8 )
 shader_param/hdr = false
 shader_param/seed = 5.0
 
+[sub_resource type="DynamicFont" id=2]
+size = 120
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=1]
+size = 31
+font_data = ExtResource( 4 )
+
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource( 2 )
 
@@ -296,6 +296,30 @@ texture = ExtResource( 9 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 192, 192 )
 
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource( 4 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -264.0
+margin_top = -480.0
+margin_right = 160.0
+margin_bottom = 64.0
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -473.0
+margin_top = -71.5
+margin_right = 369.0
+margin_bottom = 71.5
+custom_fonts/font = SubResource( 2 )
+text = "tHrIVE_MIND"
+
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchor_top = 1.0
 anchor_right = 1.0
@@ -324,29 +348,6 @@ margin_bottom = 88.0
 rect_min_size = Vector2( 143, 0 )
 theme = ExtResource( 3 )
 text = "QUIT"
-
-[node name="Label" type="Label" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -473.0
-margin_top = -71.5
-margin_right = 369.0
-margin_bottom = 71.5
-custom_fonts/font = SubResource( 2 )
-text = "tHrIVE_MIND"
-
-[node name="ColorRect" type="ColorRect" parent="."]
-material = SubResource( 4 )
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -264.0
-margin_top = -480.0
-margin_right = 160.0
-margin_bottom = 64.0
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Button_NewGame" to="." method="_on_Button_NewGame_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Button_Quit" to="." method="_on_Button_Quit_pressed"]
