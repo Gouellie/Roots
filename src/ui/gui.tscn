@@ -266,7 +266,6 @@ size_flags_horizontal = 3
 text = "Cancel"
 
 [node name="SeasonChangedNotif" parent="." instance=ExtResource( 10 )]
-visible = false
 
 [connection signal="toggled" from="Margin/Control_Options/Button_Settings" to="." method="_on_Button_Settings_toggled"]
 [connection signal="mouse_entered" from="Margin/Control_ButtonShop/Button_OpenShop" to="." method="_on_Button_OpenShop_mouse_entered"]

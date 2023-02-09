@@ -1,6 +1,7 @@
 extends Node
 
 const MAX_TURNS : int = 30
+const TURNS_PER_SEASON_CYCLES : int = 36
 const TILE_HEALTH : int = 3
 const PLANT_HEALTH : int = 2
 const MASTER_PLANT_HEALTH : int = 3
@@ -21,7 +22,7 @@ const SEASON_CONFIG : Dictionary = {
 	1 : "summer",
 	8 : "autumn",
 	20 : "winter",
-	31 : "spring",
+	28 : "spring",
 }
 
 const SEASON_CONSUMPTION_MODIFIER = {

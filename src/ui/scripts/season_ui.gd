@@ -35,3 +35,8 @@ func on_next_turn(turn):
 
 func _on_SeasonUI_mouse_entered() -> void:
 	season_manager.display_info()
+
+
+func _on_SeasonUI_gui_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_accept"):
+		Events.emit_signal("display_season_notif", season_manager.season)

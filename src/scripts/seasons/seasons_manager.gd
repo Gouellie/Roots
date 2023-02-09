@@ -16,10 +16,10 @@ func on_next_turn(_turn):
 
 func process_turn():
 	var _turn : int = Globals.turn_manager.turn
-	var modulatd_turn = _turn % Globals.MAX_TURNS
-	if not Globals.SEASON_CONFIG.has(modulatd_turn):
+	var modulated_turn = wrapi(_turn, 1, Globals.TURNS_PER_SEASON_CYCLES)
+	if not Globals.SEASON_CONFIG.has(modulated_turn):
 		return
-	set_season(Globals.SEASON_CONFIG[modulatd_turn])
+	set_season(Globals.SEASON_CONFIG[modulated_turn])
 
 
 func set_season(_season : String):
@@ -31,22 +31,23 @@ func set_season(_season : String):
 
 func get_season() -> String:
 	return season
-	
+
 
 func get_next_season() -> String:
 	match season:
-		"winter": return "spring"
-		"spring": return "summer"
 		"summer": return "autumn"
 		"autumn": return "winter"
-	
+		"winter": return "spring"
+		# commenting out spring and using the TURNS_PER_SEASON_CYCLES as the rollover
+		#"spring": return "summer"
 	return ""
+
 
 func get_turns_til_next_season() -> int:
 	for _turns in Globals.SEASON_CONFIG:
 		if Globals.SEASON_CONFIG[_turns] == get_next_season():
-			return _turns - (Globals.turn_manager.turn % Globals.MAX_TURNS)
-	return 0
+			return _turns - wrapi(Globals.turn_manager.turn, 1, Globals.TURNS_PER_SEASON_CYCLES)
+	return Globals.TURNS_PER_SEASON_CYCLES - wrapi(Globals.turn_manager.turn, 1, Globals.TURNS_PER_SEASON_CYCLES)
 
 
 func display_info() -> void:

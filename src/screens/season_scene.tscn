@@ -32,4 +32,5 @@ align = 1
 valign = 1
 uppercase = true
 
+[connection signal="gui_input" from="." to="." method="_on_SeasonUI_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_SeasonUI_mouse_entered"]

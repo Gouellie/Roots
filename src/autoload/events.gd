@@ -129,6 +129,10 @@ signal player_resource_amount_deducted(indentifier, amount)
 signal season_changed(season)
 
 # warning-ignore:unused_signal
+# use to only request the notification
+signal display_season_notif(season) 
+
+# warning-ignore:unused_signal
 signal open_settings
 
 # warning-ignore:unused_signal
