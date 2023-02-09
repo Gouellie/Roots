@@ -23,7 +23,7 @@ func _ready():
 	if turn_manager == null:
 		Log.log_error(1, "No valid TurnManager was initialized.")
 		return
-	_max_turns = turn_manager.max_turns
+	_max_turns = Globals.MAX_TURNS
 	progress_bar.max_value = _max_turns	
 	progress_bar.value = turn_manager.turn
 

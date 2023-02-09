@@ -4,8 +4,6 @@ class_name TurnManager
 # warning-ignore:unused_signal
 signal time_remaining_changed(_time_remaining)
 
-export (int)var max_turns : int = 30
-
 
 var plant_damage_in_turn : int = 0
 var tile_damage_in_turn : int = 0
@@ -27,13 +25,7 @@ func get_time_remaining() -> float:
 
 func _process(delta):
 	pass
-#	if step != Turns.STEP_ORDER.placing:
-#		return
-#
-#	set_time_remaining(time_remaining - delta)
-#
-#	if time_remaining <= 0:
-#		_start_end_turn_sequence()
+
 
 func _ready():
 	Turns.emit_signal("turn_manager_initialized", self)
@@ -42,21 +34,22 @@ func _ready():
 	
 	start_turn()
 
+
 func _start_end_turn_sequence():
 	if step != Turns.STEP_ORDER.placing:
 		return
-	
-	if is_last_turn():
-		while step != Turns.STEP_ORDER.condition_lose:
-			next_step()
-		return
-	
+#	if is_last_turn():
+#		while step != Turns.STEP_ORDER.condition_lose:
+#			next_step()
+#		return
 	next_step()
 	while step != Turns.STEP_ORDER.placing:
 		next_step()
 
+
 func on_turn_end_requested(_sender):
 	_start_end_turn_sequence()
+
 
 func on_request_resolve(_sender, _step):
 	var _resolver : StepResolver = _sender as StepResolver
@@ -100,10 +93,8 @@ func next_step():
 	Turns.emit_signal("step_next", step)
 	Turns.emit_signal(_signal)
 
+
 func start_turn():
-	if turn > max_turns:
-		return
-	
 	plant_damage_in_turn = 0
 	tile_damage_in_turn = 0
 	
@@ -112,7 +103,8 @@ func start_turn():
 	
 	while step != Turns.STEP_ORDER.placing:
 		next_step()
-	
+
+
 func end_turn():
 	if plant_damage_in_turn > 0 || tile_damage_in_turn > 0:
 		Turns.emit_signal("turn_end_damage_received")
@@ -120,6 +112,7 @@ func end_turn():
 	turn += 1
 	Turns.emit_signal("turn_next", turn)
 	start_turn()
-	
+
+
 func is_last_turn() -> bool:
-	return turn >= max_turns
+	return turn == Globals.MAX_TURNS

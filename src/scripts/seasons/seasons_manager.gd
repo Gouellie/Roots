@@ -16,10 +16,11 @@ func on_next_turn(_turn):
 
 func process_turn():
 	var _turn : int = Globals.turn_manager.turn
-	if Globals.SEASON_CONFIG.has(_turn) == false:
+	var modulatd_turn = _turn % Globals.MAX_TURNS
+	if not Globals.SEASON_CONFIG.has(modulatd_turn):
 		return
-	
-	set_season(Globals.SEASON_CONFIG[_turn])
+	set_season(Globals.SEASON_CONFIG[modulatd_turn])
+
 
 func set_season(_season : String):
 	if season == _season:
@@ -44,8 +45,7 @@ func get_next_season() -> String:
 func get_turns_til_next_season() -> int:
 	for _turns in Globals.SEASON_CONFIG:
 		if Globals.SEASON_CONFIG[_turns] == get_next_season():
-			return _turns - Globals.turn_manager.turn
-	
+			return _turns - (Globals.turn_manager.turn % Globals.MAX_TURNS)
 	return 0
 
 

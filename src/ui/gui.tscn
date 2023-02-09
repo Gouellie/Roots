@@ -128,7 +128,6 @@ margin_right = 415.0
 margin_bottom = 263.0
 
 [node name="GameControlScreen" type="ColorRect" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.113725, 0.0941176, 0.0941176, 0.54902 )
@@ -150,9 +149,9 @@ anchor_bottom = 1.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GameControlScreen/Panel/CenterContainer"]
 margin_left = 49.0
-margin_top = 64.0
+margin_top = 45.0
 margin_right = 271.0
-margin_bottom = 273.0
+margin_bottom = 292.0
 
 [node name="Header" type="Label" parent="GameControlScreen/Panel/CenterContainer/VBoxContainer"]
 margin_right = 222.0
@@ -175,22 +174,28 @@ margin_right = 222.0
 margin_bottom = 95.0
 align = 1
 
-[node name="Button_Retry" type="Button" parent="GameControlScreen/Panel/CenterContainer/VBoxContainer"]
+[node name="Button_KeepPlaying" type="Button" parent="GameControlScreen/Panel/CenterContainer/VBoxContainer"]
 margin_top = 99.0
 margin_right = 222.0
 margin_bottom = 133.0
-text = "RETRY"
+text = "KEEP PLAYING"
 
-[node name="Button_Quit" type="Button" parent="GameControlScreen/Panel/CenterContainer/VBoxContainer"]
+[node name="Button_Retry" type="Button" parent="GameControlScreen/Panel/CenterContainer/VBoxContainer"]
 margin_top = 137.0
 margin_right = 222.0
 margin_bottom = 171.0
-text = "QUIT TO MAIN"
+text = "RETRY"
 
-[node name="Button_QuitToDeskop" type="Button" parent="GameControlScreen/Panel/CenterContainer/VBoxContainer"]
+[node name="Button_Quit" type="Button" parent="GameControlScreen/Panel/CenterContainer/VBoxContainer"]
 margin_top = 175.0
 margin_right = 222.0
 margin_bottom = 209.0
+text = "QUIT TO MAIN"
+
+[node name="Button_QuitToDeskop" type="Button" parent="GameControlScreen/Panel/CenterContainer/VBoxContainer"]
+margin_top = 213.0
+margin_right = 222.0
+margin_bottom = 247.0
 text = "QUIT TO DESKTOP"
 
 [node name="GameControlScreen_Confirm" type="ColorRect" parent="."]
@@ -266,6 +271,7 @@ visible = false
 [connection signal="toggled" from="Margin/Control_Options/Button_Settings" to="." method="_on_Button_Settings_toggled"]
 [connection signal="mouse_entered" from="Margin/Control_ButtonShop/Button_OpenShop" to="." method="_on_Button_OpenShop_mouse_entered"]
 [connection signal="toggled" from="Margin/Control_ButtonShop/Button_OpenShop" to="." method="_on_Button_OpenShop_toggled"]
+[connection signal="pressed" from="GameControlScreen/Panel/CenterContainer/VBoxContainer/Button_KeepPlaying" to="." method="_on_Button_KeepPlaying_pressed"]
 [connection signal="pressed" from="GameControlScreen/Panel/CenterContainer/VBoxContainer/Button_Retry" to="." method="_on_Button_Retry_pressed"]
 [connection signal="pressed" from="GameControlScreen/Panel/CenterContainer/VBoxContainer/Button_Quit" to="." method="_on_Button_Quit_pressed"]
 [connection signal="pressed" from="GameControlScreen/Panel/CenterContainer/VBoxContainer/Button_QuitToDeskop" to="." method="_on_Button_QuitToDeskop_pressed"]

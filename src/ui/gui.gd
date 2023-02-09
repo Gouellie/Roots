@@ -11,6 +11,7 @@ onready var button_quit_to_desktop := $GameControlScreen/Panel/CenterContainer/V
 onready var shop := $UpgradesShop
 onready var button_shop :Button= $Margin/Control_ButtonShop/Button_OpenShop
 onready var button_settings :Button= $Margin/Control_Options/Button_Settings
+onready var button_keep_playing :Button= $GameControlScreen/Panel/CenterContainer/VBoxContainer/Button_KeepPlaying
 
 func _ready() -> void:
 	button_shop.disabled = true
@@ -28,6 +29,7 @@ func _ready() -> void:
 func on_game_over(behavior) -> void:
 	header.text = "GAME OVER"
 	game_control.visible = true
+	button_keep_playing.visible = false
 	
 	if behavior is ConditionLoseResolveBehavior:
 		description.text = behavior.description
@@ -106,3 +108,7 @@ func _on_Button_Settings_toggled(button_pressed: bool) -> void:
 func on_settings_closed() -> void:
 	if button_settings.pressed : # shop closed by mouse click outside of panel
 		button_settings.pressed = false
+
+
+func _on_Button_KeepPlaying_pressed() -> void:
+	game_control.visible = false
